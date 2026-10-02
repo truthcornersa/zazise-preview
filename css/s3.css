@@ -1,0 +1,103 @@
+}
+.trend-card .trend-title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--wf-ink);
+}
+
+
+/* ——— Shared mobile helpers (homes / menu-open / localized share classes) ——— */
+@media (max-width: 768px) {
+  html {
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+  /* Right mini rail → burger menu on narrow viewports */
+  .sidebar.mini {
+    display: none !important;
+  }
+  .sidebar.mini ~ .main,
+  .main {
+    margin-right: 0;
+  }
+  .main {
+    min-width: 0;
+    max-width: 100%;
+  }
+  /* Single-column feed when shared grid is used */
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Chips / lang pills: allow horizontal swipe without page scroll */
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar { display: none; height: 0; }
+  .chip { flex-shrink: 0; }
+  .lang-bar .lang-pills {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .lang-bar .lang-pills::-webkit-scrollbar { display: none; height: 0; }
+  .top-trending-scroll {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Watch / play screen */
+  .main.watch-main {
+    padding: 0 0 28px;
+  }
+  .watch-layout {
+    max-width: 100%;
+  }
+  .player {
+    max-height: none;
+    border-radius: 0;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+  .player .ctrl-bar {
+    height: 48px;
+    align-items: center;
+    font-size: 15px;
+  }
+  .watch-stats {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .watch-actions .act {
+    min-height: 44px;
+  }
+  .btn-subscribe {
+    min-height: 44px;
+  }
+  .related-rail {
+    flex-direction: column;
+    overflow-x: hidden;
+    scroll-snap-type: none;
+  }
+  .related-item {
+    flex-direction: row;
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+  .related-item .r-thumb {
+    flex: 0 0 168px;
+    width: 168px;
+    max-width: 42vw;
+  }
+}
