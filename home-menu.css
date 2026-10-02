@@ -1,2 +1,43 @@
-/* Placeholder - will replace */
-body { margin: 0; }
+/* Icons stay hidden until the main menu is opened. */
+body.home .sidebar.mini {
+  display: none !important;
+}
+body.home .sidebar.mini ~ .main,
+body.home.home-preview.menu-open .main,
+body.home.menu-open .main {
+  margin-right: 0 !important;
+}
+body.home .avatar.has-photo,
+body.home .dock-avatar.has-photo {
+  background-position: center;
+  background-size: cover;
+  color: transparent;
+}
+.toast--success {
+  background: #317045;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+}
+.toast--success .toast__mark {
+  background: rgba(255,255,255,0.28);
+  box-shadow: none;
+}
+.avatar.has-photo,
+.dock-avatar.has-photo,
+#cmt-av.has-photo {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: transparent;
+}
+.settings-row[data-setting="soon"] {
+  color: #9aa3af;
+  cursor: default;
+  opacity: 0.72;
+}
+.settings-row[data-setting="soon"]:active {
+  background: transparent;
+}
+html.z-dark .settings-row[data-setting="soon"] {
+  color: #6d7784;
+}
