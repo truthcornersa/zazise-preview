@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZAZISE — Thank you</title>
+  <link rel="icon" href="assets/favicon/favicon.ico" />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+  <style>.preview-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#183D83;color:#fff;font:600 13px/1.3 system-ui,sans-serif;padding:8px 14px;text-align:center}
+  .preview-banner a{color:#E2AE41} body.login-body{padding-top:36px}</style>
+</head>
+<body class="home login-body thank-you-body">
+  <div class="preview-banner">Thank-you preview · confetti · <a href="interactions.html">interactions</a> · <a href="index.html">home</a></div>
+  <main class="login-page">
+    <section class="login-card">
+      <h1>You're in 🎉</h1>
+      <p class="subtitle">Make yourself known on ZAZISE</p>
+      <div class="login-actions"><a class="btn-primary" href="interactions.html" style="display:inline-block;text-decoration:none">See interactions</a></div>
+    </section>
+  </main>
+  <script src="js/thank-you-confetti.js"></script>
+  <script>document.addEventListener('DOMContentLoaded',function(){if(window.fireThankYouConfetti)fireThankYouConfetti();else if(window.ZaziseConfetti)ZaziseConfetti.burst&&ZaziseConfetti.burst();});</script>
+</body>
+</html>
