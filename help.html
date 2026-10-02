@@ -1,23 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Help — ZAZISE preview</title>
-  <link rel="stylesheet" href="https://www.zazise.africa/styles.css" />
-  <link rel="stylesheet" href="https://www.zazise.africa/home.css" />
-  <link rel="stylesheet" href="https://www.zazise.africa/docs-page.css" />
+  <meta name="description" content="How ZAZISE early access works: what the preview includes, how to create an account, and which South African languages are on the site." data-i18n-content="seo_desc_help" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="help.html" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/favicon/favicon-180.png" />
+  <meta name="theme-color" content="#183D83" />
+  <meta name="application-name" content="ZAZISE" />
+  <meta property="og:site_name" content="ZAZISE" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_ZA" />
+  <meta property="og:url" content="help.html" />
+  <meta property="og:title" content="ZAZISE Help — early adopter guide" />
+  <meta property="og:description" content="How ZAZISE early access works: what the preview includes, how to create an account, and which South African languages are on the site." />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ZAZISE — Make yourself known" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ZAZISE Help — early adopter guide" />
+  <meta name="twitter:description" content="How ZAZISE early access works: what the preview includes, how to create an account, and which South African languages are on the site." />
+  <meta name="twitter:image" content="assets/og-image.png" />
+  <title>ZAZISE Help — early adopter guide</title>
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="docs-page.css" />
+  <style>
+    .preview-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#183D83;color:#fff;font:600 13px/1.3 system-ui,sans-serif;padding:8px 14px;text-align:center}
+    .preview-banner a{color:#E2AE41}
+    body{padding-top:36px !important}
+  </style>
 </head>
-<body class="home login-body docs-body">
-  <main class="docs-wrap">
+<body class="home login-body docs-body" data-doc="help">
+  <div class="preview-banner" role="status">GitHub Pages preview · self-contained (local CSS/JS/assets) · no Afrihost dependency · PHP APIs do not run here · <a href="register.html">register</a> · <a href="login.html">login</a> · <a href="watch.html">watch</a> · <a href="https://www.zazise.africa/">live site</a></div>
+
+  <nav class="lang-bar lang-bar--login" aria-label="Language" data-collapsed="true">
+    <button type="button" class="lang-toggle" aria-expanded="false" aria-controls="lang-pills" title="Toggle languages">
+      <span class="lang-hint" data-i18n="lang_hint">SA languages</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="lang-pills" id="lang-pills" role="list">
+      <a href="#" class="lang-pill active" role="listitem" hreflang="en" lang="en" data-lang="en" title="English"><span class="lang-short">EN</span><span class="lang-full">English</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="af" lang="af" data-lang="af" title="Afrikaans"><span class="lang-short">AF</span><span class="lang-full">Afrikaans</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="zu" lang="zu" data-lang="zu" title="isiZulu"><span class="lang-short">ZU</span><span class="lang-full">isiZulu</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="xh" lang="xh" data-lang="xh" title="isiXhosa"><span class="lang-short">XH</span><span class="lang-full">isiXhosa</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="st" lang="st" data-lang="st" title="Sesotho"><span class="lang-short">ST</span><span class="lang-full">Sesotho</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="tn" lang="tn" data-lang="tn" title="Setswana"><span class="lang-short">TN</span><span class="lang-full">Setswana</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nso" lang="nso" data-lang="nso" title="Sepedi / Northern Sotho"><span class="lang-short">NSO</span><span class="lang-full">Sepedi</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ts" lang="ts" data-lang="ts" title="Xitsonga"><span class="lang-short">TS</span><span class="lang-full">Xitsonga</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ss" lang="ss" data-lang="ss" title="siSwati"><span class="lang-short">SS</span><span class="lang-full">siSwati</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ve" lang="ve" data-lang="ve" title="Tshivenda"><span class="lang-short">VE</span><span class="lang-full">Tshivenda</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nr" lang="nr" data-lang="nr" title="isiNdebele"><span class="lang-short">NR</span><span class="lang-full">isiNdebele</span></a>
+    </div>
+  </nav>
+
+  <div class="docs-wrap">
+    <div class="docs-toolbar">
+      <nav class="docs-nav" aria-label="Documents">
+        <a href="help.html" data-doc-nav="help"><span data-docs="nav_help">Help</span></a>
+        <a href="privacy.html" data-doc-nav="privacy"><span data-docs="nav_privacy">Privacy</span></a>
+        <a href="terms.html" data-doc-nav="terms"><span data-docs="nav_terms">Terms</span></a>
+      </nav>
+      <a class="docs-download" href="docs/ZAZISE-Help.pdf" download>
+        <span data-docs="download_pdf">Download PDF (EN)</span>
+      </a>
+    </div>
+
     <article class="doc">
       <header class="doc-header">
-        <a href="index.html"><img class="doc-header__logo" src="https://www.zazise.africa/assets/zazise-logo-colour-header.png" alt="ZAZISE" /></a>
+        <a href="register.html"><img class="doc-header__logo" src="assets/zazise-logo-colour-header.png" alt="ZAZISE" /></a>
+        <div class="doc-header__meta">
+          <strong data-docs="meta">Help</strong>
+          <span data-docs="meta_sub">Early adopter · 28 Sep 2026
+ZAZISE · South Africa</span>
+        </div>
       </header>
-      <h1>ZAZISE GitHub Pages preview</h1>
-      <p class="lede">This is a static UI preview. PHP APIs and registration do not run here. Live site: <a href="https://www.zazise.africa/">www.zazise.africa</a>.</p>
-      <p><a class="docs-back" href="index.html">Back to registration preview</a></p>
+
+      <span class="badge" data-docs="badge">Public participation</span>
+      <h1 data-docs="h1">Welcome, early adopter</h1>
+      <p class="lede" data-docs="lede"></p>
+
+      <div class="accent-row" aria-hidden="true">
+        <span class="dot dot--gold"></span>
+        <span class="dot dot--blue"></span>
+        <span class="dot dot--green"></span>
+      </div>
+
+      <h2 data-docs-key="s1_h2">Born from love of South Africa</h2>
+      <p data-docs-key="s1_p1"></p>
+      <p data-docs-key="s1_p2"></p>
+
+      <div class="note">
+        <strong data-docs-key="note_title">Public participation.</strong>
+        <span data-docs-key="note_body"></span>
+      </div>
+
+      <h2 data-docs-key="s2_h2">What you are looking at</h2>
+      <p data-docs-key="s2_p1"></p>
+
+      <h2 data-docs-key="s3_h2">The current build: what to try</h2>
+      <div class="feature-grid">
+        <div class="feature"><strong data-docs-key="f1_t">Register</strong><span data-docs-key="f1_d"></span></div>
+        <div class="feature"><strong data-docs-key="f2_t">Thank you</strong><span data-docs-key="f2_d"></span></div>
+        <div class="feature"><strong data-docs-key="f3_t">Hover GIFs</strong><span data-docs-key="f3_d"></span></div>
+        <div class="feature"><strong data-docs-key="f4_t">Top Trending</strong><span data-docs-key="f4_d"></span></div>
+        <div class="feature"><strong data-docs-key="f5_t">Cooking toasts</strong><span data-docs-key="f5_d"></span></div>
+        <div class="feature"><strong data-docs-key="f6_t">Logo → register</strong><span data-docs-key="f6_d"></span></div>
+      </div>
+
+      <div class="card">
+        <h3 data-docs-key="card_h3">Profile initials</h3>
+        <p style="margin:0" data-docs-key="card_p"></p>
+      </div>
+
+      <h2 data-docs-key="s4_h2">How to try it</h2>
+      <ol class="steps">
+        <li data-docs-key="step1"></li>
+        <li data-docs-key="step2"></li>
+        <li data-docs-key="step3"></li>
+        <li data-docs-key="step4"></li>
+      </ol>
+
+      <h2 data-docs-key="s5_h2">As an early adopter</h2>
+      <p data-docs-key="s5_p1"></p>
+      <ul>
+        <li data-docs-key="s5_li1"></li>
+        <li data-docs-key="s5_li2"></li>
+        <li data-docs-key="s5_li3"></li>
+      </ul>
+
+      <h2 data-docs-key="s6_h2">Need a hand?</h2>
+      <p data-docs-key="s6_p1"></p>
+
+      <footer class="doc-footer">
+        <div data-docs="footer_copy">© 2026 ZAZISE · South Africa · Early adopter documentation</div>
+        <a class="docs-back" href="register.html" data-docs="back_register">Back to registration</a>
+      </footer>
     </article>
-  </main>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/docs-page.js"></script>
+  <script src="js/whoami.js"></script>
+  <script src="js/cooking-toast.js"></script>
+  <script src="js/guest-gate.js" data-page="help"></script>
 </body>
 </html>
