@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZAZISE — Zazise Early Adopters</title>
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="home-menu.css" />
+<style>
+    body.home.login-body.notifications-body .login-card { max-width: 560px; text-align: left; }
+    body.home.notifications-body .notif-title {
+      font-size: 20px; font-weight: 750; margin: 0 0 6px; text-align: center;
+    }
+    body.home.notifications-body .notif-sub {
+      text-align: center; color: var(--z-muted); font-size: 13px; margin: 0 0 18px;
+    }
+    body.home.notifications-body .notif-paths {
+      background: var(--z-soft); border: 1px solid var(--z-border); border-radius: 12px;
+      padding: 12px 14px; font-size: 12.5px; color: var(--z-muted); margin-bottom: 16px;
+      word-break: break-all;
+    }
+    body.home.notifications-body .notif-paths code { color: var(--z-ink); font-size: 12px; }
+    body.home.notifications-body .notif-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; }
+    body.home.notifications-body .notif-item {
+      border: 1px solid var(--z-border); border-radius: 14px; padding: 12px 14px;
+      background: #fff; box-shadow: var(--z-shadow);
+    }
+    body.home.notifications-body .notif-item h3 {
+      margin: 0 0 6px; font-size: 14px; color: var(--z-green); font-weight: 750;
+    }
+    body.home.notifications-body .notif-item .meta { font-size: 12.5px; color: var(--z-muted); }
+    body.home.notifications-body .notif-item .who { font-size: 14px; font-weight: 650; margin: 4px 0 0; color: var(--z-ink); }
+    body.home.notifications-body .empty { text-align: center; color: var(--z-muted); padding: 18px 8px; }
+    body.home.notifications-body .notif-actions { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+  </style>
+</head>
+<body class="home login-body notifications-body">
+  <main class="login-page">
+    <section class="login-card" aria-labelledby="notif-heading">
+      <div class="logo-block logo-block--lockup">
+        <img class="brand-icon-3d" src="assets/zazise-logo-icon-3d-clean@2x.png" alt="" aria-hidden="true" />
+        <img class="brand-flat-wordmark" src="assets/zazise-logo-flat-wordmark.png" alt="ZAZISE — Make Yourself Known" />
+      </div>
+      <h1 id="notif-heading" class="notif-title">Zazise Early Adopters</h1>
+      <p class="notif-sub">Local demo inbox — name + email only (never passwords). Sample / not live.</p>
+      <div class="notif-paths">
+        <div>JSON log: <code>data/notifications.json</code></div>
+        <div>Markdown: <code>data/early-adopters-notifications.md</code></div>
+        <div>API: <code>GET /api/notifications</code></div>
+      </div>
+      <ul class="notif-list" id="notif-list">
+        <li class="empty">Loading…</li>
+      </ul>
+      <div class="notif-actions">
+        <a class="btn-primary" href="register.html">Back to registration</a>
+        <button type="button" class="btn-ghost" id="refresh-notifs">Refresh</button>
+      </div>
+    </section>
+  </main>
+  <script>
+    async function loadNotifs() {
+      var list = document.getElementById('notif-list');
+      try {
+        var res = await fetch('/api/notifications', { cache: 'no-store' });
+        var data = await res.json();
+        var items = (data && data.notifications) || [];
+        if (!items.length) {
+          list.innerHTML = '<li class="empty">No early adopters yet. Complete a registration to see a notification here.</li>';
+          return;
+        }
+        list.innerHTML = items.map(function (n) {
+          var when = n.createdAt ? new Date(n.createdAt).toLocaleString() : '';
+          return (
+            '<li class="notif-item">' +
+              '<h3>' + (n.title || 'Zazise Early Adopters') + '</h3>' +
+              '<div class="who">' + escapeHtml(n.name || '') + ' &lt;' + escapeHtml(n.email || '') + '&gt;</div>' +
+              '<div class="meta">' + escapeHtml(when) + '</div>' +
+            '</li>'
+          );
+        }).join('');
+      } catch (e) {
+        list.innerHTML = '<li class="empty">Could not load notifications. Is <code>npm start</code> running?</li>';
+      }
+    }
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+      });
+    }
+    document.getElementById('refresh-notifs').addEventListener('click', loadNotifs);
+    loadNotifs();
+    setInterval(loadNotifs, 8000);
+  </script>
+</body>
+</html>

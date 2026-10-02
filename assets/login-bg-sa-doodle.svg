@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1200" viewBox="0 0 1920 1200">
+  <defs>
+    <style>
+      .ol { stroke:#0A0A0A; stroke-width:7; stroke-linejoin:round; stroke-linecap:round; fill-rule:evenodd; }
+      .ol2 { stroke:#0A0A0A; stroke-width:5; stroke-linejoin:round; stroke-linecap:round; }
+      .ol3 { stroke:#0A0A0A; stroke-width:4; stroke-linejoin:round; stroke-linecap:round; }
+    </style>
+  </defs>
+
+  <!-- Warm cream base -->
+  <rect width="1920" height="1200" fill="#FFF8E7"/>
+
+  <!-- Soft corner colour blooms (vibrant, not washed) -->
+  <circle cx="80" cy="80" r="280" fill="#FFB81C" opacity="0.35"/>
+  <circle cx="1840" cy="100" r="260" fill="#001489" opacity="0.28"/>
+  <circle cx="100" cy="1120" r="300" fill="#007A4D" opacity="0.30"/>
+  <circle cx="1820" cy="1100" r="280" fill="#DE3831" opacity="0.28"/>
+  <circle cx="960" cy="600" r="420" fill="#FFB81C" opacity="0.12"/>
+
+  <!-- ========== TOP LEFT: Table Mountain / Cape ========== -->
+  <g transform="translate(40,40)">
+    <!-- Ocean -->
+    <path class="ol" fill="#00A3E0" d="M20,220 C80,200 160,240 240,210 C300,190 360,230 420,200 L420,280 L20,280 Z"/>
+    <!-- Mountain flat top -->
+    <path class="ol" fill="#001489" d="M60,220 L90,120 L140,95 L200,90 L260,95 L310,115 L350,200 L340,220 L60,220 Z"/>
+    <path class="ol2" fill="#007A4D" d="M100,220 L120,160 L180,145 L240,150 L280,170 L300,220 Z"/>
+    <!-- Clouds -->
+    <ellipse class="ol3" fill="#FFFFFF" cx="160" cy="70" rx="48" ry="22"/>
+    <ellipse class="ol3" fill="#FFFFFF" cx="200" cy="62" rx="30" ry="16"/>
+    <!-- Tiny Cape Town buildings at base -->
+    <rect class="ol3" fill="#FFB81C" x="130" y="210" width="22" height="40"/>
+    <rect class="ol3" fill="#DE3831" x="155" y="200" width="18" height="50"/>
+    <rect class="ol3" fill="#FFFFFF" x="176" y="215" width="26" height="35"/>
+  </g>
+
+  <!-- ========== TOP CENTER: Twin Airlink-style jets ========== -->
+  <g transform="translate(620,30)">
+    <!-- Plane 1 (left, climbing) -->
+    <g transform="rotate(-18 180 90)">
+      <ellipse class="ol" fill="#FFFFFF" cx="180" cy="90" rx="110" ry="28"/>
+      <path class="ol" fill="#DE3831" d="M70,90 L40,78 L40,102 Z"/>
+      <path class="ol" fill="#001489" d="M250,70 L290,55 L270,90 L250,90 Z"/>
+      <path class="ol" fill="#001489" d="M160,90 L130,130 L155,95 Z"/>
+      <path class="ol" fill="#001489" d="M160,90 L130,50 L155,85 Z"/>
+      <rect class="ol3" fill="#FFB81C" x="100" y="78" width="90" height="10" rx="3"/>
+      <circle class="ol3" fill="#0A0A0A" cx="210" cy="82" r="5"/>
+      <circle class="ol3" fill="#0A0A0A" cx="230" cy="82" r="5"/>
+      <!-- SA flag stripe on fuselage -->
+      <rect class="ol3" fill="#007A4D" x="115" y="95" width="55" height="8"/>
+    </g>
+    <!-- Plane 2 (right, banking) -->
+    <g transform="translate(280,40) rotate(12 180 90)">
+      <ellipse class="ol" fill="#FFFFFF" cx="180" cy="90" rx="100" ry="26"/>
+      <path class="ol" fill="#FFB81C" d="M80,90 L52,80 L52,100 Z"/>
+      <path class="ol" fill="#007A4D" d="M240,72 L275,58 L258,90 L240,90 Z"/>
+      <path class="ol" fill="#007A4D" d="M165,90 L138,125 L160,94 Z"/>
+      <path class="ol" fill="#007A4D" d="M165,90 L138,55 L160,86 Z"/>
+      <rect class="ol3" fill="#DE3831" x="110" y="80" width="80" height="9" rx="3"/>
+      <circle class="ol3" fill="#0A0A0A" cx="200" cy="82" r="4"/>
+      <circle class="ol3" fill="#0A0A0A" cx="218" cy="82" r="4"/>
+    </g>
+  </g>
+
+  <!-- ========== TOP RIGHT: Jozi skyline ========== -->
+  <g transform="translate(1380,50)">
+    <rect class="ol" fill="#001489" x="20" y="80" width="48" height="160"/>
+    <rect class="ol" fill="#FFB81C" x="70" y="40" width="42" height="200"/>
+    <rect class="ol" fill="#DE3831" x="115" y="100" width="55" height="140"/>
+    <rect class="ol" fill="#007A4D" x="175" y="60" width="38" height="180"/>
+    <rect class="ol" fill="#0A0A0A" x="220" y="110" width="50" height="130"/>
+    <rect class="ol" fill="#00A3E0" x="275" y="90" width="44" height="150"/>
+    <!-- Hillbrow-ish tower spike -->
+    <path class="ol" fill="#C0C8D0" d="M85,40 L91,10 L97,40 Z"/>
+    <!-- Windows -->
+    <g fill="#FFB81C" stroke="#0A0A0A" stroke-width="2">
+      <rect x="30" y="100" width="10" height="12"/><rect x="45" y="100" width="10" height="12"/>
+      <rect x="30" y="130" width="10" height="12"/><rect x="45" y="130" width="10" height="12"/>
+      <rect x="78" y="60" width="10" height="12"/><rect x="92" y="60" width="10" height="12"/>
+      <rect x="78" y="90" width="10" height="12"/><rect x="92" y="90" width="10" height="12"/>
+      <rect x="125" y="120" width="12" height="14"/><rect x="145" y="120" width="12" height="14"/>
+      <rect x="185" y="80" width="10" height="12"/><rect x="185" y="110" width="10" height="12"/>
+      <rect x="230" y="130" width="12" height="12"/><rect x="250" y="130" width="12" height="12"/>
+    </g>
+    <path class="ol2" fill="#007A4D" d="M10,240 L480,240 L480,260 L10,260 Z"/>
+  </g>
+
+  <!-- ========== LEFT MID: Soweto matchbox houses + Orlando towers ========== -->
+  <g transform="translate(30,320)">
+    <!-- Orlando cooling towers -->
+    <path class="ol" fill="#DE3831" d="M40,40 C20,100 25,200 35,260 L95,260 C105,200 110,100 90,40 Z"/>
+    <path class="ol" fill="#FFB81C" d="M120,50 C102,110 106,200 115,255 L170,255 C180,200 185,110 168,50 Z"/>
+    <ellipse class="ol3" fill="#FFF8E7" cx="65" cy="55" rx="28" ry="12"/>
+    <ellipse class="ol3" fill="#FFF8E7" cx="144" cy="62" rx="26" ry="11"/>
+    <!-- Matchbox houses -->
+    <g transform="translate(200,160)">
+      <path class="ol" fill="#007A4D" d="M0,60 L0,20 L30,0 L60,20 L60,60 Z"/>
+      <rect class="ol3" fill="#FFB81C" x="20" y="35" width="18" height="25"/>
+      <path class="ol" fill="#001489" d="M70,70 L70,30 L105,8 L140,30 L140,70 Z"/>
+      <rect class="ol3" fill="#DE3831" x="95" y="42" width="20" height="28"/>
+      <path class="ol" fill="#FFB81C" d="M150,65 L150,28 L180,10 L210,28 L210,65 Z"/>
+      <rect class="ol3" fill="#0A0A0A" x="172" y="40" width="16" height="25"/>
+    </g>
+  </g>
+
+  <!-- ========== LEFT LOWER: Ndebele patterns ========== -->
+  <g transform="translate(40,620)">
+    <rect class="ol" fill="#FFFFFF" x="0" y="0" width="220" height="160"/>
+    <!-- Geometric Ndebele blocks -->
+    <rect class="ol2" fill="#DE3831" x="15" y="15" width="55" height="40"/>
+    <rect class="ol2" fill="#001489" x="80" y="15" width="55" height="40"/>
+    <rect class="ol2" fill="#FFB81C" x="145" y="15" width="55" height="40"/>
+    <polygon class="ol2" fill="#007A4D" points="15,70 70,70 42,120"/>
+    <rect class="ol2" fill="#0A0A0A" x="80" y="70" width="55" height="50"/>
+    <polygon class="ol2" fill="#E6007E" points="145,70 200,70 200,120 145,120"/>
+    <rect class="ol3" fill="#FFB81C" x="90" y="80" width="35" height="30"/>
+    <circle class="ol3" fill="#00A3E0" cx="172" cy="95" r="16"/>
+  </g>
+
+  <!-- ========== BOTTOM LEFT: Kids playing soccer ========== -->
+  <g transform="translate(280,880)">
+    <!-- Ball -->
+    <circle class="ol" fill="#FFFFFF" cx="160" cy="140" r="22"/>
+    <path class="ol3" fill="#0A0A0A" d="M160,120 L172,135 L160,148 L148,135 Z"/>
+    <!-- Kid 1 -->
+    <circle class="ol" fill="#C68642" cx="60" cy="50" r="22"/>
+    <path class="ol" fill="#007A4D" d="M40,75 L35,130 L85,130 L80,75 Z"/>
+    <path class="ol2" fill="#C68642" d="M35,85 L10,110"/>
+    <path class="ol2" fill="#C68642" d="M85,85 L115,105"/>
+    <path class="ol2" fill="#001489" d="M45,130 L40,170"/>
+    <path class="ol2" fill="#001489" d="M75,130 L85,170"/>
+    <!-- Kid 2 -->
+    <circle class="ol" fill="#F1C27D" cx="240" cy="55" r="22"/>
+    <path class="ol" fill="#DE3831" d="M220,78 L215,130 L265,130 L260,78 Z"/>
+    <path class="ol2" fill="#F1C27D" d="M215,90 L185,70"/>
+    <path class="ol2" fill="#F1C27D" d="M265,90 L295,115"/>
+    <path class="ol2" fill="#0A0A0A" d="M225,130 L220,170"/>
+    <path class="ol2" fill="#0A0A0A" d="M255,130 L268,170"/>
+    <!-- Kid 3 smaller -->
+    <circle class="ol" fill="#8D5524" cx="150" cy="70" r="18"/>
+    <path class="ol" fill="#FFB81C" d="M135,88 L132,125 L170,125 L167,88 Z"/>
+  </g>
+
+  <!-- ========== CENTER LEFT: Toyota Quantum minibus ========== -->
+  <g transform="translate(300,480)">
+    <!-- Body -->
+    <path class="ol" fill="#FFFFFF" d="M20,80 L20,40 C20,25 35,15 55,15 L260,15 C290,15 310,30 315,55 L320,80 L320,120 L20,120 Z"/>
+    <!-- Green stripe (classic taxi) -->
+    <rect class="ol3" fill="#007A4D" x="25" y="70" width="285" height="18"/>
+    <!-- Yellow stripe -->
+    <rect class="ol3" fill="#FFB81C" x="25" y="55" width="285" height="12"/>
+    <!-- Windows -->
+    <rect class="ol2" fill="#00A3E0" x="50" y="25" width="50" height="28" rx="4"/>
+    <rect class="ol2" fill="#00A3E0" x="110" y="25" width="50" height="28" rx="4"/>
+    <rect class="ol2" fill="#00A3E0" x="170" y="25" width="50" height="28" rx="4"/>
+    <rect class="ol2" fill="#00A3E0" x="230" y="25" width="55" height="28" rx="4"/>
+    <!-- Wheels -->
+    <circle class="ol" fill="#0A0A0A" cx="70" cy="120" r="28"/>
+    <circle class="ol2" fill="#C0C8D0" cx="70" cy="120" r="12"/>
+    <circle class="ol" fill="#0A0A0A" cx="260" cy="120" r="28"/>
+    <circle class="ol2" fill="#C0C8D0" cx="260" cy="120" r="12"/>
+    <!-- Headlights -->
+    <ellipse class="ol3" fill="#FFB81C" cx="310" cy="90" rx="10" ry="14"/>
+  </g>
+
+  <!-- ========== CENTER: BMW sedan ========== -->
+  <g transform="translate(720,520)">
+    <path class="ol" fill="#001489" d="M30,90 L50,50 C60,30 90,20 130,20 L250,20 C300,20 330,40 350,70 L370,90 L375,120 L20,120 L30,90 Z"/>
+    <path class="ol2" fill="#00A3E0" d="M70,55 L70,35 L140,28 L140,55 Z"/>
+    <path class="ol2" fill="#00A3E0" d="M155,55 L155,28 L250,28 L270,55 Z"/>
+    <circle class="ol" fill="#0A0A0A" cx="90" cy="120" r="26"/>
+    <circle class="ol2" fill="#C0C8D0" cx="90" cy="120" r="11"/>
+    <circle class="ol" fill="#0A0A0A" cx="300" cy="120" r="26"/>
+    <circle class="ol2" fill="#C0C8D0" cx="300" cy="120" r="11"/>
+    <!-- BMW roundel hint -->
+    <circle class="ol3" fill="#FFFFFF" cx="200" cy="48" r="14"/>
+    <path fill="#001489" d="M200,48 L200,34 A14,14 0 0,1 214,48 Z"/>
+    <path fill="#001489" d="M200,48 L200,62 A14,14 0 0,1 186,48 Z"/>
+  </g>
+
+  <!-- ========== CENTER RIGHT: Soccer stadium ========== -->
+  <g transform="translate(1180,400)">
+    <!-- Bowl -->
+    <ellipse class="ol" fill="#007A4D" cx="200" cy="160" rx="190" ry="70"/>
+    <ellipse class="ol2" fill="#FFFFFF" cx="200" cy="155" rx="140" ry="45"/>
+    <ellipse class="ol2" fill="#007A4D" cx="200" cy="155" rx="110" ry="32"/>
+    <!-- Roof arches / calabash vibe -->
+    <path class="ol" fill="#FFB81C" d="M30,150 C30,40 120,10 200,10 C280,10 370,40 370,150 L340,150 C340,70 270,45 200,45 C130,45 60,70 60,150 Z"/>
+    <path class="ol2" fill="#DE3831" d="M80,140 C90,80 150,55 200,55 C250,55 310,80 320,140" fill-opacity="0"/>
+    <!-- Floodlights -->
+    <rect class="ol3" fill="#0A0A0A" x="20" y="80" width="10" height="80"/>
+    <circle class="ol3" fill="#FFB81C" cx="25" cy="75" r="12"/>
+    <rect class="ol3" fill="#0A0A0A" x="370" y="80" width="10" height="80"/>
+    <circle class="ol3" fill="#FFB81C" cx="375" cy="75" r="12"/>
+  </g>
+
+  <!-- ========== RIGHT MID: Braai / culture ========== -->
+  <g transform="translate(1550,320)">
+    <!-- Braai drum -->
+    <ellipse class="ol" fill="#0A0A0A" cx="100" cy="140" rx="70" ry="25"/>
+    <path class="ol" fill="#0A0A0A" d="M30,80 L30,140 L170,140 L170,80 Z"/>
+    <ellipse class="ol" fill="#C0C8D0" cx="100" cy="80" rx="70" ry="22"/>
+    <!-- Flames -->
+    <path class="ol2" fill="#DE3831" d="M70,75 Q75,40 85,70 Q90,45 100,72 Q110,42 115,70 Q125,48 130,75 Z"/>
+    <path class="ol3" fill="#FFB81C" d="M85,70 Q90,50 95,68 Q100,52 105,68 Q110,55 115,70 Z"/>
+    <!-- Person braaiing -->
+    <circle class="ol" fill="#C68642" cx="200" cy="50" r="20"/>
+    <path class="ol" fill="#007A4D" d="M180,72 L175,140 L225,140 L220,72 Z"/>
+    <path class="ol2" fill="#C68642" d="M175,90 L120,95"/>
+    <!-- Tongs hint -->
+    <path class="ol3" stroke="#C0C8D0" fill="none" d="M120,95 L90,70"/>
+  </g>
+
+  <!-- ========== RIGHT LOWER: Protea + wildlife ========== -->
+  <g transform="translate(1480,700)">
+    <!-- Protea flower -->
+    <g transform="translate(40,40)">
+      <ellipse class="ol" fill="#E6007E" cx="80" cy="90" rx="22" ry="55" transform="rotate(-30 80 90)"/>
+      <ellipse class="ol" fill="#DE3831" cx="80" cy="90" rx="22" ry="55" transform="rotate(0 80 90)"/>
+      <ellipse class="ol" fill="#E6007E" cx="80" cy="90" rx="22" ry="55" transform="rotate(30 80 90)"/>
+      <ellipse class="ol" fill="#FFB81C" cx="80" cy="90" rx="22" ry="50" transform="rotate(-15 80 90)"/>
+      <ellipse class="ol" fill="#FFB81C" cx="80" cy="90" rx="22" ry="50" transform="rotate(15 80 90)"/>
+      <circle class="ol2" fill="#F36C21" cx="80" cy="95" r="18"/>
+      <path class="ol2" fill="#007A4D" d="M80,140 L70,200 L90,200 Z"/>
+    </g>
+    <!-- Springbok -->
+    <g transform="translate(200,80)">
+      <ellipse class="ol" fill="#F36C21" cx="70" cy="70" rx="55" ry="30"/>
+      <ellipse class="ol" fill="#F1C27D" cx="120" cy="50" rx="28" ry="22"/>
+      <path class="ol2" fill="#0A0A0A" d="M130,35 L145,10 L138,38"/>
+      <path class="ol2" fill="#0A0A0A" d="M125,35 L132,8 L135,36"/>
+      <circle class="ol3" fill="#0A0A0A" cx="135" cy="48" r="4"/>
+      <path class="ol2" fill="#F36C21" d="M40,95 L30,140"/>
+      <path class="ol2" fill="#F36C21" d="M60,100 L55,145"/>
+      <path class="ol2" fill="#F36C21" d="M90,100 L95,145"/>
+      <path class="ol2" fill="#F36C21" d="M105,95 L120,140"/>
+      <!-- Jumping pose back legs -->
+      <path class="ol3" fill="#FFFFFF" d="M55,65 L80,75 L55,80 Z"/>
+    </g>
+  </g>
+
+  <!-- ========== BOTTOM CENTER: SA flag + dancers / culture ========== -->
+  <g transform="translate(700,880)">
+    <!-- SA flag waving -->
+    <path class="ol" fill="#DE3831" d="M20,20 L180,10 L180,70 L20,80 Z"/>
+    <path class="ol" fill="#001489" d="M20,80 L180,70 L180,130 L20,140 Z"/>
+    <path class="ol" fill="#007A4D" d="M20,40 L100,80 L20,120 Z"/>
+    <path class="ol3" fill="#FFB81C" d="M28,50 L85,80 L28,110 Z"/>
+    <path class="ol3" fill="#0A0A0A" d="M35,58 L75,80 L35,102 Z"/>
+    <path class="ol3" fill="#FFFFFF" d="M20,48 L95,80 L20,112" fill-opacity="0"/>
+    <!-- Flag pole -->
+    <rect class="ol3" fill="#8B4513" x="12" y="15" width="12" height="160"/>
+    <!-- Dancer 1 -->
+    <g transform="translate(220,40)">
+      <circle class="ol" fill="#C68642" cx="40" cy="25" r="20"/>
+      <path class="ol" fill="#DE3831" d="M20,48 L10,110 L70,110 L60,48 Z"/>
+      <path class="ol" fill="#FFB81C" d="M10,110 L5,130 L75,130 L70,110 Z"/>
+      <path class="ol2" fill="#C68642" d="M15,60 L-20,40"/>
+      <path class="ol2" fill="#C68642" d="M65,60 L100,35"/>
+      <path class="ol2" fill="#0A0A0A" d="M25,130 L20,170"/>
+      <path class="ol2" fill="#0A0A0A" d="M55,130 L65,170"/>
+    </g>
+    <!-- Dancer 2 -->
+    <g transform="translate(360,50)">
+      <circle class="ol" fill="#F1C27D" cx="40" cy="25" r="20"/>
+      <path class="ol" fill="#001489" d="M22,48 L15,105 L65,105 L58,48 Z"/>
+      <path class="ol" fill="#007A4D" d="M15,105 L10,125 L70,125 L65,105 Z"/>
+      <path class="ol2" fill="#F1C27D" d="M18,65 L-15,90"/>
+      <path class="ol2" fill="#F1C27D" d="M62,65 L100,55"/>
+      <path class="ol2" fill="#0A0A0A" d="M28,125 L22,165"/>
+      <path class="ol2" fill="#0A0A0A" d="M52,125 L60,165"/>
+    </g>
+  </g>
+
+  <!-- ========== BOTTOM RIGHT: Lion head ========== -->
+  <g transform="translate(1200,920)">
+    <circle class="ol" fill="#FFB81C" cx="100" cy="100" r="85"/>
+    <!-- Mane spikes -->
+    <g fill="#F36C21" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round">
+      <ellipse cx="100" cy="20" rx="18" ry="35"/>
+      <ellipse cx="40" cy="45" rx="18" ry="35" transform="rotate(-40 40 45)"/>
+      <ellipse cx="160" cy="45" rx="18" ry="35" transform="rotate(40 160 45)"/>
+      <ellipse cx="25" cy="100" rx="18" ry="35" transform="rotate(-80 25 100)"/>
+      <ellipse cx="175" cy="100" rx="18" ry="35" transform="rotate(80 175 100)"/>
+      <ellipse cx="50" cy="160" rx="18" ry="30" transform="rotate(-130 50 160)"/>
+      <ellipse cx="150" cy="160" rx="18" ry="30" transform="rotate(130 150 160)"/>
+    </g>
+    <circle class="ol" fill="#FFB81C" cx="100" cy="105" r="55"/>
+    <circle class="ol3" fill="#0A0A0A" cx="80" cy="95" r="8"/>
+    <circle class="ol3" fill="#0A0A0A" cx="120" cy="95" r="8"/>
+    <ellipse class="ol3" fill="#0A0A0A" cx="100" cy="115" rx="10" ry="8"/>
+    <path class="ol3" fill="#FFFFFF" d="M85,130 Q100,145 115,130"/>
+  </g>
+
+  <!-- ========== Scattered interlocking fillers (leaves, shapes) ========== -->
+  <g opacity="0.95">
+    <path class="ol2" fill="#007A4D" d="M520,200 Q540,160 560,200 Q540,220 520,200"/>
+    <path class="ol2" fill="#007A4D" d="M1100,280 Q1125,240 1150,280 Q1125,300 1100,280"/>
+    <path class="ol2" fill="#DE3831" d="M980,180 L1000,140 L1020,180 L1000,200 Z"/>
+    <path class="ol2" fill="#FFB81C" d="M480,750 L510,720 L540,750 L510,780 Z"/>
+    <circle class="ol2" fill="#00A3E0" cx="900" cy="320" r="28"/>
+    <circle class="ol2" fill="#E6007E" cx="1050" cy="700" r="24"/>
+    <path class="ol2" fill="#001489" d="M1350,280 L1380,250 L1410,280 L1380,310 Z"/>
+    <!-- Acacia tree silhouette -->
+    <g transform="translate(560,300)">
+      <rect class="ol3" fill="#8B4513" x="48" y="60" width="14" height="70"/>
+      <ellipse class="ol" fill="#007A4D" cx="55" cy="50" rx="55" ry="28"/>
+      <ellipse class="ol2" fill="#007A4D" cx="40" cy="35" rx="35" ry="18"/>
+      <ellipse class="ol2" fill="#007A4D" cx="70" cy="32" rx="30" ry="16"/>
+    </g>
+  </g>
+
+
+  <!-- ========== ZAZISE EASTER EGGS — various sizes, thick-outline doodles ========== -->
+
+  <!-- LARGE: Bubble-letter ZAZISE near Table Mountain -->
+  <g transform="translate(250,55)">
+    <text x="0" y="58" font-family="Arial Black, Helvetica, sans-serif" font-size="56" font-weight="900"
+          fill="#FFB81C" stroke="#0A0A0A" stroke-width="7" stroke-linejoin="round" paint-order="stroke">ZAZISE</text>
+  </g>
+
+  <!-- LARGE: Chevron doodle badge mid-right -->
+  <g transform="translate(1260,200) scale(1.35)">
+    <path class="ol" fill="#DE3831" d="M10,10 L70,50 L10,90 Z"/>
+    <path class="ol" fill="#001489" d="M10,50 L70,90 L10,130 Z"/>
+    <path class="ol" fill="#007A4D" d="M30,50 L70,50 L50,70 Z"/>
+    <path class="ol2" fill="#FFB81C" d="M18,50 L55,50"/>
+    <path class="ol2" fill="#0A0A0A" d="M25,42 L48,58 L25,58 Z"/>
+  </g>
+
+  <!-- MEDIUM: Round sticker MAKE YOURSELF KNOWN near stadium -->
+  <g transform="translate(1060,540)">
+    <circle class="ol" fill="#FFB81C" cx="78" cy="78" r="70"/>
+    <circle class="ol2" fill="#FFF8E7" cx="78" cy="78" r="54"/>
+    <text x="78" y="70" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="12" font-weight="800"
+          fill="#0A0A0A">MAKE YOURSELF</text>
+    <text x="78" y="94" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="16" font-weight="900"
+          fill="#DE3831" stroke="#0A0A0A" stroke-width="3.5" paint-order="stroke" stroke-linejoin="round">KNOWN</text>
+  </g>
+
+  <!-- MEDIUM: Graffiti Z! tag near Soweto -->
+  <g transform="translate(410,350)">
+    <path class="ol" fill="#E6007E" d="M5,5 L60,5 L48,78 L0,78 Z"/>
+    <text x="6" y="60" font-family="Comic Sans MS, Arial Black, sans-serif" font-size="54" font-weight="900"
+          fill="#FFB81C" stroke="#0A0A0A" stroke-width="5.5" paint-order="stroke" stroke-linejoin="round">Z!</text>
+  </g>
+
+  <!-- MEDIUM-SMALL: ZZ monogram near Quantum -->
+  <g transform="translate(640,450)">
+    <rect class="ol" fill="#001489" x="0" y="0" width="64" height="46" rx="9"/>
+    <text x="32" y="34" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="26" font-weight="900"
+          fill="#FFB81C" stroke="#0A0A0A" stroke-width="4" paint-order="stroke" stroke-linejoin="round">ZZ</text>
+  </g>
+
+  <!-- MEDIUM: Speech-bubble ZAZISE near kids -->
+  <g transform="translate(500,800)">
+    <path class="ol" fill="#00A3E0" d="M10,10 H140 Q156,10 156,26 V58 Q156,74 140,74 H58 L36,102 L48,74 H10 Q0,74 0,58 V26 Q0,10 10,10 Z"/>
+    <text x="78" y="52" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="20" font-weight="900"
+          fill="#FFFFFF" stroke="#0A0A0A" stroke-width="3.5" paint-order="stroke" stroke-linejoin="round">ZAZISE</text>
+  </g>
+
+  <!-- MEDIUM: Retro TV/billboard near Jozi -->
+  <g transform="translate(1585,185)">
+    <rect class="ol" fill="#0A0A0A" x="0" y="0" width="140" height="96" rx="8"/>
+    <rect class="ol2" fill="#007A4D" x="10" y="10" width="120" height="58" rx="4"/>
+    <text x="70" y="50" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="18" font-weight="900"
+          fill="#FFB81C" stroke="#0A0A0A" stroke-width="3.5" paint-order="stroke" stroke-linejoin="round">ZAZISE</text>
+    <rect class="ol3" fill="#C0C8D0" x="55" y="74" width="30" height="12"/>
+    <rect class="ol3" fill="#C0C8D0" x="45" y="86" width="50" height="8"/>
+  </g>
+
+  <!-- SMALL: Ndebele Z block -->
+  <g transform="translate(95,805)">
+    <rect class="ol" fill="#DE3831" x="0" y="0" width="44" height="44"/>
+    <path class="ol2" fill="#FFB81C" d="M7,10 H38 L16,34 H38 V38 H7 V34 L28,10 H7 Z"/>
+  </g>
+
+  <!-- TINY: mini Z on plane wing area -->
+  <g transform="translate(980,120)">
+    <rect class="ol3" fill="#DE3831" x="0" y="0" width="22" height="22" rx="3"/>
+    <text x="11" y="17" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="14" font-weight="900"
+          fill="#FFB81C" stroke="#0A0A0A" stroke-width="2" paint-order="stroke">Z</text>
+  </g>
+
+  <!-- TINY: mini ZZ under acacia -->
+  <g transform="translate(600,390)">
+    <circle class="ol3" fill="#007A4D" cx="12" cy="12" r="12"/>
+    <text x="12" y="16" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="9" font-weight="900"
+          fill="#FFB81C" stroke="#0A0A0A" stroke-width="1.5" paint-order="stroke">ZZ</text>
+  </g>
+
+  <!-- TINY: Z on BMW rear -->
+  <g transform="translate(1085,560)">
+    <rect class="ol3" fill="#001489" x="0" y="0" width="18" height="16" rx="2"/>
+    <text x="9" y="13" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="11" font-weight="900"
+          fill="#FFFFFF" stroke="#0A0A0A" stroke-width="1.5" paint-order="stroke">Z</text>
+  </g>
+
+  <!-- TINY: star-burst Z near protea -->
+  <g transform="translate(1720,860)">
+    <circle class="ol3" fill="#FFB81C" cx="14" cy="14" r="14"/>
+    <text x="14" y="19" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="13" font-weight="900"
+          fill="#DE3831" stroke="#0A0A0A" stroke-width="2" paint-order="stroke">Z</text>
+  </g>
+
+  <!-- SMALL: banner ZAZISE near flag dancers -->
+  <g transform="translate(920,1050)">
+    <path class="ol2" fill="#E6007E" d="M0,8 H95 L105,20 L95,32 H0 Z"/>
+    <text x="48" y="26" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-size="13" font-weight="900"
+          fill="#FFFFFF" stroke="#0A0A0A" stroke-width="2.5" paint-order="stroke" stroke-linejoin="round">ZAZISE</text>
+  </g>
+
+  <!-- LARGE-ish: outlined hollow Z watermark-style mid-left (still doodle) -->
+  <g transform="translate(200,520)" opacity="0.9">
+    <text x="0" y="90" font-family="Arial Black, Helvetica, sans-serif" font-size="110" font-weight="900"
+          fill="none" stroke="#0A0A0A" stroke-width="8" stroke-linejoin="round">Z</text>
+    <text x="4" y="86" font-family="Arial Black, Helvetica, sans-serif" font-size="110" font-weight="900"
+          fill="#FFB81C" stroke="#0A0A0A" stroke-width="3" paint-order="stroke" opacity="0.85">Z</text>
+  </g>
+
+
+  <!-- Soft vignette so login card stays readable — lighten center -->
+  <radialGradient id="softCenter" cx="50%" cy="48%" r="42%">
+    <stop offset="0%" stop-color="#FFF8E7" stop-opacity="0.72"/>
+    <stop offset="55%" stop-color="#FFF8E7" stop-opacity="0.28"/>
+    <stop offset="100%" stop-color="#FFF8E7" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1920" height="1200" fill="url(#softCenter)"/>
+</svg>

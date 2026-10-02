@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZAZISE: Privacy (Early Adopter Demo)</title>
+  <link rel="stylesheet" href="doc-shared.css" />
+</head>
+<body>
+  <article class="doc">
+    <header class="doc-header">
+      <img class="doc-header__logo" src="../assets/zazise-logo-colour-header.png" alt="ZAZISE" />
+      <div class="doc-header__meta">
+        <strong>Privacy</strong>
+        Early adopter demo · 28 Sep 2026<br />
+        ZAZISE · South Africa
+      </div>
+    </header>
+
+    <span class="badge">Demo notice · POPIA aware</span>
+    <h1>Privacy (demo)</h1>
+    <p class="lede">
+      How we handle personal information in this ZAZISE early adopter demo. It is clear, proportionate, and written for South Africans.
+    </p>
+
+
+    <h2>1. Who we are</h2>
+    <p>
+      For this demo, “we” means <strong>ZAZISE (South Africa)</strong>
+      operating the early adopter wireframe kit and local registration flow.
+      Contact for demo related privacy questions should go through the channel
+      by which you were invited, or the project maintainers named in that invite.
+    </p>
+
+    <h2>2. What we collect</h2>
+    <p>When you register as an early adopter in this demo, we may collect:</p>
+    <ul>
+      <li><strong>First name</strong></li>
+      <li><strong>Surname</strong></li>
+      <li><strong>Email address</strong></li>
+      <li><strong>Password</strong>, stored only as a <strong>hashed</strong> value (never shown as plaintext in notices, logs meant for operators, or emails)</li>
+    </ul>
+    <p>
+      We also use a human verification step (reCAPTCHA / similar) so bots don’t
+      flood the list. That provider may process technical signals under its own terms.
+    </p>
+    <div class="card">
+      <h3>What we do <em>not</em> sell</h3>
+      <p style="margin:0">
+        We do <strong>not</strong> sell your personal information. Early adopter
+        data exists to run this demo and to notify you about ZAZISE, not to trade.
+      </p>
+    </div>
+
+    <h2>3. Why we collect it (purpose)</h2>
+    <ul>
+      <li>To maintain an <strong>early adopter list</strong> of people who registered interest.</li>
+      <li>To <strong>notify</strong> you about preview progress, invites, or next steps (where an email was provided).</li>
+      <li>To operate the local demo (authentication / account shape in the sample build).</li>
+      <li>To show preview personalisation such as profile initials on the Early Adopter Preview home.</li>
+    </ul>
+
+    <h2>4. Where it is stored</h2>
+    <p>
+      This build stores registration records in a <strong>local demo database / file</strong>
+      on the machine running the demo (for example a local JSON store under the
+      wireframes <span class="mono">data/</span> folder). It is <strong>not</strong>
+      a production cloud launch. Treat the host machine’s access controls as the
+      primary safeguard for this demo.
+    </p>
+    <p>
+      Passwords are retained only in <strong>hashed</strong> form. Plaintext passwords
+      are not written into notices for operators.
+    </p>
+
+    <h2>5. Cookies, localStorage &amp; preview initials</h2>
+    <p>
+      The Early Adopter Preview may keep a small profile object (e.g. first name,
+      surname, and derived <strong>initials</strong>) in browser
+      <span class="mono">localStorage</span> / <span class="mono">sessionStorage</span>
+      so the avatar can greet you without a full production auth stack.
+      Language preference may also be stored locally (e.g. <span class="mono">zazise.lang</span>).
+    </p>
+    <p>
+      You can clear this data by clearing site data for the demo origin in your browser.
+    </p>
+
+    <h2>6. Retention</h2>
+    <p>
+      For this demo, we keep early adopter records for as long as they are useful
+      to the initiative (notify / acknowledge / shape the product), or until you
+      ask us to remove your details where practically possible on the demo host.
+      When the demo is retired, local stores should be wiped or archived only as
+      needed for the project’s internal lessons, not for secondary marketing unrelated to ZAZISE.
+    </p>
+
+    <h2>7. Sharing</h2>
+    <p>
+      We do not sell personal data. Limited technical sharing may occur with
+      verification providers (e.g. reCAPTCHA) solely to run the demo’s abuse prevention step.
+      Contributors acknowledged in project materials are named with care; your
+      registration email is not published as a “contributor list” by default.
+    </p>
+
+    <h2>8. Your choices</h2>
+    <ul>
+      <li>Use a contact email you’re comfortable receiving project updates on.</li>
+      <li>Ask (via your invite channel) to be removed from the early adopter list where the demo host can action it.</li>
+      <li>Clear browser storage to remove local preview initials and language prefs.</li>
+    </ul>
+
+    <h2>9. South Africa &amp; POPIA (overview)</h2>
+    <p>
+      We aim to handle personal information in a way that respects the spirit of
+      South Africa’s <strong>Protection of Personal Information Act (POPIA)</strong>:
+      collect only what we need for the early adopter purpose, keep it secure for
+      a demo context, be transparent, and avoid secondary use that would surprise you.
+      This paragraph gives a broad overview of our approach.
+    </p>
+
+    <h2>10. Contact</h2>
+    <p>
+      Privacy questions about this demo: use the same channel that invited you
+      into the early adopter programme, addressed to ZAZISE (South Africa).
+    </p>
+
+    <footer class="doc-footer">
+      <div>© 2026 ZAZISE · South Africa · Separate from Terms · Demo documentation</div>
+    </footer>
+  </article>
+</body>
+</html>

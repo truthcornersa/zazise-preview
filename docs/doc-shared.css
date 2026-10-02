@@ -1,0 +1,273 @@
+/* ZAZISE early-adopter docs — premium, minimal, warm SA craft */
+@page {
+  size: A4;
+  margin: 28mm 16mm 22mm 16mm;
+}
+
+:root {
+  --z-gold: #E2AE41;
+  --z-blue: #183D83;
+  --z-green: #317045;
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --line: #e8e0d4;
+  --cream: #fbf8f3;
+  --warm: #f5efe6;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: "Inter", "Manrope", "Helvetica Neue", Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.doc {
+  max-width: 180mm;
+  margin: 0 auto;
+}
+
+.doc-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--z-gold);
+  margin-bottom: 22px;
+}
+
+.doc-header__logo {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
+.doc-header__meta {
+  text-align: right;
+  font-size: 8.5pt;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.doc-header__meta strong {
+  display: block;
+  color: var(--z-blue);
+  font-weight: 600;
+  font-size: 9pt;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-family: "Cormorant Garamond", "Libre Baskerville", Georgia, serif;
+  font-weight: 600;
+  font-size: 26pt;
+  line-height: 1.15;
+  color: var(--z-blue);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  font-size: 11.5pt;
+  color: var(--muted);
+  margin: 0 0 20px;
+  max-width: 42em;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--z-green);
+  background: color-mix(in srgb, var(--z-green) 10%, white);
+  border: 1px solid color-mix(in srgb, var(--z-green) 28%, white);
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-family: "Cormorant Garamond", "Libre Baskerville", Georgia, serif;
+  font-weight: 600;
+  font-size: 14.5pt;
+  color: var(--z-blue);
+  margin: 22px 0 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+h2:first-of-type { border-top: none; padding-top: 0; }
+
+h3 {
+  font-family: Inter, Manrope, sans-serif;
+  font-weight: 600;
+  font-size: 10.5pt;
+  color: var(--ink);
+  margin: 14px 0 4px;
+}
+
+p { margin: 0 0 10px; }
+
+ul, ol {
+  margin: 0 0 12px;
+  padding-left: 1.25em;
+}
+
+li { margin-bottom: 4px; }
+
+li::marker { color: var(--z-gold); }
+
+.note {
+  background: var(--warm);
+  border-left: 3px solid var(--z-gold);
+  padding: 10px 14px;
+  margin: 14px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 9.5pt;
+  color: #3d3d3d;
+}
+
+.note strong { color: var(--z-blue); }
+
+.card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 12px 0 16px;
+}
+
+.card h3 { margin-top: 0; color: var(--z-blue); }
+
+.steps {
+  counter-reset: step;
+  list-style: none;
+  padding-left: 0;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.2em;
+  margin-bottom: 10px;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: var(--z-blue);
+  color: #fff;
+  font-size: 8.5pt;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5em;
+}
+
+code, .mono {
+  font-family: "DM Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 9pt;
+  background: #f3f1ec;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+a { color: var(--z-blue); text-decoration: none; }
+
+.doc-footer {
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 8pt;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.doc-footer .disclaimer {
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.accent-row {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot--gold { background: var(--z-gold); }
+.dot--blue { background: var(--z-blue); }
+.dot--green { background: var(--z-green); }
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0 16px;
+}
+
+.feature {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.feature strong {
+  display: block;
+  color: var(--z-blue);
+  font-size: 9.5pt;
+  margin-bottom: 2px;
+}
+
+.feature span {
+  font-size: 9pt;
+  color: var(--muted);
+}
+
+@media print {
+  .doc-header { break-after: avoid; }
+  h2, h3 { break-after: avoid; }
+  .card, .note, .feature { break-inside: avoid; }
+}
+
+/* Repeating header on every printed PDF page */
+@media print {
+  .doc-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0 0 10px;
+    background: #fff;
+    z-index: 10;
+  }
+  .doc {
+    /* body already has @page top margin for header clearance */
+  }
+  .doc-footer {
+    break-inside: avoid;
+  }
+}

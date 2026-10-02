@@ -1,1 +1,101 @@
-!function(){"use strict";var t=document.body&&document.body.getAttribute("data-doc")||"help",e=null,a={help:"docs/ZAZISE-Help.pdf",privacy:"docs/ZAZISE-Privacy.pdf",terms:"docs/ZAZISE-Terms.pdf"};function o(a){if(!e)return null;var o=a||(window.ZaziseI18n&&window.ZaziseI18n.getLang?window.ZaziseI18n.getLang():"en");return e[o]&&e[o][t]?{root:e[o],page:e[o][t],code:o}:e.en&&e.en[t]?{root:e.en,page:e.en[t],code:"en"}:null}function n(t,e){var a=document.querySelector(t);a&&null!=e&&(a.textContent=e)}function d(t){var e,a,o;t&&(t.page_title&&(document.title=t.page_title),n('[data-docs="meta"]',t.meta),e='[data-docs="meta_sub"]',a=t.meta_sub,(o=document.querySelector(e))&&null!=a&&(o.textContent=a),n('[data-docs="badge"]',t.badge),n('[data-docs="h1"]',t.h1),n('[data-docs="lede"]',t.lede),document.querySelectorAll("[data-docs-key]").forEach((function(e){var a=e.getAttribute("data-docs-key");a&&null!=t[a]&&(e.textContent=t[a])})))}function c(){var e=o();e&&(!function(e){if(e){n('[data-docs="download_pdf"]',e.download_pdf),n('[data-docs="footer_copy"]',e.footer_copy),n('[data-docs="back_register"]',e.back_register),n('[data-docs="nav_help"]',e.nav_help),n('[data-docs="nav_privacy"]',e.nav_privacy),n('[data-docs="nav_terms"]',e.nav_terms);var o=document.querySelector(".docs-download");o&&a[t]&&o.setAttribute("href",a[t])}}(e.root),d(e.page),document.querySelectorAll(".docs-nav a").forEach((function(e){var a=e.getAttribute("data-doc-nav");e.classList.toggle("is-active",a===t)})))}async function r(){try{var t=await fetch("i18n/docs.json",{cache:"no-store"});if(!t.ok)throw new Error("docs.json missing");e=await t.json()}catch(t){e=null}if(window.ZaziseI18n&&window.ZaziseI18n.load)try{await window.ZaziseI18n.load()}catch(t){}c(),document.addEventListener("zazise:lang",c)}"loading"===document.readyState?document.addEventListener("DOMContentLoaded",r):r()}();
+/**
+ * ZAZISE digital docs — language bar (same as register) + docs.json content swap.
+ */
+(function () {
+  'use strict';
+
+  var docKey = (document.body && document.body.getAttribute('data-doc')) || 'help';
+  var catalog = null;
+  var pdfMap = {
+    help: 'docs/ZAZISE-Help.pdf',
+    privacy: 'docs/ZAZISE-Privacy.pdf',
+    terms: 'docs/ZAZISE-Terms.pdf'
+  };
+
+  function lang() {
+    return (window.ZaziseI18n && window.ZaziseI18n.getLang)
+      ? window.ZaziseI18n.getLang()
+      : 'en';
+  }
+
+  function pack(code) {
+    if (!catalog) return null;
+    var c = code || lang();
+    if (catalog[c] && catalog[c][docKey]) return { root: catalog[c], page: catalog[c][docKey], code: c };
+    if (catalog.en && catalog.en[docKey]) return { root: catalog.en, page: catalog.en[docKey], code: 'en' };
+    return null;
+  }
+
+  function setText(sel, val) {
+    var el = document.querySelector(sel);
+    if (!el || val == null) return;
+    el.textContent = val;
+  }
+
+  function setHtmlPre(sel, val) {
+    var el = document.querySelector(sel);
+    if (!el || val == null) return;
+    el.textContent = val;
+  }
+
+  function applyShared(root) {
+    if (!root) return;
+    setText('[data-docs="download_pdf"]', root.download_pdf);
+    setText('[data-docs="footer_copy"]', root.footer_copy);
+    setText('[data-docs="back_register"]', root.back_register);
+    setText('[data-docs="nav_help"]', root.nav_help);
+    setText('[data-docs="nav_privacy"]', root.nav_privacy);
+    setText('[data-docs="nav_terms"]', root.nav_terms);
+    var a = document.querySelector('.docs-download');
+    if (a && pdfMap[docKey]) a.setAttribute('href', pdfMap[docKey]);
+  }
+
+  function applyPage(page) {
+    if (!page) return;
+    if (page.page_title) document.title = page.page_title;
+    setText('[data-docs="meta"]', page.meta);
+    setHtmlPre('[data-docs="meta_sub"]', page.meta_sub);
+    setText('[data-docs="badge"]', page.badge);
+    setText('[data-docs="h1"]', page.h1);
+    setText('[data-docs="lede"]', page.lede);
+
+    document.querySelectorAll('[data-docs-key]').forEach(function (el) {
+      var key = el.getAttribute('data-docs-key');
+      if (key && page[key] != null) el.textContent = page[key];
+    });
+  }
+
+  function render() {
+    var p = pack();
+    if (!p) return;
+    applyShared(p.root);
+    applyPage(p.page);
+    document.querySelectorAll('.docs-nav a').forEach(function (a) {
+      var k = a.getAttribute('data-doc-nav');
+      a.classList.toggle('is-active', k === docKey);
+    });
+  }
+
+  async function boot() {
+    try {
+      var res = await fetch('i18n/docs.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('docs.json missing');
+      catalog = await res.json();
+    } catch (e) {
+      catalog = null;
+    }
+
+    if (window.ZaziseI18n && window.ZaziseI18n.load) {
+      try { await window.ZaziseI18n.load(); } catch (e) { /* EN markup remains */ }
+    }
+
+    render();
+    document.addEventListener('zazise:lang', render);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();

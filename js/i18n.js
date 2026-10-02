@@ -1,1 +1,188 @@
-!function(t){"use strict";var e="zazise.lang",n="en",a=["en","af","zu","xh","st","tn","nso","ts","ss","ve","nr"],r=null,i=n;function o(t){if(!t)return n;var e=String(t).toLowerCase();return"nso"===e||"sepedi"===e?"nso":a.indexOf(e)>=0?e:n}function u(t){var e=r&&r[i]||r&&r.en||{};return null!=e[t]?e[t]:r&&r.en&&null!=r.en[t]?r.en[t]:t}function c(t){(t=t||document).querySelectorAll("[data-i18n]").forEach((function(t){var e=t.getAttribute("data-i18n");if(e){var n=u(e);"TITLE"===t.tagName?document.title=n:t.textContent=n}})),t.querySelectorAll("[data-i18n-content]").forEach((function(t){var e=t.getAttribute("data-i18n-content");e&&t.setAttribute("content",u(e))}));var e=document.querySelector('meta[property="og:title"]');e&&document.title&&e.setAttribute("content",document.title);var n=document.querySelector('meta[name="twitter:title"]');n&&document.title&&n.setAttribute("content",document.title);var a=document.querySelector('meta[name="description"]'),r=a?a.getAttribute("content"):"",c=document.querySelector('meta[property="og:description"]');c&&r&&c.setAttribute("content",r);var l=document.querySelector('meta[name="twitter:description"]');l&&r&&l.setAttribute("content",r),t.querySelectorAll("[data-i18n-placeholder]").forEach((function(t){t.setAttribute("placeholder",u(t.getAttribute("data-i18n-placeholder")))})),t.querySelectorAll("[data-i18n-title]").forEach((function(t){t.setAttribute("title",u(t.getAttribute("data-i18n-title")))})),t.querySelectorAll("[data-i18n-aria]").forEach((function(t){t.setAttribute("aria-label",u(t.getAttribute("data-i18n-aria")))}));var d=t.querySelector("[data-i18n-region]");if(d){var s="sasl"===i?"EN":i.toUpperCase();d.textContent=u("region")+" · "+s}var f="sasl"===i?"en":i;document.documentElement.setAttribute("lang",f),t.querySelectorAll(".lang-pill").forEach((function(t){var e=o(t.getAttribute("data-lang")||t.getAttribute("hreflang")||t.textContent);t.classList.toggle("active",e===i),t.setAttribute("aria-current",e===i?"true":"false")}))}function l(t,n){i=o(t);try{localStorage.setItem(e,i)}catch(t){}c(),n&&n.silent||document.dispatchEvent(new CustomEvent("zazise:lang",{detail:{lang:i}}))}function d(){try{return window.matchMedia("(max-width: 820px)").matches}catch(t){return!1}}function s(t,e){t&&(t.setAttribute("data-collapsed","true"),e&&e.setAttribute("aria-expanded","false"))}function f(t,e){t&&(t.setAttribute("data-collapsed","false"),e&&e.setAttribute("aria-expanded","true"))}t.ZaziseI18n={load:async function(){var t=n;try{t=localStorage.getItem(e)||n}catch(t){}i=o(t);var a,u,g,p=await fetch("i18n/ui.json",{cache:"no-store"});if(!p.ok)throw new Error("i18n load failed");return r=await p.json(),u=(a=a||document).querySelector(".lang-bar"),g=a.querySelector(".lang-toggle"),u&&g&&(d()?s(u,g):f(u,g),g.__zaziseBound||(g.__zaziseBound=!0,g.addEventListener("click",(function(t){t.preventDefault(),t.stopPropagation(),"true"===u.getAttribute("data-collapsed")?f(u,g):s(u,g)}))),u.__zaziseOutside||(u.__zaziseOutside=!0,document.addEventListener("click",(function(t){if(d()&&"true"!==u.getAttribute("data-collapsed")){var e=t.target;u.contains(e)||s(u,g)}}),!0),document.addEventListener("keydown",(function(t){"Escape"===t.key&&"true"!==u.getAttribute("data-collapsed")&&s(u,g)})),window.addEventListener("resize",(function(){d()?s(u,g):f(u,g)}))),a.querySelectorAll(".lang-pill").forEach((function(t){t.__zaziseBound||(t.__zaziseBound=!0,t.addEventListener("click",(function(e){e.preventDefault(),e.stopPropagation(),l(o(t.getAttribute("data-lang")||t.getAttribute("hreflang"))),d()&&s(u,g)})))}))),c(),i},t:u,setLang:l,getLang:function(){return i},apply:c,supported:a.slice()}}(window);
+/**
+ * ZAZISE offline i18n for register + thank-you.
+ * Curated JSON for 11 official languages; SASL uses EN UI strings.
+ * Optional live translate: only if GOOGLE_TRANSLATE_API_KEY / LIBRETRANSLATE_URL
+ * is configured server-side (not used by default — see README).
+ */
+(function (global) {
+  'use strict';
+
+  var STORAGE_KEY = 'zazise.lang';
+  var DEFAULT_LANG = 'en';
+  var SUPPORTED = ['en', 'af', 'zu', 'xh', 'st', 'tn', 'nso', 'ts', 'ss', 've', 'nr'];
+  var catalog = null;
+  var current = DEFAULT_LANG;
+
+  function normalize(code) {
+    if (!code) return DEFAULT_LANG;
+    var c = String(code).toLowerCase();
+    if (c === 'nso' || c === 'sepedi') return 'nso';
+    return SUPPORTED.indexOf(c) >= 0 ? c : DEFAULT_LANG;
+  }
+
+  function t(key) {
+    var pack = (catalog && catalog[current]) || (catalog && catalog.en) || {};
+    if (pack[key] != null) return pack[key];
+    if (catalog && catalog.en && catalog.en[key] != null) return catalog.en[key];
+    return key;
+  }
+
+  function applyDom(root) {
+    root = root || document;
+    root.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (!key) return;
+      var val = t(key);
+      if (el.tagName === 'TITLE') {
+        document.title = val;
+      } else {
+        el.textContent = val;
+      }
+    });
+    root.querySelectorAll('[data-i18n-content]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n-content');
+      if (!key) return;
+      el.setAttribute('content', t(key));
+    });
+
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle && document.title) ogTitle.setAttribute('content', document.title);
+    var twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle && document.title) twTitle.setAttribute('content', document.title);
+    var descEl = document.querySelector('meta[name="description"]');
+    var desc = descEl ? descEl.getAttribute('content') : '';
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc && desc) ogDesc.setAttribute('content', desc);
+    var twDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twDesc && desc) twDesc.setAttribute('content', desc);
+
+    root.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder')));
+    });
+    root.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+      el.setAttribute('title', t(el.getAttribute('data-i18n-title')));
+    });
+    root.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
+
+    var region = root.querySelector('[data-i18n-region]');
+    if (region) {
+      var code = current === 'sasl' ? 'EN' : current.toUpperCase();
+      region.textContent = t('region') + ' · ' + code;
+    }
+
+    var htmlLang = current === 'sasl' ? 'en' : current;
+    document.documentElement.setAttribute('lang', htmlLang);
+
+    root.querySelectorAll('.lang-pill').forEach(function (pill) {
+      var lang = normalize(pill.getAttribute('data-lang') || pill.getAttribute('hreflang') || pill.textContent);
+      pill.classList.toggle('active', lang === current);
+      pill.setAttribute('aria-current', lang === current ? 'true' : 'false');
+    });
+  }
+
+  function setLang(code, opts) {
+    current = normalize(code);
+    try { localStorage.setItem(STORAGE_KEY, current); } catch (e) { /* ignore */ }
+    applyDom();
+    if (!opts || !opts.silent) {
+      document.dispatchEvent(new CustomEvent('zazise:lang', { detail: { lang: current } }));
+    }
+  }
+
+  function isPhone() {
+    try { return window.matchMedia('(max-width: 820px)').matches; } catch (e) { return false; }
+  }
+
+  function collapseLangBar(bar, btn) {
+    if (!bar) return;
+    bar.setAttribute('data-collapsed', 'true');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+  }
+
+  function expandLangBar(bar, btn) {
+    if (!bar) return;
+    bar.setAttribute('data-collapsed', 'false');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+  }
+
+  function bindLangBar(root) {
+    root = root || document;
+    var bar = root.querySelector('.lang-bar');
+    var btn = root.querySelector('.lang-toggle');
+    if (!bar || !btn) return;
+
+    if (isPhone()) {
+      collapseLangBar(bar, btn);
+    } else {
+      expandLangBar(bar, btn);
+    }
+
+    if (!btn.__zaziseBound) {
+      btn.__zaziseBound = true;
+      btn.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        var collapsed = bar.getAttribute('data-collapsed') === 'true';
+        if (collapsed) expandLangBar(bar, btn);
+        else collapseLangBar(bar, btn);
+      });
+    }
+
+    if (!bar.__zaziseOutside) {
+      bar.__zaziseOutside = true;
+      document.addEventListener('click', function (ev) {
+        if (!isPhone()) return;
+        if (bar.getAttribute('data-collapsed') === 'true') return;
+        var t = ev.target;
+        if (bar.contains(t)) return;
+        collapseLangBar(bar, btn);
+      }, true);
+      document.addEventListener('keydown', function (ev) {
+        if (ev.key !== 'Escape') return;
+        if (bar.getAttribute('data-collapsed') === 'true') return;
+        collapseLangBar(bar, btn);
+      });
+      window.addEventListener('resize', function () {
+        if (isPhone()) collapseLangBar(bar, btn);
+        else expandLangBar(bar, btn);
+      });
+    }
+
+    root.querySelectorAll('.lang-pill').forEach(function (pill) {
+      if (pill.__zaziseBound) return;
+      pill.__zaziseBound = true;
+      pill.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        var lang = normalize(pill.getAttribute('data-lang') || pill.getAttribute('hreflang'));
+        setLang(lang);
+        // Always collapse after a pick on phone so the sheet never sticks open.
+        if (isPhone()) collapseLangBar(bar, btn);
+      });
+    });
+  }
+
+  async function load() {
+    var saved = DEFAULT_LANG;
+    try { saved = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG; } catch (e) { /* ignore */ }
+    current = normalize(saved);
+
+    var res = await fetch('i18n/ui.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('i18n load failed');
+    catalog = await res.json();
+    bindLangBar();
+    applyDom();
+    return current;
+  }
+
+  global.ZaziseI18n = {
+    load: load,
+    t: t,
+    setLang: setLang,
+    getLang: function () { return current; },
+    apply: applyDom,
+    supported: SUPPORTED.slice(),
+  };
+})(window);

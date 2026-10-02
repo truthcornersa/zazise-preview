@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZAZISE — Cape Stories</title>
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="home-menu.css" />
+</head>
+<body class="home" data-zz-page="studio">
+  <header class="app-bar">
+    <a href="index.html" class="brand" aria-label="ZAZISE">
+      <img class="brand-icon" src="assets/zazise-logo-icon-3d-clean.png" alt="" />
+      <img class="brand-word" src="assets/zazise-logo-word-flat.png" alt="ZAZISE" />
+    </a>
+    <div class="search-wrap">
+      <div class="search-box">
+        <input type="search" placeholder="Search ZAZISE" />
+        <button class="search-btn" aria-label="Search">
+          <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="app-bar-actions">
+      <a href="upload.html" class="icon-btn" title="Create" aria-label="Create">
+        <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </a>
+      <button class="icon-btn" title="Notifications" aria-label="Notifications">
+        <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 7 3 7 3 7H3s3 0 3-7"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+      </button>
+      <div class="avatar guest-za" id="preview-profile-avatar" title="ZA">ZA</div>
+      <a href="home-menu-open.html" class="menu-btn" aria-label="Menu"><div class="hamburger"><span></span><span></span><span></span></div></a>
+    </div>
+  </header>
+  <nav class="lang-bar" aria-label="Language" data-collapsed="false">
+    <button type="button" class="lang-toggle" aria-expanded="true" aria-controls="lang-pills" title="Toggle languages">
+      <span class="lang-hint">SA languages</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="lang-pills" id="lang-pills" role="list">
+      <a href="index.html" class="lang-pill active" role="listitem" hreflang="en" lang="en" title="English">EN</a>
+      <a href="home-af.html" class="lang-pill" role="listitem" hreflang="af" lang="af" title="Afrikaans">AF</a>
+      <a href="home-zu.html" class="lang-pill" role="listitem" hreflang="zu" lang="zu" title="isiZulu">ZU</a>
+      <a href="home-xh.html" class="lang-pill" role="listitem" hreflang="xh" lang="xh" title="isiXhosa">XH</a>
+      <a href="home-st.html" class="lang-pill" role="listitem" hreflang="st" lang="st" title="Sesotho">ST</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="tn" lang="tn" title="Setswana">TN</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nso" lang="nso" title="Sepedi / Northern Sotho">NSO</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ts" lang="ts" title="Xitsonga">TS</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ss" lang="ss" title="siSwati">SS</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ve" lang="ve" title="Tshivenda">VE</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nr" lang="nr" title="isiNdebele">NR</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="en" lang="en" title="South African Sign Language">SASL</a>
+    </div>
+  </nav>
+  <div class="layout">
+    <nav class="sidebar mini" aria-label="Primary navigation">
+      <a class="nav-item" href="index.html" title="Home">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/></svg></span>
+        Home
+      </a>
+      <a class="nav-item" href="#" title="Trending">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M13 3s1 4-2 7c0 0 5 0 5 6a6 6 0 1 1-12 0c0-4 4-6 4-6S6 5 13 3z"/></svg></span>
+        Trending
+      </a>
+      <a class="nav-item active" href="studio.html" title="Your studio" id="nav-yours">
+        <span class="ico"><img class="ico-logo" src="assets/zazise-logo-bw-icon-menu.png" alt="" width="22" height="22" /></span>
+        Your studio
+      </a>
+      <a class="nav-item" href="clips.html" title="Clips">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 3v18M16 3v18M4 9h16M4 15h16"/></svg></span>
+        Clips
+      </a>
+      <div class="divider"></div>
+      <a class="nav-item" href="#" title="Library">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M4 5h4v14H4zM10 5h4v14h-4zM16 7l5 3-5 3V7z"/></svg></span>
+        Library
+      </a>
+      <a class="nav-item" href="#" title="History">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/></svg></span>
+        History
+      </a>
+      <a class="nav-item" href="upload.html" title="Your videos">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 10l4-2v8l-4-2"/></svg></span>
+        Your videos
+      </a>
+      <a class="nav-item" href="#" title="Watch later">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        Watch later
+      </a>
+      <a class="nav-item" href="#" title="Liked videos">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M7 11v9H4v-9h3zm3 9h7.2a2 2 0 0 0 1.95-1.55l1.35-6A2 2 0 0 0 18.55 10H13V6.5A2.5 2.5 0 0 0 10.5 4L7 11"/></svg></span>
+        Liked videos
+      </a>
+      <div class="divider"></div>
+      <div class="section-label">Subscriptions</div>
+      <a class="nav-item active" href="channel.html" title="Cape Stories">
+        <span class="ico"><img class="side-av" src="assets/avatars/a1.jpg" alt="" /></span>
+        Cape Stories
+      </a>
+      <a class="nav-item" href="#" title="Jozi Beats">
+        <span class="ico"><img class="side-av" src="assets/avatars/a2.jpg" alt="" /></span>
+        Jozi Beats
+      </a>
+      <a class="nav-item" href="#" title="SA Eats">
+        <span class="ico"><img class="side-av" src="assets/avatars/a3.jpg" alt="" /></span>
+        SA Eats
+      </a>
+      <div class="divider"></div>
+      <div class="section-label">More from ZAZISE</div>
+      <a class="nav-item" href="#" title="Settings">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></span>
+        Settings
+      </a>
+      <a class="nav-item" href="#" title="Help">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.6 2.25c-.8.4-1.1.9-1.1 1.75v.5M12 17h.01"/></svg></span>
+        Help
+      </a>
+    </nav>
+
+    <main class="main channel-page">
+      <div class="channel-banner"><img src="assets/thumbs/banner.jpg" alt="" /></div>
+
+      <div class="channel-header">
+        <button type="button" class="btn-subscribe" data-act="subscribe">Subscribe</button>
+        <div class="ch-meta">
+          <h1>Cape Stories</h1>
+          <div class="ch-handle">@capestories · Cape Town, South Africa</div>
+          <div class="ch-stats">428K subscribers · 186 videos · 24M views</div>
+        </div>
+        <div class="ch-big-avatar"><img src="assets/avatars/channel.jpg" alt="" /></div>
+      </div>
+
+      <div class="channel-tabs">
+        <a class="tab active" href="#">Home</a>
+        <a class="tab" href="#">Videos</a>
+        <a class="tab" href="#">Clips</a>
+        <a class="tab" href="#">Playlists</a>
+        <a class="tab" href="#">Community</a>
+        <a class="tab" href="#">About</a>
+      </div>
+
+      <div class="channel-uploads">
+        <div class="channel-section-title">Uploads</div>
+        <div class="video-grid">
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/sunset.jpg" alt="" /><span class="dur">8:02</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Sunset drive through Cape Town — 4K</div>
+                <div class="sub">89K views · 5 days ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/capetown.jpg" alt="" /><span class="dur">14:22</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Bo-Kaap walking tour — colour &amp; culture</div>
+                <div class="sub">62K views · 1 week ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/tablemountain.jpg" alt="" /><span class="dur">11:05</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Table Mountain cableway — sunrise</div>
+                <div class="sub">141K views · 2 weeks ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/harbour.jpg" alt="" /><span class="dur">9:48</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Kalk Bay harbour — weekend market</div>
+                <div class="sub">37K views · 3 weeks ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/cooking.jpg" alt="" /><span class="dur">16:30</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Cape Malay cooking with Aunty Fatima</div>
+                <div class="sub">98K views · 1 month ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/streetfood.jpg" alt="" /><span class="dur">7:15</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Penguins at Boulders Beach</div>
+                <div class="sub">210K views · 1 month ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/winelands.jpg" alt="" /><span class="dur">12:40</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Winelands day trip — Stellenbosch</div>
+                <div class="sub">55K views · 2 months ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+          <a class="video-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/intro.jpg" alt="" /><span class="dur">5:55</span></div>
+            <div class="video-meta">
+              <div class="card-menu" title="More">⋮</div>
+              <div class="info">
+                <div class="title">Make yourself known — Cape Stories intro</div>
+                <div class="sub">312K views · 3 months ago</div>
+              </div>
+              <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var bar = document.querySelector('.lang-bar');
+      var btn = document.querySelector('.lang-toggle');
+      if (!bar || !btn) return;
+      btn.addEventListener('click', function () {
+        var collapsed = bar.getAttribute('data-collapsed') === 'true';
+        bar.setAttribute('data-collapsed', collapsed ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', collapsed ? 'true' : 'false');
+      });
+    })();
+  </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.ZaziseGuest && ZaziseGuest.isGuest()) {
+        ZaziseGuest.openGate({ blurSelector: ".studio-main" });
+      }
+    });
+  </script>
+  <script src="js/whoami.js?v=8"></script>
+  <script src="js/i18n.js?v=8"></script>
+  <script src="js/cooking-toast.js?v=18"></script>
+  <script src="js/guest-gate.js?v=8" data-page="studio"></script>
+</body>
+</html>

@@ -1,40 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
+<head><meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZAZISE — Sign in (preview)</title>
-  <link rel="icon" href="assets/favicon/favicon.ico" />
+  <meta name="description" content="Sign in to ZAZISE. Make yourself known." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="assets/favicon/favicon.ico?v=mustard" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png?v=mustard" />
+  <link rel="apple-touch-icon" href="assets/favicon/favicon-180.png?v=mustard" />
+  <meta name="theme-color" content="#183D83" />
+  <title data-i18n="page_title_login">ZAZISE — Sign in</title>
   <link rel="stylesheet" href="fonts.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="home.css" />
-  <style>
-    .preview-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#183D83;color:#fff;font:600 13px/1.3 system-ui,sans-serif;padding:8px 14px;text-align:center}
-    .preview-banner a{color:#E2AE41}
-    body.login-body{padding-top:36px}
+<style>
+    body.home .footer-register {
+      color: #12161f;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      background: none;
+      border: 0;
+      outline: none;
+      box-shadow: none;
+    }
+    body.home.login-body > .toast-host {
+      width: min(440px, calc(100% - 16px));
+      top: calc(8px + env(safe-area-inset-top));
+    }
+    body.home.login-body .toast {
+      align-items: flex-start;
+      font-size: 14.5px;
+      line-height: 1.4;
+      padding: 12px 14px;
+    }
+    body.home.login-body .toast__msg {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    body.home .field--password .forgot-link {
+      display: block;
+      width: fit-content;
+      margin: 4px 0 0 auto;
+      color: #5b6573;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.15;
+      text-decoration: none;
+    }
+    body.home .field--password .forgot-link:hover,
+    body.home .field--password .forgot-link:focus,
+    body.home .field--password .forgot-link:active {
+      text-decoration: none;
+      color: #5b6573;
+    }
   </style>
 </head>
 <body class="home login-body register-body">
-  <div class="preview-banner">GitHub Pages preview · self-contained local CSS/JS/assets/fonts · preview only · <a href="register.html">register</a> · <a href="watch.html">watch</a></div>
   <div class="auth-bg" aria-hidden="true">
-    <div class="auth-bg__slide is-active" style="background-image:url('assets/login-bg-cape-town-planes.jpg')"></div>
+    <div class="auth-bg__slide is-active" style="background-image:url('assets/login-bg-dam.jpg?v=1')"></div>
+    <div class="auth-bg__slide" style="background-image:url('assets/login-bg-city.jpg?v=1')"></div>
   </div>
+
+  <nav class="lang-bar lang-bar--login" aria-label="Language" data-collapsed="true">
+    <button type="button" class="lang-toggle" aria-expanded="false" aria-controls="lang-pills" title="Toggle languages">
+      <span class="lang-hint" data-i18n="lang_hint">SA languages</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="lang-pills" id="lang-pills" role="list">
+      <a href="#" class="lang-pill active" role="listitem" hreflang="en" lang="en" data-lang="en" title="English"><span class="lang-short">EN</span><span class="lang-full">English</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="af" lang="af" data-lang="af" title="Afrikaans"><span class="lang-short">AF</span><span class="lang-full">Afrikaans</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="zu" lang="zu" data-lang="zu" title="isiZulu"><span class="lang-short">ZU</span><span class="lang-full">isiZulu</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="xh" lang="xh" data-lang="xh" title="isiXhosa"><span class="lang-short">XH</span><span class="lang-full">isiXhosa</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="st" lang="st" data-lang="st" title="Sesotho"><span class="lang-short">ST</span><span class="lang-full">Sesotho</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="tn" lang="tn" data-lang="tn" title="Setswana"><span class="lang-short">TN</span><span class="lang-full">Setswana</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nso" lang="nso" data-lang="nso" title="Sepedi"><span class="lang-short">NSO</span><span class="lang-full">Sepedi</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ts" lang="ts" data-lang="ts" title="Xitsonga"><span class="lang-short">TS</span><span class="lang-full">Xitsonga</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ss" lang="ss" data-lang="ss" title="siSwati"><span class="lang-short">SS</span><span class="lang-full">siSwati</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ve" lang="ve" data-lang="ve" title="Tshivenda"><span class="lang-short">VE</span><span class="lang-full">Tshivenda</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nr" lang="nr" data-lang="nr" title="isiNdebele"><span class="lang-short">NR</span><span class="lang-full">isiNdebele</span></a>
+    </div>
+  </nav>
+
   <main class="login-page">
-    <section class="login-card">
+    <section class="login-card" aria-labelledby="login-title">
       <div class="logo-block logo-block--lockup">
-        <img class="brand-icon-3d" src="assets/zazise-logo-icon-3d-clean@2x.png" alt="" />
-        <img class="brand-flat-wordmark" src="assets/zazise-logo-flat-wordmark.png" alt="ZAZISE" />
+        <img class="brand-icon-3d" src="assets/zazise-logo-icon-3d-clean@2x.png" alt="" aria-hidden="true" />
+        <img class="brand-flat-wordmark" src="assets/zazise-logo-flat-wordmark.png" alt="ZAZISE — Make Yourself Known" />
       </div>
-      <h1>Sign in</h1>
-      <p class="subtitle">Welcome back to ZAZISE</p>
-      <form class="register-form" action="#" onsubmit="event.preventDefault();alert('Static preview — login API does not run on GitHub Pages.');">
-        <div class="field"><label>Email</label><input type="email" required placeholder="you@example.co.za" /></div>
-        <div class="field"><label>Password</label><input type="password" required /></div>
-        <div class="login-actions"><button type="submit" class="btn-primary">Sign in (preview)</button></div>
+      <h1 id="login-title" data-i18n="title_login">Sign in</h1>
+      <p class="subtitle" data-i18n="subtitle_login">Welcome back to ZAZISE</p>
+
+      <form id="login-form" class="register-form" action="#" method="post" novalidate>
+        <div class="field">
+          <label for="login-email" data-i18n="label_email">Email</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" required
+                 data-i18n-placeholder="placeholder_email" placeholder="you@example.co.za" />
+        </div>
+
+        <div class="field field--password">
+          <label for="login-password" data-i18n="label_password">Password</label>
+          <div class="pw-wrap">
+            <input id="login-password" name="password" type="password"
+                   autocomplete="current-password" required maxlength="128"
+                   data-i18n-placeholder="placeholder_password" placeholder="••••••••" />
+            <button type="button" class="pw-toggle" data-pw-toggle="login-password"
+                    aria-label="Show password" data-i18n-aria="btn_show_password">
+              <span class="pw-toggle__show" data-i18n="btn_show">Show</span>
+              <span class="pw-toggle__hide" hidden data-i18n="btn_hide">Hide</span>
+            </button>
+          </div>
+          <a class="forgot-link" href="forgot.html" data-i18n="forgot_password">forgot password</a>
+        </div>
+
+        <div class="login-actions login-actions--register">
+          <p class="link-muted register-signin">
+            <span data-i18n="no_account">New here?</span>
+            <a href="register.html" data-i18n="btn_create">Create account</a>
+          </p>
+          <button type="submit" class="btn-primary" data-submit data-i18n="sign_in">Sign in</button>
+        </div>
       </form>
-      <div class="login-footer"><a href="register.html">Create account</a><span>preview only</span></div>
+
+      <div class="google-leave">
+        <div class="auth-or" aria-hidden="true"><span data-i18n="or">or</span></div>
+        <a class="btn-google" id="login-google" href="google.html?mode=login">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path fill="#4285F4" d="M17.6 9.2c0-.6-.1-1.2-.2-1.8H9v3.4h4.8a4.1 4.1 0 0 1-1.8 2.7v2.2h2.9c1.7-1.6 2.7-3.9 2.7-6.5z"/><path fill="#34A853" d="M9 18c2.4 0 4.5-.8 6-2.2l-2.9-2.2c-.8.6-1.9.9-3.1.9-2.4 0-4.4-1.6-5.1-3.8H.9v2.3A9 9 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.9 10.7A5.4 5.4 0 0 1 3.6 9c0-.6.1-1.2.3-1.7V5H.9A9 9 0 0 0 0 9c0 1.5.4 2.8.9 4l3-2.3z"/><path fill="#EA4335" d="M9 3.6c1.3 0 2.5.5 3.4 1.3L15.1 2A9 9 0 0 0 .9 5l3 2.3C4.6 5.2 6.6 3.6 9 3.6z"/></svg>
+          <span data-i18n="continue_google">Continue with Google</span>
+        </a>
+      </div>
+
+      <div class="login-footer">
+        <a class="footer-register" href="" data-i18n="btn_create">Create account</a>
+        <span><a href="help.html" data-i18n="help">Help</a> · <a href="privacy.html" data-i18n="privacy">Privacy</a> · <a href="terms.html" data-i18n="terms">Terms</a></span>
+      </div>
     </section>
   </main>
+
+  <div id="toast-host" class="toast-host" aria-live="polite"></div>
+
+  <script src="js/i18n.js?v=8"></script>
   <script src="js/auth-bg.js"></script>
+  <script src="js/cooking-toast.js?v=3"></script>
+  <script>
+    (function () {
+      function t(key, fallback) {
+        if (window.ZaziseI18n && ZaziseI18n.t) {
+          var said = ZaziseI18n.t(key);
+          if (said && said !== key) return said;
+        }
+        return fallback;
+      }
+      function toast(message, key) {
+        if (window.ZaziseCookingToast) ZaziseCookingToast.show(message, "error", key);
+      }
+      function safeNext() {
+        var n = "";
+        try { n = new URLSearchParams(location.search).get("next") || ""; } catch (e) {}
+        // Open-redirect harden: relative path only, allowlist, no protocol-relative / escapes.
+        if (!n || n.charAt(0) !== "/" || n.indexOf("//") !== -1 || n.indexOf("\") !== -1 || n.indexOf("@") !== -1) {
+          return "index.html";
+        }
+        var path = n.split("?")[0].split("#")[0];
+        var ok = [
+          "/", "/index.html", "/home.html", "/home-preview.html",
+          "/watch.html", "/clips.html", "/reels.html", "/later.html",
+          "/studio.html", "/upload.html", "/help.html", "/privacy.html", "/terms.html",
+          "/notifications-sample.html", "/channel.html"
+        ];
+        if (ok.indexOf(path) === -1) return "index.html";
+        if (path === "/") return "index.html";
+        return n.slice(1);
+      }
+      function initials(first, last) {
+        var a = String(first || "").replace(/[^A-Za-z]/g, "");
+        var b = String(last || "").replace(/[^A-Za-z]/g, "");
+        if (a && b) return (a.charAt(0) + b.charAt(0)).toUpperCase();
+        var one = a || b;
+        if (one.length >= 2) return one.slice(0, 2).toUpperCase();
+        return "MZ";
+      }
+      document.querySelectorAll("[data-pw-toggle]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var input = document.getElementById(btn.getAttribute("data-pw-toggle"));
+          if (!input) return;
+          var show = input.type === "password";
+          input.type = show ? "text" : "password";
+          var on = btn.querySelector(".pw-toggle__show");
+          var off = btn.querySelector(".pw-toggle__hide");
+          if (on) on.hidden = show;
+          if (off) off.hidden = !show;
+        });
+      });
+      document.getElementById("login-form").addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var emailEl = document.getElementById("login-email");
+        var passEl = document.getElementById("login-password");
+        var email = emailEl.value.trim();
+        var password = passEl.value;
+        var btn = ev.target.querySelector("[data-submit]");
+        if (!email) {
+          toast(t("err_email_required", "Enter your email."), "err_email_required");
+          return;
+        }
+        if (email.indexOf("@") < 1 || email.indexOf(".") < email.indexOf("@")) {
+          toast(t("err_email_invalid", "Enter a valid email address."), "err_email_invalid");
+          return;
+        }
+        if (!password) {
+          toast(t("err_password_required", "Enter your password."), "err_password_required");
+          return;
+        }
+        if (btn) btn.disabled = true;
+        fetch("/api/login.php", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ email: email, password: password, website: "" })
+        }).then(function (res) {
+          return res.json().then(function (data) { return { res: res, data: data }; });
+        }).then(function (out) {
+          passEl.value = "";
+          if (!out.res.ok || !out.data || !out.data.ok) {
+            var code = out.data && out.data.errors && out.data.errors[0] && out.data.errors[0].code;
+            var serverMsg = out.data && out.data.errors && out.data.errors[0] && out.data.errors[0].message;
+            var known = {
+              email_invalid: ["err_email_invalid", "Enter a valid email address."],
+              password_required: ["err_password_required", "Enter your password."],
+              not_registered: ["err_not_registered", "No ZAZISE account for that email. Create an account first."],
+              password: ["err_password", "That password is not correct."],
+              google_only: ["err_google_only", "That email was registered with Google. Continue with Google instead."],
+              email_unconfirmed: ["err_email_unconfirmed", "Confirm the link we emailed you before you sign in."],
+              locked: ["err_login_locked", "Too many attempts. Please wait a few minutes and try again."],
+              origin: ["err_origin", "Sign-in has to come from ZAZISE."]
+            };
+            var pair = known[code] || ["err_login", serverMsg || "Email or password is not correct."];
+            toast(t(pair[0], pair[1]), pair[0]);
+            if (btn) btn.disabled = false;
+            return;
+          }
+          var user = out.data.user || {};
+          try {
+            var profile = {
+              firstName: user.name || "",
+              surname: user.surname || "",
+              initials: initials(user.name, user.surname)
+            };
+            sessionStorage.setItem("zazisePreviewProfile", JSON.stringify(profile));
+          } catch (e) {}
+          window.location.href = safeNext();
+        }).catch(function () {
+          passEl.value = "";
+          toast(t("err_network", "Could not reach ZAZISE. Check your connection and try again."), "err_network");
+          if (btn) btn.disabled = false;
+        });
+      });
+      var googleLink = document.getElementById("login-google");
+      if (googleLink) {
+        try {
+          var next = new URLSearchParams(location.search).get("next") || "";
+          if (next && next.charAt(0) === "/" && next.indexOf("//") === -1) {
+            googleLink.href = "google.html?mode=login&next=" + encodeURIComponent(next);
+          }
+        } catch (e) {}
+      }
+      if (window.ZaziseI18n) ZaziseI18n.load().catch(function () {});
+    })();
+  </script>
 </body>
 </html>

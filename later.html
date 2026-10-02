@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#183D83">
+  <title>Watch later — ZAZISE</title>
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="home-menu.css" />
+<script>try { if (localStorage.getItem("zazise.theme") === "dark") document.documentElement.classList.add("z-dark"); } catch (e) {}</script>
+  <style>
+    .later { max-width: 1100px; margin: 0 auto; padding: 4px 16px 32px; }
+    .crumbs { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; color: #5c6573; font-size: 13px; }
+    .crumbs button { border: 0; background: transparent; color: inherit; font: inherit; padding: 8px 0; min-height: 44px; cursor: pointer; }
+    .crumbs [aria-current="page"] { color: #12161f; font-weight: 700; }
+    .banner-group { position: relative; }
+    .later-banner { height: 196px; border-radius: 16px; background: #183D83 url("assets/thumbs/pills/table-mountain.jpg") center 42%/cover no-repeat; }
+    .later-edit { position: absolute; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.8); border-radius: 12px; background: rgba(255,255,255,.94); color: #183D83; box-shadow: 0 6px 16px rgba(18,22,31,.12); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+    .later-edit svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .later-hero { position: relative; z-index: 1; display: grid; grid-template-columns: 156px minmax(0,1fr); gap: 18px; align-items: center; margin: -52px 16px 0; background: #fff; border: 1px solid #e6e8ee; border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgba(18,22,31,.06); }
+    .mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; width: 156px; height: 104px; border-radius: 10px; overflow: hidden; background: #183D83; }
+    .mosaic span { background: #183D83 center/cover no-repeat; }
+    .later-hero h1 { margin: 0; font-size: 28px; line-height: 1.1; letter-spacing: -0.03em; color: #183D83; }
+    .later-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 6px 0 0; color: #5c6573; font-size: 14px; }
+    .private { display: inline-flex; align-items: center; min-height: 24px; padding: 0 8px; border-radius: 999px; background: #f3f4f7; color: #5c6573; font-size: 12px; font-weight: 700; }
+    .later-tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .play-all, .shuffle, .sort { min-height: 44px; border-radius: 12px; font: inherit; font-weight: 750; }
+    .play-all, .shuffle { cursor: pointer; display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+    .play-all { border: 0; background: #183D83; color: #fff; padding: 0 16px; }
+    .shuffle { border: 1px solid #d5d8e0; background: #fff; color: #12161f; padding: 0 14px; }
+    .play-all svg, .shuffle svg, .resume svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .sort { display: inline-flex; flex-direction: row; align-items: center; gap: 6px; flex: 0 0 auto; padding: 0 12px; border: 1px solid #d5d8e0; background: #fff; color: #5c6573; font-size: 13px; font-weight: 650; }
+    .sort select { width: auto; min-height: 40px; border: 0; background: transparent; font: inherit; font-size: 14px; font-weight: 750; color: #12161f; padding: 0; }
+    .queue-group { margin-top: 20px; }
+    .queue-head { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
+    .queue-head b { font-size: 11px; letter-spacing: .08em; color: #5c6573; white-space: nowrap; }
+    .queue-chips { display: flex; gap: 8px; overflow: auto; scrollbar-width: none; }
+    .queue-chips::-webkit-scrollbar { display: none; }
+    .qchip { min-height: 36px; border: 1px solid #e6e8ee; border-radius: 999px; background: #fff; color: #12161f; padding: 0 14px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .qchip.is-on { background: #183D83; border-color: #183D83; color: #fff; }
+    .continue { display: none; grid-template-columns: 168px minmax(0,1fr) auto; gap: 14px; align-items: center; margin-bottom: 14px; padding: 10px; border: 1px solid #ead9b0; border-radius: 16px; background: #fffaf1; }
+    .continue.is-on { display: grid; }
+    .continue .shot { position: relative; display: block; border-radius: 10px; overflow: hidden; }
+    .continue img { width: 100%; aspect-ratio: 16/9; height: auto; object-fit: cover; display: block; background: #183D83; }
+    .continue .kicker { margin: 0 0 4px; color: #9a7420; font-size: 11px; font-weight: 800; letter-spacing: .06em; }
+    .continue h2 { margin: 0 0 8px; font-size: 16px; line-height: 1.3; letter-spacing: -0.02em; }
+    .continue h2 a { color: inherit; text-decoration: none; }
+    .watchline { display: flex; align-items: center; gap: 8px; color: #5c6573; font-size: 12px; font-weight: 650; }
+    .watchline .bar { flex: 1; height: 4px; border-radius: 99px; background: #e6e1d6; overflow: hidden; }
+    .watchline .bar i { display: block; height: 100%; background: #E2AE41; }
+    .resume { min-height: 44px; border: 0; border-radius: 12px; background: #183D83; color: #fff; font: inherit; font-weight: 750; padding: 0 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+    .later-rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 2px 8px; scrollbar-width: none; }
+    .later-rail::-webkit-scrollbar { display: none; }
+    .later-card { position: relative; flex: 0 0 220px; scroll-snap-align: start; background: #fff; border: 1px solid #e6e8ee; border-radius: 16px; overflow: hidden; }
+    .later-card .shot { position: relative; display: block; }
+    .later-card img { width: 100%; aspect-ratio: 16/9; height: auto; object-fit: cover; display: block; background: #183D83; }
+    .later-card .dur { position: absolute; right: 8px; bottom: 8px; background: rgba(18,22,31,.82); color: #fff; border-radius: 6px; padding: 2px 6px; font-size: 12px; font-weight: 700; }
+    .later-card .remove { position: absolute; top: 0; right: 0; width: 44px; height: 44px; border: 0; background: transparent; color: #fff; font-size: 16px; line-height: 1; cursor: pointer; display: flex; align-items: flex-start; justify-content: flex-end; padding: 8px; }
+    .later-card .remove span { width: 28px; height: 28px; border-radius: 50%; background: rgba(18,22,31,.72); display: flex; align-items: center; justify-content: center; }
+    .later-card .pad { padding: 10px 12px 12px; }
+    .ttl { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.6em; color: #12161f; font-weight: 750; font-size: 14px; letter-spacing: -0.01em; text-decoration: none; line-height: 1.3; }
+    .who { display: flex; align-items: center; gap: 6px; margin-top: 6px; color: #3c4450; text-decoration: none; font-size: 12px; font-weight: 650; min-height: 28px; }
+    .who i { width: 6px; height: 6px; border-radius: 50%; background: #E2AE41; flex: 0 0 auto; }
+    .sub { display: flex; align-items: center; gap: 6px; margin: 2px 0 0; color: #5c6573; font-size: 12px; }
+    .sub svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .empty { margin: 8px 0 0; padding: 22px; border-radius: 16px; background: #fff; border: 1px solid #e6e8ee; }
+    .empty a { color: #183D83; font-weight: 750; }
+    .settings-panel { position: fixed; inset: 0; z-index: 400; display: flex; align-items: flex-end; justify-content: center; background: rgba(18,22,31,.45); }
+    .settings-panel[hidden] { display: none !important; }
+    .settings-card { width: 100%; max-height: min(88dvh, 640px); overflow: auto; background: #fff; color: #12161f; border-radius: 18px 18px 0 0; padding: 6px 8px calc(12px + env(safe-area-inset-bottom)); }
+    .settings-head { display: flex; align-items: center; gap: 8px; }
+    .settings-head h2 { margin: 0; font-size: 18px; }
+    .settings-back { width: 44px; height: 44px; border: 0; background: transparent; font-size: 26px; color: inherit; cursor: pointer; }
+    .settings-row { width: 100%; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border: 0; background: transparent; color: inherit; font: inherit; font-weight: 650; text-align: left; border-radius: 12px; cursor: pointer; }
+    .settings-row--out { color: #c62828; }
+    .settings-switch { width: 44px; height: 26px; border-radius: 999px; background: #d5d8e0; position: relative; }
+    .settings-switch:after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .15s; }
+    .settings-row[aria-pressed="true"] .settings-switch { background: #183D83; }
+    .settings-row[aria-pressed="true"] .settings-switch:after { transform: translateX(18px); }
+    body.settings-open { overflow: hidden; }
+    body.settings-open .mobile-dock { visibility: hidden; }
+    @media (min-width: 769px) {
+      .settings-panel { align-items: center; padding: 16px; }
+      .settings-card { width: min(440px, 100%); border-radius: 18px; }
+    }
+    @media (max-width: 768px) {
+      .later { padding: 4px 12px 16px; }
+      .later-banner { height: 148px; }
+      .later-hero, .continue { grid-template-columns: 1fr; margin-left: 0; margin-right: 0; }
+      .later-hero { margin-top: -28px; padding: 14px; }
+      .later-hero h1 { font-size: 24px; }
+      .mosaic { width: 100%; height: 42vw; max-height: 140px; }
+      .continue img, .later-card img { height: auto; aspect-ratio: 16/9; max-height: none; }
+      .later-card { flex-basis: 72vw; }
+      .resume { justify-content: center; }
+    }
+    html.z-dark .later-hero, html.z-dark .later-card, html.z-dark .empty, html.z-dark .settings-card, html.z-dark .qchip, html.z-dark .shuffle, html.z-dark .sort { background: #171c24; color: #f3f5f8; border-color: #2c3544; }
+    html.z-dark .qchip.is-on { background: #183D83; color: #fff; }
+    html.z-dark .crumbs [aria-current="page"], html.z-dark .sort select, html.z-dark .ttl, html.z-dark .later-hero h1 { color: #f3f5f8; }
+    html.z-dark .continue { background: #231d12; }
+    html.z-dark .later-edit { background: rgba(23,28,36,.92); color: #E2AE41; }
+    html.z-dark .later-card .remove { color: #fff; }
+    #mobile-dock { display: none; }
+    @media (max-width: 768px) {
+      #mobile-dock {
+        display: flex;
+        position: fixed;
+        left: 0; right: 0; bottom: 0;
+        z-index: 130;
+        height: calc(58px + env(safe-area-inset-bottom));
+        padding: 4px 6px env(safe-area-inset-bottom);
+        background: rgba(255,255,255,.96);
+        border-top: 1px solid #e6e6e6;
+        box-shadow: 0 -6px 18px rgba(18,22,31,.06);
+      }
+      #mobile-dock .dock-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        min-height: 48px;
+        color: #5c6573;
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .later { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+    }
+    @media (min-width: 769px) {
+      #mobile-dock { display: none !important; }
+    }
+  </style>
+</head>
+<body class="home home-preview">
+  <header class="app-bar">
+    <a href="index.html" class="brand" aria-label="ZAZISE">
+      <img class="brand-lockup" src="assets/zazise-logo-colour-header.png" alt="ZAZISE" />
+      <img class="brand-icon" src="assets/zazise-logo-icon-3d-clean@2x.png" alt="" />
+      <img class="brand-word" src="assets/zazise-logo-word-flat.png" alt="ZAZISE" />
+    </a>
+    <div class="search-wrap">
+      <form class="search-box" id="search-form" action="#" role="search" onsubmit="return false;">
+        <input type="search" name="q" placeholder="Search ZAZISE" data-i18n-placeholder="pv_search" autocomplete="off" enterkeyhint="search" />
+        <button type="submit" class="search-btn" aria-label="Search" data-i18n-aria="pv_search_btn">
+          <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+      </form>
+    </div>
+    <div class="app-bar-actions">
+      <button type="button" class="icon-btn" title="Create" aria-label="Create" data-i18n-title="pv_create" data-i18n-aria="pv_create">
+        <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+      <button type="button" class="icon-btn" data-bell title="Notifications" aria-label="Notifications" data-i18n-title="pv_notifications" data-i18n-aria="pv_notifications">
+        <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 7 3 7 3 7H3s3 0 3-7"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+      </button>
+      <button type="button" class="avatar" id="preview-profile-avatar" title="MZ" aria-label="Profile MZ">MZ</button>
+      <button type="button" class="menu-btn" aria-label="Menu" data-i18n-aria="pv_menu" aria-expanded="false" aria-controls="preview-sidebar">
+        <div class="hamburger" aria-hidden="true"><span></span><span></span><span></span></div>
+      </button>
+    </div>
+  </header>
+  <nav class="lang-bar lang-bar--login" aria-label="Language" data-collapsed="true">
+    <button type="button" class="lang-toggle" aria-expanded="false" aria-controls="lang-pills" title="Toggle languages">
+      <span class="lang-hint" data-i18n="lang_hint">SA languages</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="lang-pills" id="lang-pills" role="list">
+      <a href="#" class="lang-pill active" role="listitem" hreflang="en" lang="en" data-lang="en" title="English"><span class="lang-short">EN</span><span class="lang-full">English</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="af" lang="af" data-lang="af" title="Afrikaans"><span class="lang-short">AF</span><span class="lang-full">Afrikaans</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="zu" lang="zu" data-lang="zu" title="isiZulu"><span class="lang-short">ZU</span><span class="lang-full">isiZulu</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="xh" lang="xh" data-lang="xh" title="isiXhosa"><span class="lang-short">XH</span><span class="lang-full">isiXhosa</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="st" lang="st" data-lang="st" title="Sesotho"><span class="lang-short">ST</span><span class="lang-full">Sesotho</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="tn" lang="tn" data-lang="tn" title="Setswana"><span class="lang-short">TN</span><span class="lang-full">Setswana</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nso" lang="nso" data-lang="nso" title="Sepedi"><span class="lang-short">NSO</span><span class="lang-full">Sepedi</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ts" lang="ts" data-lang="ts" title="Xitsonga"><span class="lang-short">TS</span><span class="lang-full">Xitsonga</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ss" lang="ss" data-lang="ss" title="siSwati"><span class="lang-short">SS</span><span class="lang-full">siSwati</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ve" lang="ve" data-lang="ve" title="Tshivenda"><span class="lang-short">VE</span><span class="lang-full">Tshivenda</span></a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nr" lang="nr" data-lang="nr" title="isiNdebele"><span class="lang-short">NR</span><span class="lang-full">isiNdebele</span></a>
+    </div>
+  </nav>
+  <div id="menu-scrim" class="menu-scrim" hidden></div>
+  <div class="layout">
+    <nav class="sidebar mini" id="preview-sidebar" aria-label="Primary navigation">
+      <a class="nav-item" href="index.html" data-i18n-title="pv_home" title="Home"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/></svg></span><span data-i18n="pv_home">Home</span></a>
+      <a class="nav-item" href="#" data-i18n-title="pv_trending" title="Trending"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M13 3s1 4-2 7c0 0 5 0 5 6a6 6 0 1 1-12 0c0-4 4-6 4-6S6 5 13 3z"/></svg></span><span data-i18n="pv_trending">Trending</span></a>
+      <a class="nav-item" href="studio.html" data-i18n-title="pv_yours" title="Your studio" id="nav-yours"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l5-2.5-5-2.5z"/></svg></span><span data-i18n="pv_yours">Your studio</span></a>
+      <a class="nav-item" href="clips.html" data-i18n-title="pv_clips" title="Clips"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 3v18M16 3v18M4 9h16M4 15h16"/></svg></span><span data-i18n="pv_clips">Clips</span></a>
+      <div class="divider"></div>
+      <a class="nav-item" href="#" data-i18n-title="pv_library" title="Library"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M4 5h4v14H4zM10 5h4v14h-4zM16 7l5 3-5 3V7z"/></svg></span><span data-i18n="pv_library">Library</span></a>
+      <a class="nav-item" href="#" data-i18n-title="pv_history" title="History"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/></svg></span><span data-i18n="pv_history">History</span></a>
+      
+      <a class="nav-item active" href="later.html" data-i18n-title="pv_later" title="Watch later" aria-current="page"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><span data-i18n="pv_later">Watch later</span></a>
+      <a class="nav-item" href="#" data-i18n-title="pv_liked" title="Liked videos"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M7 11v9H4v-9h3zm3 9h7.2a2 2 0 0 0 1.95-1.55l1.35-6A2 2 0 0 0 18.55 10H13V6.5A2.5 2.5 0 0 0 10.5 4L7 11"/></svg></span><span data-i18n="pv_liked">Liked videos</span></a>
+      <div class="divider"></div>
+      <a class="nav-item" href="#" data-open-settings data-i18n-title="pv_settings" title="Settings"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></span><span data-i18n="pv_settings">Settings</span></a>
+      <a class="nav-item" href="help.html" data-i18n-title="help" title="Help"><span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.6 2.25c-.8.4-1.1.9-1.1 1.75v.5M12 17h.01"/></svg></span><span data-i18n="help">Help</span></a>
+    </nav>
+    <main class="main">
+      <div class="later">
+        <p class="crumbs"><button type="button" id="crumb-library" data-i18n="pv_library">Library</button><span aria-hidden="true">/</span><span aria-current="page" data-i18n="pv_later">Watch later</span></p>
+        <div class="banner-group">
+          <div class="later-banner" id="later-banner" role="img" aria-label="Watch later banner"></div>
+          <button type="button" class="later-edit" id="later-edit" aria-label="Edit banner"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>
+        </div>
+        <input type="file" id="banner-file" accept="image/*" hidden>
+        <section class="later-hero" aria-labelledby="later-title">
+          <div class="mosaic" id="mosaic" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <div>
+            <h1 id="later-title" data-i18n="pv_later">Watch later</h1>
+            <p class="later-meta"><span id="later-count">0 videos</span><span class="private">Private</span></p>
+            <div class="later-tools" role="group" aria-label="Play this queue">
+              <button type="button" class="play-all" id="play-all"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l12-7z" fill="currentColor" stroke="none"/></svg>Play all</button>
+              <button type="button" class="shuffle" id="shuffle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>Shuffle</button>
+              <label class="sort"><span>Sort</span>
+                <select id="sort" aria-label="Sort watch later">
+                  <option value="added">Date added</option>
+                  <option value="title">Title</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </section>
+        <section class="queue-group" aria-labelledby="queue-label">
+        <div class="queue-head">
+          <b id="queue-label">IN THIS QUEUE</b>
+          <div class="queue-chips" id="queue-chips"></div>
+        </div>
+        <section class="continue" id="continue">
+          <a class="shot" id="continue-link" href="#"><img id="continue-img" alt=""></a>
+          <div>
+            <p class="kicker" id="continue-kicker">CONTINUE</p>
+            <h2 id="continue-title"></h2>
+            <p class="watchline"><span id="continue-time"></span><span class="bar"><i id="continue-bar"></i></span></p>
+          </div>
+          <button type="button" class="resume" id="resume"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l12-7z" fill="currentColor" stroke="none"/></svg>Resume</button>
+        </section>
+        <div class="later-rail" id="later-rail"></div>
+        <p class="empty" id="empty" hidden>Nothing is waiting in Watch later yet. Save a video from Home and it will show here. <a href="index.html">Browse videos</a></p>
+        </section>
+      </div>
+    </main>
+  </div>
+  <nav class="mobile-dock" id="mobile-dock" aria-label="Mobile">
+    <a class="dock-item" data-dock="home" href="index.html"><svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/></svg><span data-i18n="pv_home">Home</span></a>
+    <a class="dock-item" data-dock="clips" href="clips.html"><svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 3v18M16 3v18M4 9h16M4 15h16"/></svg><span data-i18n="pv_clips">Clips</span></a>
+    <a class="dock-item" data-dock="notes" href="notifications-sample.html"><svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 7 3 7 3 7H3s3 0 3-7"/><path d="M10 19a2 2 0 0 0 4 0"/></svg><span data-i18n="pv_notifications">Notifications</span></a>
+    <a class="dock-item" data-dock="profile" href="studio.html"><span class="dock-avatar" id="dock-profile">MZ</span><span data-i18n="pv_profile">Profile</span></a>
+  </nav>
+  <div id="settings-panel" class="settings-panel" hidden>
+    <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+      <div class="settings-head">
+        <button type="button" class="settings-back" id="settings-back" aria-label="Back">‹</button>
+        <h2 id="settings-title" data-i18n="set_title">Settings</h2>
+      </div>
+      <button type="button" class="settings-row" data-setting="account"><span data-i18n="set_account">Account</span></button>
+      <button type="button" class="settings-row" data-setting="soon"><span data-i18n="set_playback">Playback</span></button>
+      <button type="button" class="settings-row" data-setting="soon"><span data-i18n="set_privacy">Privacy</span></button>
+      <button type="button" class="settings-row" id="settings-dark" aria-pressed="false"><span data-i18n="set_dark">Dark mode</span><span class="settings-switch" aria-hidden="true"></span></button>
+      <button type="button" class="settings-row settings-row--out" id="settings-signout"><span data-i18n="set_signout">Sign out</span></button>
+    </div>
+  </div>
+  <script src="js/whoami.js?v=8"></script>
+  <script src="js/guest-gate.js?v=8" data-page="later"></script>
+  <script src="js/notes-badge.js?v=1"></script>
+  <script src="js/cooking-toast.js?v=18"></script>
+  <script src="js/i18n.js?v=8"></script>
+  <script>
+  (function () {
+    if (window.ZaziseI18n) window.ZaziseI18n.load().catch(function () {});
+    var KEY = "zazise.watchLater";
+    var sort = "added";
+    var queueCat = "all";
+    try { sort = sessionStorage.getItem("zazise.laterSort") || "added"; } catch (e) {}
+    if (sort !== "title" && sort !== "added") sort = "added";
+    function cook() {
+      var msg = "We're still cooking — be patient.";
+      var api = window.ZaziseCookingToast;
+      if (!api) return;
+      if (api.text) msg = api.text("pv_cooking", msg);
+      api.show(msg, "cooking", "pv_cooking");
+    }
+    function ok(msg) {
+      if (window.ZaziseCookingToast) window.ZaziseCookingToast.show(msg, "success");
+    }
+    function fail(msg) {
+      if (window.ZaziseCookingToast) window.ZaziseCookingToast.show(msg, "error");
+    }
+    var DEFAULT_BANNER = "assets/thumbs/pills/table-mountain.jpg";
+    var BANNER_KEY = "zazise.laterBanner";
+    function applyBanner() {
+      var banner = document.getElementById("later-banner");
+      if (!banner) return;
+      var saved = "";
+      try { saved = localStorage.getItem(BANNER_KEY) || ""; } catch (e) {}
+      var url = saved || DEFAULT_BANNER;
+      banner.style.backgroundImage = "url('" + String(url).replace(/'/g, "%27") + "')";
+    }
+    function fitBanner(file) {
+      return new Promise(function (resolve, reject) {
+        if (!file || String(file.type || "").indexOf("image/") !== 0) { reject(new Error("type")); return; }
+        if (file.size > 12 * 1024 * 1024) { reject(new Error("size")); return; }
+        var reader = new FileReader();
+        reader.onerror = function () { reject(new Error("read")); };
+        reader.onload = function () {
+          var img = new Image();
+          img.onerror = function () { reject(new Error("read")); };
+          img.onload = function () {
+            var maxW = 1600;
+            var scale = img.width > maxW ? maxW / img.width : 1;
+            var canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(img.width * scale));
+            canvas.height = Math.max(1, Math.round(img.height * scale));
+            canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+            try { resolve(canvas.toDataURL("image/jpeg", 0.82)); }
+            catch (e) { reject(e); }
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return "&#" + c.charCodeAt(0) + ";"; });
+    }
+    function read() {
+      try {
+        var list = JSON.parse(localStorage.getItem(KEY) || "[]");
+        return Array.isArray(list) ? list.filter(Boolean) : [];
+      } catch (e) { return []; }
+    }
+    function write(list) {
+      localStorage.setItem(KEY, JSON.stringify(list.slice(0, 200)));
+    }
+    function durSeconds(label) {
+      var bits = String(label || "").trim().split(":");
+      if (!bits.length || bits.some(function (n) { return !/^\d+$/.test(n); })) return 0;
+      var nums = bits.map(Number);
+      if (nums.length === 3) return nums[0] * 3600 + nums[1] * 60 + nums[2];
+      if (nums.length === 2) return nums[0] * 60 + nums[1];
+      return nums[0];
+    }
+    function totalLabel(sec) {
+      var h = Math.floor(sec / 3600);
+      var m = Math.round((sec % 3600) / 60);
+      if (h && m) return h + " hr " + m + " min";
+      if (h) return h + " hr";
+      return m + " min";
+    }
+    function ago(at) {
+      var diff = Math.max(0, Date.now() - (at || Date.now()));
+      var day = 86400000;
+      if (diff < day) return "Added today";
+      if (diff < 2 * day) return "Added yesterday";
+      if (diff < 7 * day) return "Added " + Math.floor(diff / day) + " days ago";
+      if (diff < 14 * day) return "Added 1 week ago";
+      return "Added " + Math.floor(diff / (7 * day)) + " weeks ago";
+    }
+    function initials(name) {
+      var bits = String(name || "Z").trim().split(/\s+/);
+      return ((bits[0] || "Z").charAt(0) + (bits[1] || "").charAt(0)).toUpperCase().replace(/[^A-Z0-9]/g, "") || "Z";
+    }
+    function studioHref(item) {
+      var q = "ch=" + encodeURIComponent(item.channel || "ZAZISE");
+      if (item.photo) q += "&photo=" + encodeURIComponent(item.photo);
+      return "/studio.html?" + q;
+    }
+    var LANGS = { en: "English", af: "Afrikaans", zu: "isiZulu", xh: "isiXhosa", st: "Sesotho", tn: "Setswana", nso: "Sepedi", ts: "Xitsonga", ss: "siSwati", ve: "Tshivenda", nr: "isiNdebele" };
+    function itemLang(item) {
+      var code = String(item && item.lang || "").toLowerCase();
+      return LANGS[code] ? code : "en";
+    }
+    function viewsLabel(n) {
+      n = Number(n) || 0;
+      if (n >= 1000000) return (Math.round(n / 100000) / 10).toString().replace(/\.0$/, "") + "M";
+      if (n >= 1000) {
+        var k = n / 1000;
+        var shown = k >= 10 ? String(Math.round(k)) : String(Math.round(k * 10) / 10);
+        return shown.replace(/\.0$/, "") + "K";
+      }
+      return String(n);
+    }
+    function clock(sec) {
+      sec = Math.max(0, Math.round(sec));
+      return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+    }
+    function watchHref(part) {
+      return "/watch.html?v=" + encodeURIComponent(part.id) +
+        "&title=" + encodeURIComponent(part.title || "") +
+        "&poster=" + encodeURIComponent(part.poster || "") +
+        "&ch=" + encodeURIComponent(part.channel || "ZAZISE") +
+        "&photo=" + encodeURIComponent(part.photo || "") +
+        "&cat=" + encodeURIComponent(part.cat || "") +
+        "&views=" + encodeURIComponent(String(part.views || 0)) +
+        "&dur=" + encodeURIComponent(part.dur || "");
+    }
+    function seedItems() {
+      var base = "assets/";
+      var av = base + "avatars/";
+      var now = Date.now();
+      var day = 86400000;
+      var rows = [
+        { id: "piano-pulse", title: "How to make yourself known — ZAZISE creator tips", channel: "ZAZISE", photo: av + "a1.jpg", poster: base + "thumbs/piano-pulse.jpg", dur: "12:34", views: 4200, lang: "en", cat: "music", progress: 34, at: now },
+        { id: "stories5", title: "A letter from the Free State", channel: "SA Stories", photo: av + "a2.jpg", poster: base + "thumbs/pills/elephant-grass.jpg", dur: "9:47", views: 12000, lang: "en", cat: "stories", at: now - 2 * day },
+        { id: "stories7", title: "Durban spice market", channel: "SA Stories", photo: av + "a3.jpg", poster: base + "thumbs/pills/spice.jpg", dur: "7:32", views: 8700, lang: "en", cat: "stories", at: now - 3 * day },
+        { id: "stories8", title: "Funda isiZulu ngemizuzu eli-10.", channel: "SA Stories", photo: av + "a4.jpg", poster: base + "thumbs/language.jpg", dur: "11:05", views: 15000, lang: "zu", cat: "stories", at: now - 4 * day },
+        { id: "cape0", title: "Uhambo lokutshona kwelanga eKapa", channel: "Cape Stories", photo: av + "a5.jpg", poster: base + "thumbs/sunset.jpg", dur: "6:21", views: 5300, lang: "xh", cat: "cape", at: now - 5 * day },
+        { id: "jozi0", title: "Maboneng Sunday walk", channel: "Jozi Walks", photo: av + "a1.jpg", poster: base + "thumbs/pills/maboneng.jpg", dur: "8:56", views: 9100, lang: "en", cat: "jozi", at: now - 6 * day },
+        { id: "stories6", title: "Camera traps in Kruger", channel: "SA Stories", photo: av + "a2.jpg", poster: base + "thumbs/pills/elephant-grass.jpg", dur: "6:33", views: 18000, lang: "en", cat: "stories", at: now - 7 * day },
+        { id: "music0", title: "Amapiano-mengsel 2026 — regstreeks uit Jozi", channel: "Jozi Beats", photo: av + "a3.jpg", poster: base + "thumbs/amapiano.jpg", dur: "15:12", views: 22000, lang: "af", cat: "music", at: now - 8 * day }
+      ];
+      return rows.map(function (part) {
+        return {
+          id: part.id, title: part.title, href: watchHref(part), poster: part.poster, photo: part.photo,
+          channel: part.channel, dur: part.dur, views: part.views, lang: part.lang, cat: part.cat, sub: viewsLabel(part.views) + " views",
+          at: part.at, progress: part.progress || 0
+        };
+      });
+    }
+    function ensureSeed() {
+      try { if (localStorage.getItem(KEY) != null) return; } catch (e) { return; }
+      write(seedItems());
+    }
+    function ordered(list) {
+      var copy = list.slice();
+      if (sort === "title") copy.sort(function (a, b) { return String(a.title || "").localeCompare(String(b.title || "")); });
+      else copy.sort(function (a, b) { return (b.at || 0) - (a.at || 0); });
+      return copy;
+    }
+    var CATS = ["music", "news", "live", "amapiano", "gaming", "comedy", "sports", "stories", "jozi", "cape"];
+    var CAT_LABEL = { all: "All", music: "Music", news: "News", live: "Live", amapiano: "Amapiano", gaming: "Gaming", comedy: "Comedy", sports: "Sports", stories: "SA Stories", jozi: "Jozi", cape: "Cape" };
+    function catLabel(code) {
+      var key = code === "all" ? "pv_chip_all" : "pv_chip_" + code;
+      var fallback = CAT_LABEL[code] || code;
+      try {
+        if (window.ZaziseI18n && ZaziseI18n.t) {
+          var val = ZaziseI18n.t(key);
+          if (val && val !== key) return val;
+        }
+      } catch (e) {}
+      return fallback;
+    }
+    function itemCat(item) {
+      var code = String(item && item.cat || "").toLowerCase();
+      if (CATS.indexOf(code) !== -1) return code;
+      var href = String(item && item.href || "");
+      var match = href.match(/[?&]cat=([^&#]+)/);
+      if (match) {
+        try { code = decodeURIComponent(match[1]).toLowerCase(); } catch (e2) { code = String(match[1] || "").toLowerCase(); }
+        if (CATS.indexOf(code) !== -1) return code;
+      }
+      var id = String(item && item.id || "").toLowerCase();
+      var i;
+      for (i = 0; i < CATS.length; i++) {
+        if (id.indexOf(CATS[i]) === 0) return CATS[i];
+      }
+      return "";
+    }
+    function visible(list) {
+      if (queueCat === "all") return list;
+      return list.filter(function (item) { return itemCat(item) === queueCat; });
+    }
+    function go(item) {
+      if (item && item.href) location.href = item.href;
+      else cook();
+    }
+    function paintChips(list) {
+      var seen = {};
+      list.forEach(function (item) {
+        var code = itemCat(item);
+        if (code) seen[code] = true;
+      });
+      if (queueCat !== "all" && !seen[queueCat]) queueCat = "all";
+      var box = document.getElementById("queue-chips");
+      box.innerHTML = "";
+      function add(code) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "qchip" + (queueCat === code ? " is-on" : "");
+        btn.setAttribute("data-qcat", code);
+        btn.setAttribute("data-i18n", code === "all" ? "pv_chip_all" : "pv_chip_" + code);
+        btn.textContent = catLabel(code);
+        box.appendChild(btn);
+      }
+      if (list.length) add("all");
+      CATS.forEach(function (code) { if (seen[code]) add(code); });
+    }
+    function paint() {
+      var list = ordered(read());
+      paintChips(list);
+      var shown = visible(list);
+      var count = document.getElementById("later-count");
+      var sec = list.reduce(function (sum, item) { return sum + durSeconds(item.dur); }, 0);
+      count.textContent = list.length + (list.length === 1 ? " video" : " videos") + (sec ? " · " + totalLabel(sec) : "");
+      var mosaicFrom = list.filter(function (item) { return !(item.progress > 0 && item.progress < 100); });
+      if (mosaicFrom.length < 4) mosaicFrom = list;
+      var cells = document.querySelectorAll("#mosaic span");
+      var n;
+      for (n = 0; n < cells.length; n++) {
+        var poster = mosaicFrom[n] && mosaicFrom[n].poster;
+        cells[n].style.backgroundImage = poster ? "url('" + String(poster).replace(/'/g, "%27") + "')" : "";
+      }
+      var resumeItem = null;
+      list.forEach(function (item) {
+        if (resumeItem) return;
+        if (typeof item.progress === "number" && item.progress > 0 && item.progress < 100) resumeItem = item;
+      });
+      var cont = document.getElementById("continue");
+      cont.classList.toggle("is-on", !!resumeItem);
+      if (resumeItem) {
+        var total = durSeconds(resumeItem.dur);
+        var watched = clock(total * resumeItem.progress / 100);
+        document.getElementById("continue-link").href = resumeItem.href || "#";
+        document.getElementById("continue-img").src = resumeItem.poster || "";
+        document.getElementById("continue-img").alt = resumeItem.title || "";
+        document.getElementById("continue-title").textContent = resumeItem.title || "ZAZISE";
+        document.getElementById("continue-kicker").textContent = "CONTINUE · " + Math.round(resumeItem.progress) + "% WATCHED";
+        document.getElementById("continue-time").textContent = watched + " / " + (resumeItem.dur || clock(total));
+        document.getElementById("continue-bar").style.width = resumeItem.progress + "%";
+        document.getElementById("resume").onclick = function () { go(resumeItem); };
+      }
+      var box = document.getElementById("later-rail");
+      box.innerHTML = "";
+      document.getElementById("empty").hidden = list.length > 0;
+      var eye = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+      shown.forEach(function (item) {
+        if (resumeItem && String(item.id) === String(resumeItem.id)) return;
+        var card = document.createElement("article");
+        card.className = "later-card";
+        card.setAttribute("data-id", item.id || "");
+        var meta = item.views ? viewsLabel(item.views) + " views" : (item.sub || ago(item.at));
+        card.innerHTML = '<div class="shot"><a href="' + esc(item.href || "#") + '"><img alt="" src="' + esc(item.poster || "") + '"></a><span class="dur">' + esc(item.dur || "") + '</span>' +
+          '<button type="button" class="remove" data-remove aria-label="Remove from Watch later"><span>×</span></button></div>' +
+          '<div class="pad"><a class="ttl" href="' + esc(item.href || "#") + '">' + esc(item.title || "ZAZISE") + '</a>' +
+          '<a class="who" href="' + esc(studioHref(item)) + '"><i></i>by ' + esc(item.channel || "ZAZISE") + " · " + esc(itemLang(item).toUpperCase()) + '</a>' +
+          '<p class="sub">' + eye + esc(meta) + '</p></div>';
+        box.appendChild(card);
+      });
+      document.getElementById("sort").value = sort === "title" ? "title" : "added";
+    }
+    document.getElementById("sort").addEventListener("change", function (ev) {
+      sort = ev.target.value === "title" ? "title" : "added";
+      try { sessionStorage.setItem("zazise.laterSort", sort); } catch (e) {}
+      paint();
+    });
+    document.getElementById("play-all").addEventListener("click", function () {
+      var list = visible(ordered(read()));
+      if (!list.length) { cook(); return; }
+      go(list[0]);
+    });
+    document.getElementById("shuffle").addEventListener("click", function () {
+      var list = visible(ordered(read()));
+      if (!list.length) { cook(); return; }
+      go(list[Math.floor(Math.random() * list.length)]);
+    });
+    document.getElementById("later-edit").addEventListener("click", function () {
+      document.getElementById("banner-file").click();
+    });
+    document.getElementById("banner-file").addEventListener("change", function (ev) {
+      var file = ev.target.files && ev.target.files[0];
+      ev.target.value = "";
+      if (!file) return;
+      fitBanner(file).then(function (url) {
+        try { localStorage.setItem(BANNER_KEY, url); }
+        catch (e) { fail("That picture is too large. Try a smaller one."); return; }
+        applyBanner();
+        ok("Banner updated.");
+      }).catch(function () {
+        fail("Choose a picture to update the banner.");
+      });
+    });
+    document.getElementById("crumb-library").addEventListener("click", cook);
+    document.getElementById("search-form").addEventListener("submit", function (ev) { ev.preventDefault(); cook(); });
+    document.querySelectorAll("[data-cook]").forEach(function (btn) {
+      btn.addEventListener("click", cook);
+    });
+    document.getElementById("queue-chips").addEventListener("click", function (ev) {
+      var btn = ev.target.closest("[data-qcat]");
+      if (!btn) return;
+      queueCat = btn.getAttribute("data-qcat") || "all";
+      paint();
+    });
+    document.getElementById("later-rail").addEventListener("click", function (ev) {
+      var remove = ev.target.closest("[data-remove]");
+      if (!remove) return;
+      ev.preventDefault();
+      var card = remove.closest("[data-id]");
+      var id = card ? card.getAttribute("data-id") : "";
+      write(read().filter(function (item) { return String(item.id) !== id; }));
+      paint();
+      ok("Removed from Watch later.");
+    });
+    var sidebar = document.getElementById("preview-sidebar");
+    var burger = document.querySelector(".menu-btn");
+    var scrim = document.getElementById("menu-scrim");
+    function setOpen(open) {
+      sidebar.classList.toggle("mini", !open);
+      document.body.classList.toggle("menu-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      scrim.hidden = !open;
+    }
+    burger.addEventListener("click", function () { setOpen(sidebar.classList.contains("mini")); });
+    scrim.addEventListener("click", function () { setOpen(false); });
+    var panel = document.getElementById("settings-panel");
+    document.querySelector("[data-open-settings]").addEventListener("click", function (ev) {
+      ev.preventDefault();
+      setOpen(false);
+      panel.hidden = false;
+      document.body.classList.add("settings-open");
+    });
+    document.getElementById("settings-back").addEventListener("click", function () {
+      panel.hidden = true;
+      document.body.classList.remove("settings-open");
+    });
+    var dark = document.getElementById("settings-dark");
+    function paintDark() { dark.setAttribute("aria-pressed", document.documentElement.classList.contains("z-dark") ? "true" : "false"); }
+    paintDark();
+    dark.addEventListener("click", function () {
+      var on = !document.documentElement.classList.contains("z-dark");
+      document.documentElement.classList.toggle("z-dark", on);
+      try { localStorage.setItem("zazise.theme", on ? "dark" : "light"); } catch (e) {}
+      paintDark();
+    });
+    document.querySelectorAll("[data-setting='account']").forEach(function (btn) {
+      btn.addEventListener("click", function () { location.href = "/profile-sample.html"; });
+    });
+    document.querySelectorAll("[data-setting='soon']").forEach(function (btn) {
+      btn.addEventListener("click", cook);
+    });
+    document.getElementById("settings-signout").addEventListener("click", function () {
+      fetch("/api/logout.php", { method: "POST", credentials: "same-origin" }).finally(function () {
+        location.href = "/login.html";
+      });
+    });
+    document.getElementById("mobile-dock").addEventListener("click", function (ev) {
+      var item = ev.target.closest("[data-dock]");
+      if (!item) return;
+      var href = item.getAttribute("href");
+      if (!href || href === "#") return;
+      ev.preventDefault();
+      location.href = href;
+    });
+    document.addEventListener("zazise:lang", function () { paint(); });
+    applyBanner();
+    ensureSeed();
+    paint();
+  })();
+  </script>
+</body>
+</html>

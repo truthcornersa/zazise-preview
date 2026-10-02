@@ -1,1 +1,240 @@
-!function(){"use strict";var t="zaziseJustRegistered",e=["#E2AE41","#183D83","#317045","#DE3831","#002395","#007749","#FFB612","#FFFFFF","#000000"],n=2147483e3;function a(t){var e=Math.min(window.devicePixelRatio||1,2),n=window.innerWidth,a=window.innerHeight;t.width=Math.max(1,Math.floor(n*e)),t.height=Math.max(1,Math.floor(a*e)),t.style.width=n+"px",t.style.height=a+"px";var r=t.getContext("2d");return r.setTransform(e,0,0,e,0,0),{w:n,h:a,ctx:r}}function r(t,n,a){var r,i,o,c,d=e[Math.random()*e.length|0];return"left"===a?(r=-10,i=Math.random()*n*.6,o=4+8*Math.random(),c=-2-6*Math.random()):"right"===a?(r=t+10,i=Math.random()*n*.6,o=-(4+8*Math.random()),c=-2-6*Math.random()):(r=t*(.15+.7*Math.random()),i=n*(.2+.35*Math.random()),o=14*(Math.random()-.5),c=-6-10*Math.random()),{x:r,y:i,vx:o,vy:c,w:5+7*Math.random(),h:3+5*Math.random(),rot:Math.random()*Math.PI*2,vr:.35*(Math.random()-.5),color:d,gravity:.12+.08*Math.random(),drag:.988+.008*Math.random(),life:1,decay:.003+.004*Math.random(),shape:Math.random()<.35?"circle":"rect"}}function i(t,e){t.save(),t.translate(e.x,e.y),t.rotate(e.rot),t.globalAlpha=Math.max(0,e.life),t.fillStyle=e.color,"circle"===e.shape?(t.beginPath(),t.arc(0,0,.45*e.w,0,2*Math.PI),t.fill()):t.fillRect(-e.w/2,-e.h/2,e.w,e.h),t.restore()}function o(){var t,e=function(){var t=document.getElementById("zazise-confetti-canvas");if(t)return t;var e=document.createElement("canvas");return e.id="zazise-confetti-canvas",e.setAttribute("aria-hidden","true"),e.style.cssText=["position:fixed","inset:0","width:100vw","height:100vh","max-width:100%","max-height:100%","pointer-events:none","z-index:"+n,"margin:0","padding:0","border:0","display:block","overflow:visible"].join(";"),document.documentElement.appendChild(e),e}(),o=a(e),c=o.ctx,d=[];for(t=0;t<90;t++)d.push(r(o.w,o.h,"center"));for(t=0;t<40;t++)d.push(r(o.w,o.h,"left"));for(t=0;t<40;t++)d.push(r(o.w,o.h,"right"));var h=performance.now(),s=h,m=!0,u=function(){o=a(e),c=o.ctx};window.addEventListener("resize",u),requestAnimationFrame(function t(n){if(m){var a=n-h;c.clearRect(0,0,o.w,o.h),a<1200&&n-s>90&&(s=n,d.push(r(o.w,o.h,"left")),d.push(r(o.w,o.h,"right")),d.push(r(o.w,o.h,"center")));for(var l=0,f=0;f<d.length;f++){var w=d[f];w.life<=0||(w.vy+=w.gravity,w.vx*=w.drag,w.vy*=w.drag,w.x+=w.vx,w.y+=w.vy,w.rot+=w.vr,a>3200*.55&&(w.life-=w.decay),w.life>0&&w.y<o.h+40?(i(c,w),l++):w.life=0)}a<3200||l>0?requestAnimationFrame(t):(m=!1,window.removeEventListener("resize",u),c.clearRect(0,0,o.w,o.h),e.remove())}})}function c(t){if(function(){try{return window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(t){return!1}}())return(e=document.createElement("div")).setAttribute("aria-hidden","true"),e.style.cssText=["position:fixed","inset:0","pointer-events:none","z-index:"+(n-1),"background:radial-gradient(ellipse at center, rgba(226,174,65,0.22) 0%, transparent 70%)","opacity:0","transition:opacity 600ms ease"].join(";"),document.documentElement.appendChild(e),void requestAnimationFrame(function(){e.style.opacity="1",setTimeout(function(){e.style.opacity="0",setTimeout(function(){e.remove()},700)},400)});var e;requestAnimationFrame(function(){o()})}function d(){var e=document.body,n=!1;try{n="1"===new URLSearchParams(window.location.search||"").get("confetti")}catch(t){}var a=e&&(e.classList.contains("thank-you-body")||e.classList.contains("thank-you"));if(n||a||function(){try{if(sessionStorage.getItem(t))return sessionStorage.removeItem(t),!0}catch(t){}try{if("1"===new URLSearchParams(window.location.search||"").get("registered"))return window.history&&history.replaceState&&history.replaceState(null,"",window.location.pathname+(window.location.hash||"")),!0}catch(t){}return!1}()){if(a||n)try{sessionStorage.removeItem(t)}catch(t){}c()}}window.fireThankYouConfetti=c,window.ZaziseConfetti={burst:function(){c()}},"loading"===document.readyState?document.addEventListener("DOMContentLoaded",d):d()}();
+/**
+ * ZAZISE thank-you confetti — full-viewport overlay (fixed inset 0).
+ * Fires only when sessionStorage flag `zaziseJustRegistered` is set
+ * (register.js sets it on success, then clears here). Respects reduced-motion.
+ */
+(function () {
+  'use strict';
+
+  var FLAG = 'zaziseJustRegistered';
+  var COLORS = [
+    '#E2AE41', /* brand gold */
+    '#183D83', /* brand blue */
+    '#317045', /* brand green */
+    '#DE3831', /* SA red */
+    '#002395', /* SA blue */
+    '#007749', /* SA green */
+    '#FFB612', /* SA gold */
+    '#FFFFFF',
+    '#000000'
+  ];
+  var DURATION_MS = 3200;
+  var Z_INDEX = 2147483000;
+
+  function consumeFlag() {
+    try {
+      var v = sessionStorage.getItem(FLAG);
+      if (v) {
+        sessionStorage.removeItem(FLAG);
+        return true;
+      }
+    } catch (e) { /* storage blocked */ }
+    try {
+      var q = new URLSearchParams(window.location.search || '');
+      if (q.get('registered') === '1') {
+        // Strip query so refresh does not re-fire
+        if (window.history && history.replaceState) {
+          history.replaceState(null, '', window.location.pathname + (window.location.hash || ''));
+        }
+        return true;
+      }
+    } catch (e2) { /* ignore */ }
+    return false;
+  }
+
+  function prefersReducedMotion() {
+    try {
+      return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function ensureCanvas() {
+    var existing = document.getElementById('zazise-confetti-canvas');
+    if (existing) return existing;
+    var canvas = document.createElement('canvas');
+    canvas.id = 'zazise-confetti-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.cssText = [
+      'position:fixed',
+      'inset:0',
+      'width:100vw',
+      'height:100vh',
+      'max-width:100%',
+      'max-height:100%',
+      'pointer-events:none',
+      'z-index:' + Z_INDEX,
+      'margin:0',
+      'padding:0',
+      'border:0',
+      'display:block',
+      'overflow:visible'
+    ].join(';');
+    document.documentElement.appendChild(canvas);
+    return canvas;
+  }
+
+  function resize(canvas) {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    canvas.width = Math.max(1, Math.floor(w * dpr));
+    canvas.height = Math.max(1, Math.floor(h * dpr));
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    var ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { w: w, h: h, ctx: ctx };
+  }
+
+  function makeParticle(w, h, fromEdge) {
+    var color = COLORS[(Math.random() * COLORS.length) | 0];
+    var x, y, vx, vy;
+    if (fromEdge === 'left') {
+      x = -10; y = Math.random() * h * 0.6;
+      vx = 4 + Math.random() * 8; vy = -2 - Math.random() * 6;
+    } else if (fromEdge === 'right') {
+      x = w + 10; y = Math.random() * h * 0.6;
+      vx = -(4 + Math.random() * 8); vy = -2 - Math.random() * 6;
+    } else {
+      // Center / top burst covering full page
+      x = w * (0.15 + Math.random() * 0.7);
+      y = h * (0.2 + Math.random() * 0.35);
+      vx = (Math.random() - 0.5) * 14;
+      vy = -6 - Math.random() * 10;
+    }
+    return {
+      x: x, y: y, vx: vx, vy: vy,
+      w: 5 + Math.random() * 7,
+      h: 3 + Math.random() * 5,
+      rot: Math.random() * Math.PI * 2,
+      vr: (Math.random() - 0.5) * 0.35,
+      color: color,
+      gravity: 0.12 + Math.random() * 0.08,
+      drag: 0.988 + Math.random() * 0.008,
+      life: 1,
+      decay: 0.003 + Math.random() * 0.004,
+      shape: Math.random() < 0.35 ? 'circle' : 'rect'
+    };
+  }
+
+  function drawParticle(ctx, p) {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.globalAlpha = Math.max(0, p.life);
+    ctx.fillStyle = p.color;
+    if (p.shape === 'circle') {
+      ctx.beginPath();
+      ctx.arc(0, 0, p.w * 0.45, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    }
+    ctx.restore();
+  }
+
+  function softFlash() {
+    var el = document.createElement('div');
+    el.setAttribute('aria-hidden', 'true');
+    el.style.cssText = [
+      'position:fixed',
+      'inset:0',
+      'pointer-events:none',
+      'z-index:' + (Z_INDEX - 1),
+      'background:radial-gradient(ellipse at center, rgba(226,174,65,0.22) 0%, transparent 70%)',
+      'opacity:0',
+      'transition:opacity 600ms ease'
+    ].join(';');
+    document.documentElement.appendChild(el);
+    requestAnimationFrame(function () {
+      el.style.opacity = '1';
+      setTimeout(function () {
+        el.style.opacity = '0';
+        setTimeout(function () { el.remove(); }, 700);
+      }, 400);
+    });
+  }
+
+  function runBurst() {
+    var canvas = ensureCanvas();
+    var size = resize(canvas);
+    var ctx = size.ctx;
+    var particles = [];
+    var i;
+    for (i = 0; i < 90; i++) particles.push(makeParticle(size.w, size.h, 'center'));
+    for (i = 0; i < 40; i++) particles.push(makeParticle(size.w, size.h, 'left'));
+    for (i = 0; i < 40; i++) particles.push(makeParticle(size.w, size.h, 'right'));
+
+    var start = performance.now();
+    var lastSpawn = start;
+    var running = true;
+    var onResize = function () {
+      size = resize(canvas);
+      ctx = size.ctx;
+    };
+    window.addEventListener('resize', onResize);
+
+    function frame(now) {
+      if (!running) return;
+      var elapsed = now - start;
+      ctx.clearRect(0, 0, size.w, size.h);
+
+      // Extra side cannons for first ~1.2s so edges fill
+      if (elapsed < 1200 && now - lastSpawn > 90) {
+        lastSpawn = now;
+        particles.push(makeParticle(size.w, size.h, 'left'));
+        particles.push(makeParticle(size.w, size.h, 'right'));
+        particles.push(makeParticle(size.w, size.h, 'center'));
+      }
+
+      var alive = 0;
+      for (var j = 0; j < particles.length; j++) {
+        var p = particles[j];
+        if (p.life <= 0) continue;
+        p.vy += p.gravity;
+        p.vx *= p.drag;
+        p.vy *= p.drag;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        if (elapsed > DURATION_MS * 0.55) p.life -= p.decay;
+        if (p.life > 0 && p.y < size.h + 40) {
+          drawParticle(ctx, p);
+          alive++;
+        } else {
+          p.life = 0;
+        }
+      }
+
+      if (elapsed < DURATION_MS || alive > 0) {
+        requestAnimationFrame(frame);
+      } else {
+        running = false;
+        window.removeEventListener('resize', onResize);
+        ctx.clearRect(0, 0, size.w, size.h);
+        canvas.remove();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function init() {
+    if (!consumeFlag()) return;
+    if (prefersReducedMotion()) {
+      softFlash();
+      return;
+    }
+    // Defer one frame so layout (lang bar / card) is painted under the overlay
+    requestAnimationFrame(function () {
+      runBurst();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

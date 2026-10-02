@@ -1,41 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZAZISE — Register (preview)</title>
-  <link rel="icon" href="assets/favicon/favicon.ico" />
-  <link rel="stylesheet" href="fonts.css" />
+  <title data-i18n="page_title_register">ZAZISE — Make Yourself Known | SA Video Platform</title>
+    <link rel="stylesheet" href="fonts.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="home.css" />
-  <style>
-    .preview-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#183D83;color:#fff;font:600 13px/1.3 system-ui,sans-serif;padding:8px 14px;text-align:center}
-    .preview-banner a{color:#E2AE41}
-    body.login-body{padding-top:36px}
-  </style>
+<meta name="description" content="Join ZAZISE early adopters. South Africa's video platform to Make Yourself Known — create, share, and discover SA stories across every language." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="ZAZISE" />
+  <link rel="canonical" href="" />
+  <link rel="alternate" hreflang="en" href="" />
+  <link rel="alternate" hreflang="x-default" href="" />
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/favicon-180.png" />
+  <meta name="theme-color" content="#183D83" />
+  <meta name="msapplication-TileColor" content="#183D83" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ZAZISE" />
+  <meta property="og:locale" content="en_ZA" />
+  <meta property="og:title" content="ZAZISE — Make Yourself Known | SA Video Platform" />
+  <meta property="og:description" content="Join ZAZISE early adopters. South Africa's video platform to Make Yourself Known — create, share, and discover SA stories across every language." />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="ZAZISE — Make Yourself Known" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ZAZISE — Make Yourself Known | SA Video Platform" />
+  <meta name="twitter:description" content="Join ZAZISE early adopters. South Africa's video platform to Make Yourself Known — create, share, and discover SA stories across every language." />
+  <meta name="twitter:image" content="assets/og-image.png" />
+  <meta name="twitter:image:alt" content="ZAZISE — Make Yourself Known" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "#organization",
+      "name": "ZAZISE",
+      "alternateName": "Make Yourself Known",
+      "url": "",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "assets/zazise-logo-colour-lockup.png"
+      },
+      "image": "assets/og-image.png",
+      "slogan": "Make Yourself Known",
+      "description": "ZAZISE is a South African video platform where creators make themselves known — share stories, clips, and culture in SA languages.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Africa"
+      },
+      "knowsLanguage": [
+        "en",
+        "af",
+        "zu",
+        "xh",
+        "st",
+        "tn",
+        "nso",
+        "ts",
+        "ss",
+        "ve",
+        "nr"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "#website",
+      "url": "",
+      "name": "ZAZISE",
+      "description": "South African video platform — Make Yourself Known.",
+      "publisher": {
+        "@id": "#organization"
+      },
+      "inLanguage": "en-ZA",
+      "potentialAction": {
+        "@type": "RegisterAction",
+        "target": "",
+        "name": "Create early adopter account"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "#webpage",
+      "url": "",
+      "name": "ZAZISE — Make Yourself Known | SA Video Platform",
+      "description": "Join ZAZISE early adopters. South Africa's video platform to Make Yourself Known — create, share, and discover SA stories across every language.",
+      "isPartOf": {
+        "@id": "#website"
+      },
+      "about": {
+        "@id": "#organization"
+      },
+      "inLanguage": "en-ZA",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "assets/og-image.png"
+      }
+    }
+  ]
+}
+  </script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="home login-body register-body">
-  <div class="preview-banner">GitHub Pages preview · self-contained local CSS/JS/assets/fonts · preview only · <a href="login.html">login</a> · <a href="watch.html">watch</a></div>
   <div class="auth-bg" aria-hidden="true">
     <div class="auth-bg__slide is-active" style="background-image:url('assets/login-bg-cape-town-planes.jpg')"></div>
+    <div class="auth-bg__slide" style="background-image:url('assets/login-bg-coast-windsurf.jpg')"></div>
+    <div class="auth-bg__slide" style="background-image:url('assets/login-bg-joburg-skyline.jpg')"></div>
   </div>
+
+  <nav class="lang-bar lang-bar--login" aria-label="Language" data-collapsed="false">
+    <button type="button" class="lang-toggle" aria-expanded="true" aria-controls="lang-pills" title="Toggle languages">
+      <span class="lang-hint" data-i18n="lang_hint">SA languages</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="lang-pills" id="lang-pills" role="list">
+      <a href="#" class="lang-pill active" role="listitem" hreflang="en" lang="en" data-lang="en" title="English">EN</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="af" lang="af" data-lang="af" title="Afrikaans">AF</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="zu" lang="zu" data-lang="zu" title="isiZulu">ZU</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="xh" lang="xh" data-lang="xh" title="isiXhosa">XH</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="st" lang="st" data-lang="st" title="Sesotho">ST</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="tn" lang="tn" data-lang="tn" title="Setswana">TN</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nso" lang="nso" data-lang="nso" title="Sepedi / Northern Sotho">NSO</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ts" lang="ts" data-lang="ts" title="Xitsonga">TS</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ss" lang="ss" data-lang="ss" title="siSwati">SS</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ve" lang="ve" data-lang="ve" title="Tshivenda">VE</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nr" lang="nr" data-lang="nr" title="isiNdebele">NR</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="en" lang="en" data-lang="sasl" title="South African Sign Language">SASL</a>
+    </div>
+  </nav>
+
   <main class="login-page">
     <section class="login-card" aria-labelledby="register-title">
       <div class="logo-block logo-block--lockup">
-        <img class="brand-icon-3d" src="assets/zazise-logo-icon-3d-clean@2x.png" alt="" />
+        <img class="brand-icon-3d" src="assets/zazise-logo-icon-3d-clean@2x.png" alt="" aria-hidden="true" />
         <img class="brand-flat-wordmark" src="assets/zazise-logo-flat-wordmark.png" alt="ZAZISE — Make Yourself Known" />
       </div>
-      <h1 id="register-title">Create your account</h1>
-      <p class="subtitle">Make yourself known on ZAZISE</p>
-      <form class="register-form" action="#" method="post" onsubmit="event.preventDefault();alert('Static preview only — registration API does not run on GitHub Pages.');">
-        <div class="field"><label for="n">First name</label><input id="n" name="name" type="text" required placeholder="First name" /></div>
-        <div class="field"><label for="s">Surname</label><input id="s" name="surname" type="text" required placeholder="Surname" /></div>
-        <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" required placeholder="you@example.co.za" /></div>
-        <div class="login-actions"><button type="submit" class="btn-primary">Create account (preview)</button></div>
+      <h1 id="register-title" data-i18n="title_register">Create your account</h1>
+      <p class="subtitle" data-i18n="subtitle_register">Make yourself known on ZAZISE</p>
+
+      <form id="register-form" class="register-form" action="/api/register" method="post" novalidate>
+        <div class="field">
+          <label for="register-name" data-i18n="label_first_name">First name</label>
+          <input id="register-name" name="name" type="text" autocomplete="given-name" required
+                 data-i18n-placeholder="placeholder_first_name" placeholder="First name" />
+        </div>
+        <div class="field">
+          <label for="register-surname" data-i18n="label_surname">Surname</label>
+          <input id="register-surname" name="surname" type="text" autocomplete="family-name" required
+                 data-i18n-placeholder="placeholder_surname" placeholder="Surname" />
+        </div>
+        <div class="field">
+          <label for="register-email" data-i18n="label_email">Email</label>
+          <input id="register-email" name="email" type="email" autocomplete="email" required
+                 data-i18n-placeholder="placeholder_email" placeholder="you@example.co.za" />
+        </div>
+
+        <div class="field field--password">
+          <label for="register-password" data-i18n="label_password">Password</label>
+          <div class="pw-wrap">
+            <input id="register-password" name="password" type="password"
+                   autocomplete="new-password" required minlength="12" maxlength="128"
+                   data-i18n-placeholder="placeholder_password" placeholder="••••••••" />
+            <button type="button" class="pw-toggle" data-pw-toggle="register-password"
+                    aria-label="Show password" data-i18n-aria="btn_show_password">
+              <span class="pw-toggle__show" data-i18n="btn_show">Show</span>
+              <span class="pw-toggle__hide" hidden data-i18n="btn_hide">Hide</span>
+            </button>
+          </div>
+          <p class="pw-strength" id="pw-strength" aria-live="polite" hidden></p>
+        </div>
+
+        <div class="field field--password">
+          <label for="register-password-confirm" data-i18n="label_password_confirm">Confirm password</label>
+          <div class="pw-wrap">
+            <input id="register-password-confirm" name="passwordConfirm" type="password"
+                   autocomplete="new-password" required minlength="12" maxlength="128"
+                   data-i18n-placeholder="placeholder_password" placeholder="••••••••" />
+            <button type="button" class="pw-toggle" data-pw-toggle="register-password-confirm"
+                    aria-label="Show password" data-i18n-aria="btn_show_password">
+              <span class="pw-toggle__show" data-i18n="btn_show">Show</span>
+              <span class="pw-toggle__hide" hidden data-i18n="btn_hide">Hide</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Honeypot (bots fill this; humans never see it) -->
+        <div class="hp-trap" aria-hidden="true">
+          <label for="register-website">Website</label>
+          <input id="register-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="field field--recaptcha">
+          <div class="g-recaptcha"
+               data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+        </div>
+
+        <div class="login-actions login-actions--register">
+          <p class="link-muted register-signin" hidden>
+            <span data-i18n="already_account">Already have an account?</span>
+            <a href="login.html" data-i18n="sign_in">Sign in</a>
+          </p>
+          <button type="submit" class="btn-primary" data-submit data-i18n="btn_create">Create account</button>
+        </div>
       </form>
-      <div class="login-footer"><a href="login.html">Sign in</a><span><a href="help.html">Help</a> · preview only</span></div>
+
+      <div class="login-footer">
+        <span data-i18n-region>South Africa · EN</span>
+        <span><a href="help.html" data-i18n="help">Help</a> · <a href="privacy.html" data-i18n="privacy">Privacy</a> · <a href="terms.html" data-i18n="terms">Terms</a></span>
+      </div>
     </section>
   </main>
+
+  <div id="toast-host" class="toast-host" aria-live="polite"></div>
+
+  <script src="js/i18n.js?v=8"></script>
   <script src="js/auth-bg.js"></script>
+  <script src="js/register.js"></script>
+  <script>
+    ZaziseI18n.load().catch(function () { /* offline curated pack missing — EN markup remains */ });
+  </script>
 </body>
 </html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="af">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZAZISE — Tuis</title>
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="home-menu.css" />
+</head>
+<body class="home">
+  <header class="app-bar">
+    <a href="home-af.html" class="brand" aria-label="ZAZISE">
+      <img class="brand-lockup" src="assets/zazise-logo-colour-header.png" alt="ZAZISE" />
+      <img class="brand-icon" src="assets/zazise-logo-icon-3d-clean.png" alt="" />
+      <img class="brand-word" src="assets/zazise-logo-word-flat.png" alt="ZAZISE" />
+    </a>
+    <div class="search-wrap">
+      <div class="search-box">
+        <input type="search" placeholder="Soek ZAZISE" />
+        <button class="search-btn" aria-label="Soek">
+          <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="app-bar-actions">
+      <a href="upload.html" class="icon-btn" title="Skep" aria-label="Skep">
+        <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      </a>
+      <button class="icon-btn" title="Kennisgewings" aria-label="Kennisgewings">
+        <svg class="ico-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 7 3 7 3 7H3s3 0 3-7"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>
+      </button>
+      <div class="avatar" title="MZ">MZ</div>
+      <a href="home-menu-open.html" class="menu-btn" aria-label="Kieslys"><div class="hamburger"><span></span><span></span><span></span></div></a>
+    </div>
+  </header>
+
+  <nav class="lang-bar" aria-label="Taal" data-collapsed="false">
+    <button type="button" class="lang-toggle" aria-expanded="true" aria-controls="lang-pills" title="Wissel tale">
+      <span class="lang-hint">SA tale</span>
+      <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="lang-pills" id="lang-pills" role="list">
+      <a href="home.html" class="lang-pill" role="listitem" hreflang="en" lang="en" title="English">EN</a>
+      <a href="home-af.html" class="lang-pill active" role="listitem" hreflang="af" lang="af" title="Afrikaans">AF</a>
+      <a href="home-zu.html" class="lang-pill" role="listitem" hreflang="zu" lang="zu" title="isiZulu">ZU</a>
+      <a href="home-xh.html" class="lang-pill" role="listitem" hreflang="xh" lang="xh" title="isiXhosa">XH</a>
+      <a href="home-st.html" class="lang-pill" role="listitem" hreflang="st" lang="st" title="Sesotho">ST</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="tn" lang="tn" title="Setswana">TN</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nso" lang="nso" title="Sepedi / Northern Sotho">NSO</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ts" lang="ts" title="Xitsonga">TS</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ss" lang="ss" title="siSwati">SS</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="ve" lang="ve" title="Tshivenda">VE</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="nr" lang="nr" title="isiNdebele">NR</a>
+      <a href="#" class="lang-pill" role="listitem" hreflang="en" lang="en" title="South African Sign Language">SASL</a>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <nav class="sidebar mini" aria-label="Primary navigation">
+      <a class="nav-item active" href="home-af.html" title="Tuis">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/></svg></span>
+        Tuis
+      </a>
+      <a class="nav-item" href="#" title="Gewild">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M13 3s1 4-2 7c0 0 5 0 5 6a6 6 0 1 1-12 0c0-4 4-6 4-6S6 5 13 3z"/></svg></span>
+        Gewild
+      </a>
+      <a class="nav-item" href="#" title="Intekeninge">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l5-2.5-5-2.5z"/></svg></span>
+        Intekeninge
+      </a>
+      <a class="nav-item" href="reels.html" title="Clips">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 3v18M16 3v18M4 9h16M4 15h16"/></svg></span>
+        Clips
+      </a>
+      <div class="divider"></div>
+      <a class="nav-item" href="#" title="Biblioteek">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M4 5h4v14H4zM10 5h4v14h-4zM16 7l5 3-5 3V7z"/></svg></span>
+        Biblioteek
+      </a>
+      <a class="nav-item" href="#" title="Geskiedenis">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 3h6"/></svg></span>
+        Geskiedenis
+      </a>
+      <a class="nav-item" href="upload.html" title="Jou video's">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 10l4-2v8l-4-2"/></svg></span>
+        Jou video's
+      </a>
+      <a class="nav-item" href="#" title="Kyk later">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        Kyk later
+      </a>
+      <a class="nav-item" href="#" title="Hou-van video's">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><path d="M7 11v9H4v-9h3zm3 9h7.2a2 2 0 0 0 1.95-1.55l1.35-6A2 2 0 0 0 18.55 10H13V6.5A2.5 2.5 0 0 0 10.5 4L7 11"/></svg></span>
+        Hou-van video's
+      </a>
+      <div class="divider"></div>
+      <div class="section-label">Intekeninge</div>
+      <a class="nav-item" href="channel.html" title="Cape Stories">
+        <span class="ico"><img class="side-av" src="assets/avatars/a1.jpg" alt="" /></span>
+        Cape Stories
+      </a>
+      <a class="nav-item" href="#" title="Jozi Beats">
+        <span class="ico"><img class="side-av" src="assets/avatars/a2.jpg" alt="" /></span>
+        Jozi Beats
+      </a>
+      <a class="nav-item" href="#" title="SA Eats">
+        <span class="ico"><img class="side-av" src="assets/avatars/a3.jpg" alt="" /></span>
+        SA Eats
+      </a>
+      <div class="divider"></div>
+      <div class="section-label">Meer van ZAZISE</div>
+      <a class="nav-item" href="#" title="Instellings">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></span>
+        Instellings
+      </a>
+      <a class="nav-item" href="#" title="Hulp">
+        <span class="ico"><svg class="ico-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.6 2.25c-.8.4-1.1.9-1.1 1.75v.5M12 17h.01"/></svg></span>
+        Hulp
+      </a>
+    </nav>
+
+    <main class="main">
+      <section class="top-trending" aria-label="Top gewild">
+        <h2 class="top-trending-title">Top gewild</h2>
+        <div class="top-trending-scroll">
+          <a class="trend-card trend-card--featured" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/nightdrive.jpg" alt="" /><span class="dur">3:42</span></div>
+            <div class="trend-title">Amapiano-nagrit — Soweto</div>
+          </a>
+          <a class="trend-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/rugby.jpg" alt="" /><span class="dur">8:15</span></div>
+            <div class="trend-title">Springboks-drie van die week</div>
+          </a>
+          <a class="trend-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/streetfood.jpg" alt="" /><span class="dur">12:01</span></div>
+            <div class="trend-title">Kaapstad-straatkos-kruip</div>
+          </a>
+          <a class="trend-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/creator.jpg" alt="" /><span class="dur">5:33</span></div>
+            <div class="trend-title">Hoe om op ZAZISE te groei</div>
+          </a>
+          <a class="trend-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/jozi.jpg" alt="" /><span class="dur">9:20</span></div>
+            <div class="trend-title">Jozi-luglyn-timelapse 4K</div>
+          </a>
+          <a class="trend-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/language.jpg" alt="" /><span class="dur">6:48</span></div>
+            <div class="trend-title">Leer Afrikaanse groete</div>
+          </a>
+          <a class="trend-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/kruger.jpg" alt="" /><span class="dur">14:02</span></div>
+            <div class="trend-title">Kruger-sonopkoms-natuurlewe</div>
+          </a>
+          <a class="trend-card" href="watch.html">
+            <div class="thumb"><img src="assets/thumbs/durban.jpg" alt="" /><span class="dur">4:55</span></div>
+            <div class="trend-title">Durban-kerryhuisgeheime</div>
+          </a>
+        </div>
+      </section>
+
+      <div class="chips">
+        <span class="chip active">Alles</span>
+        <span class="chip">Musiek</span>
+        <span class="chip">Nuus</span>
+        <span class="chip">Regstreeks</span>
+        <span class="chip">Amapiano</span>
+        <span class="chip">Speletjies</span>
+        <span class="chip">Komedie</span>
+        <span class="chip">Sport</span>
+        <span class="chip">SA Stories</span>
+        <span class="chip">Jozi</span>
+        <span class="chip">Kaap</span>
+      </div>
+
+      <div class="video-grid">
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/studio.jpg" alt="" /><span class="dur">12:34</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Hoe om jouself bekend te maak — ZAZISE-skepperwenke</div>
+              <div class="sub">ZAZISE Creators<br/>125K kyke · 2 dae gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a4.jpg" alt="" /></div>
+          </div>
+        </a>
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/sunset.jpg" alt="" /><span class="dur">8:02</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Sonsondergangrit deur Kaapstad — 4K</div>
+              <div class="sub">Cape Stories<br/>89K kyke · 5 dae gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+          </div>
+        </a>
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/amapiano.jpg" alt="" /><span class="dur">4:18</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Amapiano-mix 2026 — lewendige sessie van Jozi</div>
+              <div class="sub">Jozi Beats<br/>210K kyke · 1 week gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a2.jpg" alt="" /></div>
+          </div>
+        </a>
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/market.jpg" alt="" /><span class="dur">22:01</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Straatkos-toer: Durban-speseryemarkte</div>
+              <div class="sub">SA Eats<br/>54K kyke · 3 dae gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a3.jpg" alt="" /></div>
+          </div>
+        </a>
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/startup.jpg" alt="" /><span class="dur">15:47</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Bou 'n opstart in Johannesburg</div>
+              <div class="sub">Biz Afrika<br/>31K kyke · 4 dae gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a5.jpg" alt="" /></div>
+          </div>
+        </a>
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/rugby.jpg" alt="" /><span class="dur">9:55</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Rugbyhoogtepunte — Springboks-naweek</div>
+              <div class="sub">Sports ZA<br/>402K kyke · 1 dag gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a4.jpg" alt="" /></div>
+          </div>
+        </a>
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/learn.jpg" alt="" /><span class="dur">6:30</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Leer isiZulu in 10 minute</div>
+              <div class="sub">Language Lab<br/>67K kyke · 6 dae gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a1.jpg" alt="" /></div>
+          </div>
+        </a>
+        <a class="video-card" href="watch.html">
+          <div class="thumb"><img src="assets/thumbs/wildlife.jpg" alt="" /><span class="dur">18:12</span></div>
+          <div class="video-meta">
+            <div class="card-menu" title="More">⋮</div>
+            <div class="info">
+              <div class="title">Natuurlewe-kameravalle — Kruger Nasionale Park</div>
+              <div class="sub">Wild South<br/>148K kyke · 2 weke gelede</div>
+            </div>
+            <div class="ch-avatar"><img src="assets/avatars/a5.jpg" alt="" /></div>
+          </div>
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var bar = document.querySelector('.lang-bar');
+      var btn = document.querySelector('.lang-toggle');
+      if (!bar || !btn) return;
+      btn.addEventListener('click', function () {
+        var collapsed = bar.getAttribute('data-collapsed') === 'true';
+        bar.setAttribute('data-collapsed', collapsed ? 'false' : 'true');
+        btn.setAttribute('aria-expanded', collapsed ? 'true' : 'false');
+      });
+    })();
+  </script>
+</body>
+</html>

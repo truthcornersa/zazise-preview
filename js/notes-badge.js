@@ -1,1 +1,71 @@
-!function(){if(!window.ZaziseNotesBadge){var e=document.createElement("style");e.textContent=["[data-bell],#clip-bell,#bell-btn,.icon-btn[data-i18n-aria='pv_notifications']{position:relative}",".zz-note-badge{position:absolute;top:2px;right:0;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E2AE41;color:#12161f;font-size:10px;font-weight:700;line-height:1;display:grid;place-items:center;border:2px solid #fff;pointer-events:none;z-index:2}",".zz-note-count{margin-left:8px;min-width:18px;height:18px;padding:0 6px;border-radius:999px;background:#E2AE41;color:#12161f;font-size:11px;font-weight:700;line-height:18px;text-align:center;flex:none}",".sidebar.mini .zz-note-count{display:none!important}"].join(""),document.head.appendChild(e),document.addEventListener("zazise:inbox",(function(e){e.detail&&"number"==typeof e.detail.unread&&n(e.detail.unread)})),window.ZaziseNotesBadge={paint:n,refresh:t},"loading"===document.readyState?document.addEventListener("DOMContentLoaded",t):t(),document.addEventListener("visibilitychange",(function(){document.hidden||t()})),window.addEventListener("focus",t),setInterval(t,25e3)}function n(e){var n=function(e){return e>99?"99+":String(e)}(e|=0);document.querySelectorAll("[data-bell], #clip-bell, #bell-btn, .icon-btn[data-i18n-aria='pv_notifications']").forEach((function(t){var i=t.querySelector(".note-badge, .zz-note-badge");e?(i||((i=document.createElement("span")).className="zz-note-badge",t.appendChild(i)),i.hidden=!1,i.textContent=n):i&&(i.hidden=!0,i.textContent="")})),document.querySelectorAll("a.nav-item[href*='notifications-sample']").forEach((function(t){var i=t.querySelector(".zz-note-count");e?(i||((i=document.createElement("span")).className="zz-note-count",t.appendChild(i)),i.textContent=n):i&&i.remove()}))}function t(){fetch("/api/notifications.php",{credentials:"same-origin",headers:{Accept:"application/json"}}).then((function(e){return e.ok?e.json():null})).then((function(e){var t,i;e&&e.ok&&n((t=e.notes,i=0,(t||[]).forEach((function(e){e&&!e.read&&"history"!==e.box&&("comments"!==e.kind&&"likes"!==e.kind&&"mentions"!==e.kind&&"uploads"!==e.kind||i++)})),i))})).catch((function(){}))}}();
+/* Unread inbox count on the bell and beside Notifications in the menu. */
+(function () {
+  if (window.ZaziseNotesBadge) return;
+  var css = document.createElement("style");
+  css.textContent = [
+    "[data-bell],#clip-bell,#bell-btn,.icon-btn[data-i18n-aria='pv_notifications']{position:relative}",
+    ".zz-note-badge{position:absolute;top:2px;right:0;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#E2AE41;color:#12161f;font-size:10px;font-weight:700;line-height:1;display:grid;place-items:center;border:2px solid #fff;pointer-events:none;z-index:2}",
+    ".zz-note-count{margin-left:8px;min-width:18px;height:18px;padding:0 6px;border-radius:999px;background:#E2AE41;color:#12161f;font-size:11px;font-weight:700;line-height:18px;text-align:center;flex:none}",
+    ".sidebar.mini .zz-note-count{display:none!important}"
+  ].join("");
+  document.head.appendChild(css);
+
+  function bells() {
+    return document.querySelectorAll("[data-bell], #clip-bell, #bell-btn, .icon-btn[data-i18n-aria='pv_notifications']");
+  }
+  function menus() {
+    return document.querySelectorAll("a.nav-item[href*='notifications-sample']");
+  }
+  function label(n) { return n > 99 ? "99+" : String(n); }
+  function paint(n) {
+    n = n | 0;
+    var text = label(n);
+    bells().forEach(function (btn) {
+      var badge = btn.querySelector(".note-badge, .zz-note-badge");
+      if (!n) {
+        if (badge) { badge.hidden = true; badge.textContent = ""; }
+        return;
+      }
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.className = "zz-note-badge";
+        btn.appendChild(badge);
+      }
+      badge.hidden = false;
+      badge.textContent = text;
+    });
+    menus().forEach(function (link) {
+      var count = link.querySelector(".zz-note-count");
+      if (!n) { if (count) count.remove(); return; }
+      if (!count) {
+        count = document.createElement("span");
+        count.className = "zz-note-count";
+        link.appendChild(count);
+      }
+      count.textContent = text;
+    });
+  }
+  function unreadOf(notes) {
+    var n = 0;
+    (notes || []).forEach(function (note) {
+      if (!note || note.read || note.box === "history") return;
+      if (note.kind === "comments" || note.kind === "likes" || note.kind === "mentions" || note.kind === "uploads") n++;
+    });
+    return n;
+  }
+  function refresh() {
+    fetch("/api/notifications.php", { credentials: "same-origin", headers: { Accept: "application/json" } })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) { if (data && data.ok) paint(unreadOf(data.notes)); })
+      .catch(function () {});
+  }
+  document.addEventListener("zazise:inbox", function (ev) {
+    if (ev.detail && typeof ev.detail.unread === "number") paint(ev.detail.unread);
+  });
+  window.ZaziseNotesBadge = { paint: paint, refresh: refresh };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", refresh);
+  else refresh();
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) refresh(); });
+  window.addEventListener("focus", refresh);
+  setInterval(refresh, 25000);
+})();
