@@ -124,10 +124,11 @@
       btn.addEventListener('click', function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
+        if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
         var collapsed = bar.getAttribute('data-collapsed') === 'true';
         if (collapsed) expandLangBar(bar, btn);
         else collapseLangBar(bar, btn);
-      });
+      }, true);
     }
 
     if (!bar.__zaziseOutside) {
@@ -154,12 +155,18 @@
       if (pill.__zaziseBound) return;
       pill.__zaziseBound = true;
       pill.addEventListener('click', function (ev) {
+        var href = pill.getAttribute('href') || '';
+        var navigates = href && href !== '#' && href.indexOf('javascript:') !== 0;
+        var lang = normalize(pill.getAttribute('data-lang') || pill.getAttribute('hreflang'));
+        if (navigates && !pill.hasAttribute('data-lang')) {
+          try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+          collapseLangBar(bar, btn);
+          return;
+        }
         ev.preventDefault();
         ev.stopPropagation();
-        var lang = normalize(pill.getAttribute('data-lang') || pill.getAttribute('hreflang'));
         setLang(lang);
-        // Always collapse after a pick on phone so the sheet never sticks open.
-        if (isPhone()) collapseLangBar(bar, btn);
+        collapseLangBar(bar, btn);
       });
     });
   }
@@ -176,6 +183,15 @@
     applyDom();
     return current;
   }
+
+  function bootBar() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { bindLangBar(); });
+    } else {
+      bindLangBar();
+    }
+  }
+  bootBar();
 
   global.ZaziseI18n = {
     load: load,

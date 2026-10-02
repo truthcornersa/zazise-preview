@@ -242,13 +242,13 @@
       var q = new URLSearchParams(location.search);
       var vis = (q.get('v') || q.get('vis') || 'public').toLowerCase();
       if (['private','unlisted','draft'].indexOf(vis) >= 0) {
-        location.replace('/404.html');
+        location.replace((location.pathname || '/').replace(/[^/]*$/, '') + '404.html');
       }
     })();
   </script>
   <script src="js/whoami.js?v=8"></script>
-  <script src="js/i18n.js?v=8"></script>
-  <script src="js/cooking-toast.js?v=18"></script>
-  <script src="js/guest-gate.js?v=8" data-page="watch"></script>
+  <script src="js/i18n.js?v=10"></script>
+  <script src="js/cooking-toast.js?v=19"></script>
+  <script src="js/guest-gate.js?v=10" data-page="watch"></script>
 </body>
 </html>

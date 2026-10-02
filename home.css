@@ -185,6 +185,7 @@ body.home .hamburger span {
 /* ——— Language bar (collapsible) ——— */
 body.home .lang-bar {
   top: 72px;
+  z-index: 1450;
   height: 36px;
   background: #fff;
   border-bottom: 1px solid var(--z-border);

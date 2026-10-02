@@ -96,8 +96,14 @@
 
   var leaveClipsOnClose = false;
 
+  function siteDir() {
+    var path = location.pathname || "/";
+    var cut = path.lastIndexOf("/");
+    return cut >= 0 ? path.slice(0, cut + 1) : "/";
+  }
+
   function leaveClipsForGuest() {
-    location.replace("/");
+    location.replace(siteDir() + "index.html");
   }
 
   function closeGate() {
@@ -110,16 +116,20 @@
   }
 
   function loginUrl() {
-    var path = location.pathname || "/index.html";
-    // Prefer path-only next= (no open redirect via host/query tricks). Hash dropped.
-    if (path.charAt(0) !== "/") path = "/" + path.replace(/^\.+\//, "");
+    // Same-folder filename so GitHub Pages project paths and a domain root both work.
+    var file = (location.pathname || "").split("/").filter(Boolean).pop() || "index.html";
+    if (file.indexOf(".") === -1) file = "index.html";
     var allow = {
-      "/": 1, "/index.html": 1, "/home.html": 1, "/home-preview.html": 1,
-      "/watch.html": 1, "/clips.html": 1, "/reels.html": 1, "/later.html": 1,
-      "/studio.html": 1, "/upload.html": 1, "/help.html": 1, "/channel.html": 1
+      "index.html": 1, "home.html": 1, "home-preview.html": 1,
+      "watch.html": 1, "clips.html": 1, "reels.html": 1, "later.html": 1,
+      "studio.html": 1, "upload.html": 1, "help.html": 1, "channel.html": 1,
+      "privacy.html": 1, "terms.html": 1, "notifications.html": 1, "login.html": 1
     };
-    if (!allow[path]) path = "/index.html";
-    return "login.html?next=" + encodeURIComponent(path);
+    var search = "";
+    var q = location.search || "";
+    if (q && q.indexOf("//") === -1 && q.indexOf("\\") === -1 && q.indexOf("@") === -1) search = q;
+    if (!allow[file]) { file = "index.html"; search = ""; }
+    return "login.html?next=" + encodeURIComponent(file + search);
   }
 
   function openGate(opts) {
@@ -526,31 +536,19 @@
 
   /** Main drawer/sidebar menu is registered users only */
   function gateGuestMenu() {
-    if (!isGuest()) {
-      document.documentElement.classList.remove("zz-guest-no-menu");
-      return;
-    }
-    document.documentElement.classList.add("zz-guest-no-menu");
+    // Keep the drawer on the static preview. Guests can open Home, Help,
+    // Watch later, and Settings. Studio, clips, and upload stay gated.
+    document.documentElement.classList.remove("zz-guest-no-menu");
     var sidebar = document.getElementById("preview-sidebar") || document.querySelector(".sidebar");
     var burger = document.querySelector(".menu-btn");
-    var scrim = document.getElementById("menu-scrim");
     if (sidebar) {
-      sidebar.setAttribute("hidden", "");
-      sidebar.setAttribute("aria-hidden", "true");
+      sidebar.removeAttribute("hidden");
+      sidebar.removeAttribute("aria-hidden");
     }
     if (burger) {
-      burger.setAttribute("hidden", "");
-      burger.setAttribute("aria-disabled", "true");
-      burger.setAttribute("aria-expanded", "false");
+      burger.removeAttribute("hidden");
+      burger.removeAttribute("aria-disabled");
     }
-    if (scrim) {
-      scrim.setAttribute("hidden", "");
-      scrim.setAttribute("aria-hidden", "true");
-    }
-    try {
-      document.body.classList.remove("menu-open");
-      if (sidebar) sidebar.classList.add("mini");
-    } catch (e) {}
   }
 
   /** Signed-in-only tour stubs (subscriptions / their studio) */
@@ -569,7 +567,7 @@
   function init(page) {
     page = page || (document.body && document.body.getAttribute("data-zz-page")) || "home";
     ensureStyles();
-    document.documentElement.classList.add("zz-guest-no-menu");
+    document.documentElement.classList.remove("zz-guest-no-menu");
     tourStubs();
     applyStudioLogo();
     gateGuestMenu();

@@ -63,7 +63,7 @@
     async function loadNotifs() {
       var list = document.getElementById('notif-list');
       try {
-        var res = await fetch('/api/notifications', { cache: 'no-store' });
+        var res = await fetch('api/notifications', { cache: 'no-store' });
         var data = await res.json();
         var items = (data && data.notifications) || [];
         if (!items.length) {
@@ -81,7 +81,7 @@
           );
         }).join('');
       } catch (e) {
-        list.innerHTML = '<li class="empty">Could not load notifications. Is <code>npm start</code> running?</li>';
+        list.innerHTML = '<li class="empty">Notifications need an account server. This preview keeps public pages, language, and Watch later on this device.</li>';
       }
     }
     function escapeHtml(s) {

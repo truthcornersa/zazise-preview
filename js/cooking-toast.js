@@ -114,7 +114,7 @@
     css.id = 'zz-idle-nav';
     css.textContent = [
       'a.nav-item.is-idle{color:#c5ccd4!important}',
-      'a.nav-item .zz-mark{display:block;width:22px;height:22px;background:currentColor;-webkit-mask:url(/assets/zazise-toast-mark-white.png) center/contain no-repeat;mask:url(/assets/zazise-toast-mark-white.png) center/contain no-repeat}',
+      'a.nav-item .zz-mark{display:block;width:22px;height:22px;background:currentColor;-webkit-mask:url(assets/zazise-toast-mark-white.png) center/contain no-repeat;mask:url(assets/zazise-toast-mark-white.png) center/contain no-repeat}',
       'a.nav-item.is-idle .ico,a.nav-item.is-idle .ico-svg,a.nav-item.is-idle .zz-mark{color:#c5ccd4}',
       'a.nav-item.is-idle:hover{color:#317045!important;background:color-mix(in srgb,#317045 12%,#fff)!important}',
       'a.nav-item.is-idle:hover .ico,a.nav-item.is-idle:hover .ico-svg,a.nav-item.is-idle:hover .zz-mark{color:#317045!important}',
@@ -176,7 +176,7 @@
       var yours = key === 'pv_yours' || a.id === 'nav-yours' || !!a.querySelector('[data-i18n="pv_yours"]');
       var subs = key === 'pv_subs' || !!a.querySelector('[data-i18n="pv_subs"]');
       if (yours || subs) {
-        a.setAttribute('href', '/studio.html');
+        a.setAttribute('href', 'studio.html');
         if (subs) {
           a.setAttribute('data-i18n-title', 'pv_yours');
           a.setAttribute('title', 'Your studio');
@@ -194,7 +194,7 @@
         }
       }
       if (key === 'pv_later' || a.querySelector('[data-i18n="pv_later"]')) {
-        a.setAttribute('href', '/later.html');
+        a.setAttribute('href', 'later.html');
       }
     });
     paintIdle();
@@ -237,7 +237,7 @@
       if (guestGate(ev, '.app-bar-actions')) return;
       ev.preventDefault();
       ev.stopPropagation();
-      location.href = 'notifications-sample.html';
+      location.href = 'notifications.html';
       return;
     }
     var avatar = t.closest('#preview-profile-avatar');

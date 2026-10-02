@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var base = "/";
+      if (/\.github\.io$/i.test(location.hostname)) {
+        var seg = (location.pathname || "").split("/").filter(Boolean)[0];
+        if (seg) base = "/" + seg + "/";
+      }
+      document.write('<base href="' + base + '">');
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
   <title>Page not found — ZAZISE</title>
-    <link rel="stylesheet" href="fonts.css" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="home.css" />
-<style>
+  <style>
     html, body { margin: 0; height: 100%; background: #071433; }
     .stage { position: relative; width: 100vw; height: 100vh; overflow: hidden; margin: 0; }
     .poster { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
@@ -18,55 +25,24 @@
       height: max(100vh, calc(100vw * 1080 / 1920));
     }
     .beam {
-      position: absolute;
-      z-index: 1;
-      border-radius: 50%;
-      pointer-events: none;
+      position: absolute; z-index: 1; border-radius: 50%; pointer-events: none;
       background: radial-gradient(circle, rgba(255,255,240,1) 0%, rgba(255,220,50,1) 28%, rgba(255,160,0,.65) 52%, transparent 72%);
       box-shadow: 0 0 16px 6px rgba(255, 200, 40, .9);
       animation: blink .7s linear infinite;
-      -webkit-animation: blink .7s linear infinite;
     }
     .desk .b1 { left: 64%; top: 54.2%; width: 3.6%; height: 6.4%; }
     .desk .b2 { left: 59.3%; top: 70.5%; width: 6%; height: 10.7%; }
     .desk .home { top: calc(53% + 50px); left: 43%; }
-    @keyframes blink {
-      0%, 42% { opacity: 1; }
-      52%, 100% { opacity: 0; }
-    }
-    @-webkit-keyframes blink {
-      0%, 42% { opacity: 1; }
-      52%, 100% { opacity: 0; }
-    }
+    @keyframes blink { 0%, 42% { opacity: 1; } 52%, 100% { opacity: 0; } }
     .home {
-      position: absolute;
-      z-index: 3;
-      top: calc(53% + 50px);
-      left: 43%;
-      transform: translateX(-50%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 22px;
-      border-radius: 999px;
-      background: #183d83;
-      color: #fff;
-      border: 2px solid #e2ae41;
-      font: 700 16px/1 system-ui, sans-serif;
-      text-decoration: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,.35);
-      white-space: nowrap;
+      position: absolute; z-index: 3; top: calc(53% + 50px); left: 43%;
+      transform: translateX(-50%); display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 22px; border-radius: 999px; background: #183d83; color: #fff;
+      border: 2px solid #e2ae41; font: 700 16px/1 system-ui, sans-serif; text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,.35); white-space: nowrap;
     }
-    .sr {
-      position: absolute;
-      width: 1px; height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .beam { animation: none; -webkit-animation: none; opacity: .85; }
-    }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    @media (prefers-reduced-motion: reduce) { .beam { animation: none; opacity: .85; } }
   </style>
 </head>
 <body>
@@ -76,7 +52,7 @@
       <img src="assets/404/desktop.jpg?v=live" alt="A white Quantum tipped over in a colourful city. The sign reads 404, page not found." />
       <span class="beam b1"></span>
       <span class="beam b2"></span>
-      <a class="home" href="">Back to home</a>
+      <a class="home" href="index.html">Back to home</a>
     </div>
   </main>
   <script>
