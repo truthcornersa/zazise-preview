@@ -18,6 +18,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Vendor self-hosted Inter fonts (no runtime Google CDN)
+        run: |
+          mkdir -p assets/fonts
+          curl -fsSL -o assets/fonts/inter-latin-400-normal.woff2 "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-400-normal.woff2"
+          curl -fsSL -o assets/fonts/inter-latin-500-normal.woff2 "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-500-normal.woff2"
+          curl -fsSL -o assets/fonts/inter-latin-600-normal.woff2 "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-600-normal.woff2"
+          curl -fsSL -o assets/fonts/inter-latin-700-normal.woff2 "https://cdn.jsdelivr.net/fontsource/fonts/inter@5.2.5/latin-700-normal.woff2"
+          printf '%s\n' \
+            '/* Self-hosted Inter — vendored at Pages build; zero runtime Google Fonts */' \
+            "@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}" \
+            "@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/inter-latin-500-normal.woff2) format('woff2')}" \
+            "@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}" \
+            "@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/inter-latin-700-normal.woff2) format('woff2')}" \
+            > fonts.css
+          ls -la assets/fonts fonts.css
       - uses: actions/configure-pages@v5
         with:
           enablement: true
