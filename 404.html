@@ -9,82 +9,32 @@
     html, body { margin: 0; height: 100%; background: #071433; }
     .stage { position: relative; width: 100vw; height: 100vh; overflow: hidden; margin: 0; }
     .poster { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
-    .poster img { width: 100%; height: 100%; display: block; image-rendering: auto; }
-    .desk {
-      width: max(100vw, calc(100vh * 1920 / 1080));
-      height: max(100vh, calc(100vw * 1080 / 1920));
-    }
-    .beam {
-      position: absolute;
-      z-index: 1;
-      border-radius: 50%;
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(255,255,240,1) 0%, rgba(255,220,50,1) 28%, rgba(255,160,0,.65) 52%, transparent 72%);
-      box-shadow: 0 0 16px 6px rgba(255, 200, 40, .9);
-      animation: blink .7s linear infinite;
-      -webkit-animation: blink .7s linear infinite;
-    }
+    .poster img { width: 100%; height: 100%; display: block; }
+    .desk { width: max(100vw, calc(100vh * 1920 / 1080)); height: max(100vh, calc(100vw * 1080 / 1920)); }
+    .beam { position: absolute; z-index: 1; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(255,255,240,1) 0%, rgba(255,220,50,1) 28%, rgba(255,160,0,.65) 52%, transparent 72%); box-shadow: 0 0 16px 6px rgba(255, 200, 40, .9); animation: blink .7s linear infinite; }
     .desk .b1 { left: 64%; top: 54.2%; width: 3.6%; height: 6.4%; }
     .desk .b2 { left: 59.3%; top: 70.5%; width: 6%; height: 10.7%; }
     .desk .home { top: calc(53% + 50px); left: 43%; }
-    @keyframes blink {
-      0%, 42% { opacity: 1; }
-      52%, 100% { opacity: 0; }
-    }
-    @-webkit-keyframes blink {
-      0%, 42% { opacity: 1; }
-      52%, 100% { opacity: 0; }
-    }
-    .home {
-      position: absolute;
-      z-index: 3;
-      top: calc(53% + 50px);
-      left: 43%;
-      transform: translateX(-50%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 22px;
-      border-radius: 999px;
-      background: #183d83;
-      color: #fff;
-      border: 2px solid #e2ae41;
-      font: 700 16px/1 system-ui, sans-serif;
-      text-decoration: none;
-      box-shadow: 0 8px 24px rgba(0,0,0,.35);
-      white-space: nowrap;
-    }
-    .sr {
-      position: absolute;
-      width: 1px; height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .beam { animation: none; -webkit-animation: none; opacity: .85; }
-    }
+    @keyframes blink { 0%, 42% { opacity: 1; } 52%, 100% { opacity: 0; } }
+    .home { position: absolute; z-index: 3; top: calc(53% + 50px); left: 43%; transform: translateX(-50%); display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 999px; background: #183d83; color: #fff; border: 2px solid #e2ae41; font: 700 16px/1 system-ui, sans-serif; text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,.35); white-space: nowrap; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  </style>
+  <style>
+    .preview-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#183D83;color:#fff;font:600 13px/1.3 system-ui,sans-serif;padding:8px 14px;text-align:center}
+    .preview-banner a{color:#E2AE41}
+    body{padding-top:36px !important}
   </style>
 </head>
 <body>
+  <div class="preview-banner" role="status">GitHub Pages preview · self-contained (local CSS/JS/assets) · no Afrihost dependency · PHP APIs do not run here · <a href="register.html">register</a> · <a href="login.html">login</a> · <a href="watch.html">watch</a> · <a href="https://www.zazise.africa/">live site</a></div>
   <h1 class="sr">Page not found</h1>
   <main class="stage">
     <div class="poster desk">
-      <img src="https://www.zazise.africa/assets/404/desktop.jpg?v=live" alt="A white Quantum tipped over in a colourful city. The sign reads 404, page not found." />
+      <img src="assets/404/desktop.jpg" alt="404 page not found" />
       <span class="beam b1"></span>
       <span class="beam b2"></span>
-      <a class="home" href="/">Back to home</a>
+      <a class="home" href="index.html">Back to home</a>
     </div>
   </main>
-  <script>
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      var on = true;
-      setInterval(function () {
-        var lights = document.querySelectorAll(".beam");
-        for (var i = 0; i < lights.length; i++) lights[i].style.opacity = on ? "1" : "0";
-        on = !on;
-      }, 450);
-    }
-  </script>
 </body>
 </html>
