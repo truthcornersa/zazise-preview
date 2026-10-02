@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+/* ZAZISE — placeholder; full file uploading next */
+:root{--zazise-gold:#E2AE41;--wf-bg:#f9f9f9;--wf-surface:#fff;--wf-border:#e5e5e5;--wf-muted:#606060;--wf-ink:#030303}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,"Segoe UI","Helvetica Neue",sans-serif;background:var(--wf-bg);color:var(--wf-ink);font-size:14px;line-height:1.4;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.login-body,.register-body{min-height:100vh}
+.auth-bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:#183D83}
+.auth-bg__slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease}
+.auth-bg__slide.is-active{opacity:1}
+.login-page{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-card{width:100%;max-width:420px;background:#fff;border-radius:16px;padding:28px 24px;box-shadow:0 18px 50px rgba(18,22,31,.28)}
+.logo-block{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:16px}
+.brand-icon-3d{width:72px;height:auto}
+.brand-flat-wordmark{max-width:220px;height:auto}
+.login-card h1{font-size:22px;text-align:center;margin:8px 0 4px}
+.subtitle{text-align:center;color:#606060;margin-bottom:18px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field label{font-size:13px;font-weight:600}
+.field input{height:42px;border:1px solid #e5e5e5;border-radius:10px;padding:0 12px;font-size:14px}
+.login-actions{margin-top:8px}
+.btn-primary{width:100%;height:44px;border-radius:999px;background:#183D83;color:#fff;font-weight:700;font-size:15px}
+.login-footer{display:flex;justify-content:space-between;gap:12px;margin-top:16px;font-size:13px;color:#606060}
+.login-footer a{color:#183D83;font-weight:600}
