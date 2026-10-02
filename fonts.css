@@ -1,11 +1,9 @@
-/* Self-hosted Inter — system/local fallback; no Google Fonts CDN */
+/* Self-hosted Inter latin woff2 — no Google CDN */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: local('Inter'), local('Inter Variable'), local('Segoe UI'), local('Helvetica Neue');
-}
-html, body, button, input, textarea, select {
-  font-family: Inter, "Segoe UI", "Helvetica Neue", sans-serif;
+  src: url(assets/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2'),
+       local('Inter'), local('Segoe UI'), local('Helvetica Neue');
 }
