@@ -203,18 +203,15 @@
   else paintChrome();
   document.addEventListener('zazise:lang', function () { setTimeout(paintChrome, 0); });
 
-  function guestGate(ev, blurSelector) {
-    if (!(window.ZaziseGuest && ZaziseGuest.isGuest && ZaziseGuest.isGuest())) return false;
-    ev.preventDefault();
-    ev.stopPropagation();
-    ZaziseGuest.openGate({ blurSelector: blurSelector || null });
-    return true;
+  function guestGate() {
+    /* guest write-gate removed */
+    return false;
   }
 
   document.addEventListener('click', function (ev) {
     var t = ev.target;
     if (!t || !t.closest) return;
-    // Guests must not navigate to clips/reels (guest-gate capture is primary; this is a backstop)
+    // Guest write-gate removed; clips/reels navigate normally.
     var clipsNav = t.closest('a[href*="clips"], a[href*="reels"], [data-dock="clips"], a[title="Clips"], [data-zz-gate="clips"]');
     if (clipsNav) {
       if (guestGate(ev, '.clips-stage, .clip-stage, .reel-stage, main, a[href*="clips"], [data-dock="clips"]')) {
