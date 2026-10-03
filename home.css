@@ -2478,11 +2478,13 @@ body.home .type-card {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
   padding: 12px;
   border: 1px solid var(--z-border);
   border-radius: 14px;
   background: #fff;
   cursor: pointer;
+  box-sizing: border-box;
 }
 body.home .type-card input {
   position: absolute;
@@ -2494,9 +2496,30 @@ body.home .type-card:has(input:checked) {
   border-color: var(--z-blue);
   box-shadow: 0 0 0 3px rgba(24, 61, 131, 0.12);
 }
-body.home .type-name { font-weight: 750; font-size: 14px; }
-body.home .type-help { font-size: 12px; color: var(--z-muted); line-height: 1.35; }
-body.home .type-frames { display: flex; gap: 10px; align-items: flex-end; min-height: 58px; }
+body.home .type-name {
+  display: block;
+  max-width: 100%;
+  font-weight: 750;
+  font-size: 14px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+body.home .type-help {
+  display: block;
+  max-width: 100%;
+  font-size: 12px;
+  color: var(--z-muted);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+body.home .type-frames {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  min-height: 0;
+  max-width: 100%;
+  flex-wrap: nowrap;
+}
 body.home .device {
   position: relative;
   display: flex;
@@ -2509,7 +2532,15 @@ body.home .device {
   font-weight: 800;
   letter-spacing: 0.02em;
 }
-body.home .device span { padding-bottom: 4px; }
+body.home .device span {
+  display: block;
+  width: 100%;
+  padding: 0 2px 4px;
+  line-height: 1;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
 body.home .device-desk {
   width: 78px;
   height: 48px;
@@ -2517,9 +2548,10 @@ body.home .device-desk {
   box-shadow: 0 8px 0 -6px #9aa3b2;
 }
 body.home .device-phone {
-  width: 28px;
+  width: 48px;
   height: 48px;
   border-radius: 7px;
+  font-size: 10px;
 }
 body.home .device-phone:before {
   content: "";
@@ -2647,6 +2679,7 @@ body.home .studio-avatar-letter {
 }
 @media (max-width: 900px) {
   body.home .type-chooser { grid-template-columns: 1fr; }
+  body.home .type-help { display: block; }
 }
 @media (max-width: 800px) {
   body.home .form-cols { grid-template-columns: 1fr; }
@@ -2654,10 +2687,11 @@ body.home .studio-avatar-letter {
 @media (max-width: 768px) {
   body.home .type-chooser {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
   body.home .type-mobile-note { display: block; }
+  body.home .type-help { display: block; }
   /* Bottom nav already has Clips — hide it from the side menu on phones. */
   body.home:has(#mobile-dock) .sidebar a.nav-item[href="clips.html"],
   body.home:has(#mobile-dock) .sidebar a.nav-item[data-i18n-title="pv_clips"] {
@@ -2776,15 +2810,16 @@ body.home .file-meta { margin-top: 0; }
   body.home .upload-header h1 { font-size: 18px; }
   body.home .upload-steps { margin-bottom: 10px; gap: 6px; font-size: 12px; }
   body.home .upload-steps .step-line { flex-basis: 16px; }
-  body.home .type-card { padding: 8px 6px; gap: 4px; }
-  body.home .type-name { font-size: 12px; }
-  body.home .type-help { display: none; }
-  body.home .type-frames { min-height: 36px; gap: 4px; }
-  body.home .device-desk { width: 48px; height: 30px; }
-  body.home .device-phone { width: 18px; height: 30px; }
-  body.home .surface-stage { gap: 14px; padding: 10px 8px; }
-  body.home .stage-desk .stage-screen { width: 148px; height: 84px; }
-  body.home .stage-phone .stage-screen { width: 56px; height: 100px; }
+  body.home .type-card { padding: 10px 12px; gap: 6px; }
+  body.home .type-name { font-size: 15px; line-height: 1.2; }
+  body.home .type-help { display: block; font-size: 12px; }
+  body.home .type-frames { gap: 8px; }
+  body.home .device-desk { width: 78px; height: 46px; }
+  body.home .device-phone { width: 48px; height: 46px; font-size: 10px; }
+  body.home .surface-stage { gap: 12px; padding: 10px 8px; max-width: 100%; box-sizing: border-box; overflow: hidden; }
+  body.home .stage-desk .stage-screen { width: min(168px, 48vw); height: auto; aspect-ratio: 16 / 9; }
+  body.home .stage-phone .stage-screen { width: min(64px, 18vw); height: auto; aspect-ratio: 9 / 16; }
+  body.home .stage-label { font-size: 11px; }
   body.home .upload-drop { padding: 14px 12px; margin-bottom: 10px; }
   body.home .upload-drop h2 { font-size: 15px; }
   body.home .upload-drop p { display: none; }
@@ -2808,4 +2843,33 @@ body.home .file-meta { margin-top: 0; }
     justify-content: flex-end;
   }
   body.home .upload-footer .btn-accent { min-width: 42%; }
+}
+
+body.home .video-card .card-desc {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--z-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+body.home.clips-body .clip-frame video.clip-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  z-index: 1;
+}
+body.home.clips-body .clip-overlay .clip-title { display: block; font-weight: 700; }
+body.home.clips-body .clip-overlay .clip-desc {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #eee;
 }

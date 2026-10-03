@@ -92,9 +92,9 @@
     });
     var note = document.getElementById("choice-note");
     if (note) {
-      if (kind === "clip") note.textContent = "Phone / Clips. This lands in Clips, not the home timeline. Switch to Desktop any time.";
-      else if (kind === "both") note.textContent = "Both. Preview timeline and Clips. Change this whenever you like.";
-      else note.textContent = "Desktop. Preview timeline / normal video. A phone can still choose this.";
+      if (kind === "clip") note.textContent = "Phone · Clips. This lands on the clips page only, not the home timeline.";
+      else if (kind === "both") note.textContent = "Both. Home timeline and the clips page.";
+      else note.textContent = "Desktop. Home timeline only. A phone can still choose this.";
     }
   }
 
@@ -387,15 +387,19 @@
     var kind = qsKind();
     var ch = S.channelFromProfile();
     var schedule = scheduleEl.value || "";
+    var caption = titleEl.value.trim();
     return {
       id: state.id || S.newId(),
-      title: titleEl.value.trim(),
+      title: caption,
+      caption: caption,
       description: descEl.value.trim(),
       playlist: playlistEl.value,
       category: categoryEl.value,
       visibility: visibility(),
       scheduleAt: schedule ? new Date(schedule).toISOString() : "",
       kind: kind,
+      type: kind,
+      affordance: kind,
       uploadedOnMobile: S.isPhone(),
       surfaces: S.surfacesFor(kind),
       createdAt: state.createdAt || Date.now(),
@@ -444,14 +448,8 @@
         state.existingBlob = true;
         state.file = null;
       }
-      if (status === "draft") {
-        toast("Draft saved on this device.", "success");
-        if (history.replaceState) {
-          history.replaceState(null, "", "upload.html?id=" + encodeURIComponent(meta.id));
-        }
-        return;
-      }
-      var nonce = meta.id + ":" + Date.now();
+      /* Save and Publish both leave for Studio. Confetti nonce is one-time. */
+      var nonce = meta.id + ":" + (meta.updatedAt || Date.now());
       try { sessionStorage.setItem("zazisePublishConfetti", nonce); } catch (e) {}
       location.href = "studio.html";
     }).catch(function () {
@@ -477,7 +475,7 @@
       state.thumbIndex = state.frames.indexOf(state.thumb);
       state.ready = true;
       state.kindTouched = true;
-      titleEl.value = meta.title || "";
+      titleEl.value = meta.caption || meta.title || "";
       descEl.value = meta.description || "";
       if (meta.playlist) playlistEl.value = meta.playlist;
       if (meta.category) categoryEl.value = meta.category;
@@ -491,7 +489,7 @@
       var vis = document.querySelector('input[name="vis"][value="' + (meta.visibility || "public") + '"]');
       if (vis) vis.checked = true;
       paintVis();
-      if (meta.kind) setKind(meta.kind);
+      if (meta.kind || meta.affordance || meta.type) setKind(meta.kind || meta.affordance || meta.type);
       renderThumbs();
       paintMeta();
       setStep(1);

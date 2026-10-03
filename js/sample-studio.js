@@ -138,11 +138,13 @@
     var thumbHtml = thumb
       ? '<img src="' + esc(thumb) + '" alt="" loading="lazy" decoding="async" />'
       : '<span class="studio-nothumb">No thumbnail</span>';
+    var caption = item.caption || item.title || "Untitled";
+    var blurb = item.description ? '<div class="card-desc">' + esc(item.description) + '</div>' : "";
     art.innerHTML =
       '<a class="thumb" href="' + esc(href) + '">' + thumbHtml +
       '<span class="dur">' + esc(formatDur(item.duration)) + '</span></a>' +
       '<div class="video-meta"><div class="info">' +
-      '<div class="title">' + esc(item.title || "Untitled") + '</div>' +
+      '<div class="title">' + esc(caption) + '</div>' + blurb +
       '<div class="sub">' + esc(kindLabel(item)) + ' · ' + esc(badge(item)) + ' · ' + esc(when(item.createdAt)) + '</div>' +
       '</div></div>' +
       '<div class="studio-actions">' +

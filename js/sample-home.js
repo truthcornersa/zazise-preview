@@ -34,10 +34,12 @@
       : '<span class="studio-nothumb">ZAZISE</span>';
     var channel = item.channel || "Your studio";
     var views = (item.views || 0) + " views";
+    var caption = item.caption || item.title || "ZAZISE";
+    var blurb = item.description ? '<div class="card-desc">' + esc(item.description) + '</div>' : "";
     art.innerHTML =
       '<a class="thumb" href="' + esc(href) + '">' + thumb + '<span class="dur">' + esc(formatDur(item.duration)) + '</span></a>' +
       '<div class="video-meta"><a class="info" href="' + esc(href) + '">' +
-      '<div class="title">' + esc(item.title || "ZAZISE") + '</div>' +
+      '<div class="title">' + esc(caption) + '</div>' + blurb +
       '<div class="sub"><span>' + esc(channel) + '</span><br/><span>' + esc(views) + '</span></div></a></div>';
     return art;
   }

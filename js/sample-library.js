@@ -1,7 +1,28 @@
 /**
- * ZAZISE sample library — this browser only.
- * Uploads (metadata + video blobs) live in IndexedDB on this device.
- * Nothing is sent to zazise.africa or Afrihost. A PHP API would replace this later.
+ * ZAZISE sample library — this browser only. One IndexedDB store for upload + studio.
+ * Database zazise-sample-v1. Stores: meta (fields below) and media (blob by id).
+ * Nothing is sent to zazise.africa or Afrihost. Host the same HTML/JS on
+ * build.couchwraps.co.za. If that host has no PHP upload API, this store is the
+ * live behaviour. A later PHP API can replace put/list without changing the fields.
+ *
+ * TECHNICAL LOGIC
+ * 1. Affordance (kind / type / affordance), chosen explicitly, not by viewport:
+ *    - video (Desktop) → surfaces ["timeline"] → home/preview index feed only
+ *    - clip (Phone · Clips) → surfaces ["clips"] → clips page only
+ *    - both → surfaces ["timeline","clips"] → both
+ *    Public feed items must be status published, visibility public, and not
+ *    scheduled in the future (isPublicNow). Studio still lists drafts, private,
+ *    unlisted, and scheduled items for the owner.
+ * 2. Persist on every save: title and caption (same text), description, thumb,
+ *    visibility, scheduleAt, kind/type/affordance, surfaces, createdAt, updatedAt,
+ *    and the media blob. Also duration, filename, size, frames, status, views,
+ *    channel, handle, photo.
+ * 3. Studio reads this same store: list newest-first, watch, edit (upload.html?id=),
+ *    delete. Banner is localStorage zaziseStudioBanner, not the video record.
+ * 4. Views: callers must use armView(). A view increments only after the media
+ *    element has played to currentTime >= 3 while not paused, once per id per page.
+ * 5. Publish flow lives in sample-upload.js: file ready shows a success toast;
+ *    Save draft and Publish write this store, then one-time confetti, then Studio.
  */
 (function (global) {
   "use strict";
@@ -142,6 +163,32 @@
     });
   }
 
+  /**
+   * Count one view only after 3 seconds of actual playback.
+   * Shared by watch.html and clips.html. Does not count a paused scrub.
+   */
+  function armView(video, id, onCount) {
+    if (!video || !id) return;
+    var bag = video.__zaziseViewArm;
+    if (!bag) {
+      bag = { id: id, counted: {}, onCount: onCount || null };
+      video.__zaziseViewArm = bag;
+      video.addEventListener("timeupdate", function () {
+        var st = video.__zaziseViewArm;
+        if (!st || !st.id || st.counted[st.id]) return;
+        if (video.currentTime >= 3 && !video.paused) {
+          st.counted[st.id] = true;
+          bumpView(st.id).then(function (n) {
+            if (st.onCount) st.onCount(n, st.id);
+          }).catch(function () {});
+        }
+      });
+      return;
+    }
+    bag.id = id;
+    bag.onCount = onCount || null;
+  }
+
   function bumpView(id) {
     return getMeta(id).then(function (meta) {
       if (!meta) return 0;
@@ -228,6 +275,7 @@
     remove: remove,
     patch: patch,
     bumpView: bumpView,
+    armView: armView,
     objectUrl: objectUrl,
     revoke: revoke,
     timelineItems: timelineItems,
@@ -236,6 +284,6 @@
     newId: newId,
     banner: banner,
     setBanner: setBanner,
-    deviceNote: "Sample only. Uploads stay in this browser (IndexedDB). They are not on zazise.africa. Playback, views, and the studio need this device; a later PHP build would store them on the server."
+    deviceNote: "Uploads stay in this browser (IndexedDB zazise-sample-v1) until a PHP upload API exists. Desktop is the home timeline only. Phone · Clips is the clips page only. Both is both. Views count after 3 seconds of playback. Not on zazise.africa."
   };
 })(window);

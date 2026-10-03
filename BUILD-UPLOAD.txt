@@ -1,0 +1,27 @@
+BUILD — upload + studio (Pages preview and build.couchwraps.co.za only)
+
+Do not deploy this note's behaviour to zazise.africa or Afrihost ZaZise.
+
+Same pack: upload.html, studio.html, clips.html, index.html, watch.html,
+home.css, js/sample-library.js, js/sample-upload.js, js/sample-studio.js,
+js/sample-home.js, js/sample-watch.js, js/sample-clips.js.
+
+Store: IndexedDB zazise-sample-v1 (meta + media blob). Studio, home, watch,
+and clips all read it. No PHP upload API is required. If couchwraps has no
+upload API, keep this client store and host these files on the build document
+root (/home/couchkgr/build.couchwraps.co.za).
+
+1. Affordance
+   Desktop (kind video) → home/preview timeline only.
+   Phone · Clips (kind clip) → clips page only.
+   Both (kind both) → both surfaces.
+2. Persist with the upload: title/caption, description, thumb, visibility,
+   scheduleAt, type/kind/affordance, createdAt, media blob.
+3. Studio lists the owner's uploads (newest first): watch, edit metadata,
+   delete. Banner image is editable and stored in this browser.
+4. A view counts only after 3 seconds of playback (watch and clips).
+5. File ready shows success. Save draft and Publish each go to Studio once,
+   with one-time confetti.
+
+Public home and clips skip drafts, private, unlisted, and future scheduled items.
+Hard-refresh after upload (CSS/JS use ?v=upload3 / ?v=3).

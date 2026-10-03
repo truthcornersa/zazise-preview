@@ -36,9 +36,12 @@
     S.getMeta(id).then(function (meta) {
       if (!meta) return;
       var title = document.querySelector(".watch-title");
-      if (title) title.textContent = meta.title || "ZAZISE";
+      if (title) title.textContent = meta.caption || meta.title || "ZAZISE";
       var desc = document.querySelector(".description-box");
-      if (desc) desc.textContent = meta.description || "Uploaded in this browser. It is not on zazise.africa.";
+      if (desc) {
+        desc.style.whiteSpace = "pre-wrap";
+        desc.textContent = meta.description || "Uploaded in this browser. It is not on zazise.africa.";
+      }
       var ch = document.querySelector(".channel-row .ch-name");
       if (ch) ch.textContent = meta.channel || "Your studio";
       var subs = document.querySelector(".channel-row .ch-subs");
@@ -52,7 +55,8 @@
         if (source) source.remove();
         video.src = url;
         video.load();
-        arm(meta.views || 0, function () {
+        if (S.armView) S.armView(video, id, function (n) { setLine(n, "This device"); });
+        else arm(meta.views || 0, function () {
           S.bumpView(id).then(function (n) { setLine(n, "This device"); }).catch(function () {});
         });
       });
