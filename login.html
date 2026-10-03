@@ -38,6 +38,13 @@
       white-space: normal;
       overflow-wrap: anywhere;
     }
+    .preview-demo-note {
+      margin: 0 0 14px;
+      color: #3d4a5c;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
     body.home .field--password .forgot-link {
       display: block;
       width: fit-content;
@@ -90,6 +97,7 @@
       </div>
       <h1 id="login-title" data-i18n="title_login">Sign in</h1>
       <p class="subtitle" data-i18n="subtitle_login">Welcome back to ZAZISE</p>
+      <p class="preview-demo-note" data-i18n="preview_demo_hint">GitHub Pages preview only. Demo: Test@gmail.com (Test User) or Demo@zazise.preview, password Password1. Real accounts are on build.couchwraps.</p>
 
       <form id="login-form" class="register-form" action="#" method="post" novalidate>
         <div class="field">
@@ -139,7 +147,7 @@
 
   <div id="toast-host" class="toast-host" aria-live="polite"></div>
 
-  <script src="js/i18n.js?v=10"></script>
+  <script src="js/i18n.js?v=11"></script>
   <script src="js/auth-bg.js"></script>
   <script src="js/cooking-toast.js?v=19"></script>
   <script>
@@ -195,6 +203,78 @@
           if (off) off.hidden = !show;
         });
       });
+      /* Pages demo only; real auth is build.couchwraps. */
+      var PAGES_DEMOS = [
+        { email: "test@gmail.com", password: "Password1", name: "Test", surname: "User", initials: "TU" },
+        { email: "demo@zazise.preview", password: "Password1", name: "Demo", surname: "Preview", initials: "DP" }
+      ];
+      function onGithubPages() {
+        var host = "";
+        try { host = String(location.hostname || "").toLowerCase(); } catch (e) {}
+        return host === "github.io" || host.slice(-10) === ".github.io";
+      }
+      function matchDemo(email) {
+        var want = String(email || "").trim().toLowerCase();
+        for (var i = 0; i < PAGES_DEMOS.length; i++) {
+          if (PAGES_DEMOS[i].email === want) return PAGES_DEMOS[i];
+        }
+        return null;
+      }
+      function savePreviewProfile(profile) {
+        var raw = JSON.stringify(profile);
+        try { sessionStorage.setItem("zazisePreviewProfile", raw); } catch (e) {}
+        try { localStorage.setItem("zazisePreviewProfile", raw); } catch (e2) {}
+      }
+      function acceptDemo(demo, email) {
+        savePreviewProfile({
+          name: demo.name,
+          firstName: demo.name,
+          surname: demo.surname,
+          initials: demo.initials,
+          email: email,
+          fromApi: true,
+          previewDemo: true
+        });
+        window.location.href = safeNext();
+      }
+      function previewPasswordToast() {
+        toast(
+          t("err_preview_password", "That password isn’t right for this preview. Use Password1 with Test@gmail.com (Test User) or Demo@zazise.preview."),
+          "err_preview_password"
+        );
+      }
+      function showApiError(out, btn) {
+        var code = out.data && out.data.errors && out.data.errors[0] && out.data.errors[0].code;
+        var serverMsg = out.data && out.data.errors && out.data.errors[0] && out.data.errors[0].message;
+        var known = {
+          email_invalid: ["err_email_invalid", "Enter a valid email address."],
+          password_required: ["err_password_required", "Enter your password."],
+          not_registered: ["err_not_registered", "No ZAZISE account for that email. Create an account first."],
+          password: ["err_password", "That password is not correct."],
+          google_only: ["err_google_only", "That email was registered with Google. Continue with Google instead."],
+          email_unconfirmed: ["err_email_unconfirmed", "Confirm the link we emailed you before you sign in."],
+          locked: ["err_login_locked", "Too many attempts. Please wait a few minutes and try again."],
+          origin: ["err_origin", "Sign-in has to come from ZAZISE."]
+        };
+        var pair = known[code] || ["err_login", serverMsg || "Email or password is not correct."];
+        toast(t(pair[0], pair[1]), pair[0]);
+        if (btn) btn.disabled = false;
+      }
+      function readLogin(res) {
+        return res.text().then(function (text) {
+          var data = null;
+          try { data = JSON.parse(text); } catch (e) { data = null; }
+          return { res: res, data: data };
+        });
+      }
+      function postLogin(url, body) {
+        return fetch(url, {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: body
+        }).then(readLogin);
+      }
       document.getElementById("login-form").addEventListener("submit", function (ev) {
         ev.preventDefault();
         var emailEl = document.getElementById("login-email");
@@ -214,43 +294,47 @@
           toast(t("err_password_required", "Enter your password."), "err_password_required");
           return;
         }
+        /* Pages demo only; real auth is build.couchwraps. Never call /api/login.php here. */
+        if (onGithubPages()) {
+          var pagesDemo = matchDemo(email);
+          if (!pagesDemo || password !== pagesDemo.password) {
+            previewPasswordToast();
+            return;
+          }
+          acceptDemo(pagesDemo, email);
+          return;
+        }
         if (btn) btn.disabled = true;
-        fetch("/api/login.php", {
-          method: "POST",
-          credentials: "same-origin",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({ email: email, password: password, website: "" })
-        }).then(function (res) {
-          return res.json().then(function (data) { return { res: res, data: data }; });
+        var body = JSON.stringify({ email: email, password: password, website: "" });
+        postLogin("/api/login.php", body).then(function (out) {
+          if (out.data) return out;
+          return postLogin("api/login.php", body);
         }).then(function (out) {
+          if (!out.data) {
+            var demo = matchDemo(email);
+            if (!demo || password !== demo.password) {
+              previewPasswordToast();
+              if (btn) btn.disabled = false;
+              return;
+            }
+            acceptDemo(demo, email);
+            return;
+          }
           passEl.value = "";
-          if (!out.res.ok || !out.data || !out.data.ok) {
-            var code = out.data && out.data.errors && out.data.errors[0] && out.data.errors[0].code;
-            var serverMsg = out.data && out.data.errors && out.data.errors[0] && out.data.errors[0].message;
-            var known = {
-              email_invalid: ["err_email_invalid", "Enter a valid email address."],
-              password_required: ["err_password_required", "Enter your password."],
-              not_registered: ["err_not_registered", "No ZAZISE account for that email. Create an account first."],
-              password: ["err_password", "That password is not correct."],
-              google_only: ["err_google_only", "That email was registered with Google. Continue with Google instead."],
-              email_unconfirmed: ["err_email_unconfirmed", "Confirm the link we emailed you before you sign in."],
-              locked: ["err_login_locked", "Too many attempts. Please wait a few minutes and try again."],
-              origin: ["err_origin", "Sign-in has to come from ZAZISE."]
-            };
-            var pair = known[code] || ["err_login", serverMsg || "Email or password is not correct."];
-            toast(t(pair[0], pair[1]), pair[0]);
-            if (btn) btn.disabled = false;
+          if (!out.res.ok || !out.data.ok) {
+            showApiError(out, btn);
             return;
           }
           var user = out.data.user || {};
-          try {
-            var profile = {
-              firstName: user.name || "",
-              surname: user.surname || "",
-              initials: initials(user.name, user.surname)
-            };
-            sessionStorage.setItem("zazisePreviewProfile", JSON.stringify(profile));
-          } catch (e) {}
+          savePreviewProfile({
+            name: user.name || "",
+            firstName: user.name || "",
+            surname: user.surname || "",
+            initials: initials(user.name, user.surname),
+            email: user.email || email,
+            photo: user.photo || "",
+            fromApi: true
+          });
           window.location.href = safeNext();
         }).catch(function () {
           passEl.value = "";

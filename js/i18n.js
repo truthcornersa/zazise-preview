@@ -171,12 +171,33 @@
     });
   }
 
+  function uiJsonUrl() {
+    // Catalog is served with the project, including GitHub Pages /zazise-preview/i18n/ui.json.
+    var scripts = document.getElementsByTagName('script');
+    for (var i = scripts.length - 1; i >= 0; i--) {
+      var src = scripts[i].getAttribute('src') || '';
+      if (src.indexOf('i18n.js') === -1) continue;
+      try {
+        return new URL('../i18n/ui.json', new URL(src, window.location.href)).href;
+      } catch (e) { break; }
+    }
+    var path = (window.location && window.location.pathname) || '/';
+    var marker = '/zazise-preview/';
+    var at = path.indexOf(marker);
+    if (at >= 0) return path.slice(0, at + marker.length) + 'i18n/ui.json';
+    return 'i18n/ui.json';
+  }
+
   async function load() {
     var saved = DEFAULT_LANG;
     try { saved = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG; } catch (e) { /* ignore */ }
     current = normalize(saved);
 
-    var res = await fetch('i18n/ui.json', { cache: 'no-store' });
+    var url = uiJsonUrl();
+    var res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok && url !== 'i18n/ui.json') {
+      res = await fetch('i18n/ui.json', { cache: 'no-store' });
+    }
     if (!res.ok) throw new Error('i18n load failed');
     catalog = await res.json();
     bindLangBar();

@@ -73,7 +73,61 @@
   window.ZaziseProfileChrome = { paint: paint, paintGuestZa: paintGuestZa };
   window.ZaziseAuth = window.ZaziseAuth || { user: null, guestConfirmed: false };
 
-  /* Any fresh URL loads as guest until /api/me.php confirms a real session. */
+  function onGithubPages() {
+    var host = "";
+    try { host = String(location.hostname || "").toLowerCase(); } catch (e) {}
+    return host === "github.io" || host.slice(-10) === ".github.io";
+  }
+
+  function readStoredProfile() {
+    var raw = null;
+    try { raw = sessionStorage.getItem("zazisePreviewProfile"); } catch (e) {}
+    if (!raw) {
+      try { raw = localStorage.getItem("zazisePreviewProfile"); } catch (e2) {}
+    }
+    if (!raw) return null;
+    try {
+      var profile = JSON.parse(raw);
+      if (!profile || !profile.fromApi) return null;
+      if (!profile.firstName && profile.name) profile.firstName = profile.name;
+      return profile;
+    } catch (e3) {
+      return null;
+    }
+  }
+
+  function keepStoredProfile(profile) {
+    var raw = JSON.stringify(profile);
+    try { sessionStorage.setItem("zazisePreviewProfile", raw); } catch (e) {}
+    try { localStorage.setItem("zazisePreviewProfile", raw); } catch (e2) {}
+  }
+
+  function acceptStored(profile) {
+    window.ZaziseAuth.user = {
+      name: profile.name || profile.firstName || "",
+      surname: profile.surname || "",
+      email: profile.email || "",
+      photo: profile.photo || ""
+    };
+    window.ZaziseAuth.guestConfirmed = false;
+    keepStoredProfile(profile);
+    paint(profile);
+    announce(true);
+  }
+
+  /* Pages demo only; real auth is build.couchwraps.
+     On github.io do not call /api/me.php — a 404 would wipe the demo profile. */
+  if (onGithubPages()) {
+    var pagesProfile = readStoredProfile();
+    if (pagesProfile) acceptStored(pagesProfile);
+    else {
+      window.ZaziseAuth.user = null;
+      window.ZaziseAuth.guestConfirmed = true;
+      paintGuestZa();
+      announce(false);
+    }
+  } else {
+  /* Fresh loads stay guest until /api/me.php confirms a real session. */
   try {
     var cached = JSON.parse(sessionStorage.getItem("zazisePreviewProfile") || "null");
     if (!cached || !cached.fromApi) sessionStorage.removeItem("zazisePreviewProfile");
@@ -118,11 +172,17 @@
       announce(true);
     })
     .catch(function () {
-      // Network / API missing locally — stay guest, stay on page.
+      // No PHP API (static host) — keep a Pages-style demo profile if one was stored.
+      var stored = readStoredProfile();
+      if (stored) {
+        acceptStored(stored);
+        return;
+      }
       clearPreviewProfile();
       window.ZaziseAuth.user = null;
       window.ZaziseAuth.guestConfirmed = true;
       paintGuestZa();
       announce(false);
     });
+  }
 })();
