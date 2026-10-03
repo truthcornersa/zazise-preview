@@ -166,18 +166,18 @@
         var n = "";
         try { n = new URLSearchParams(location.search).get("next") || ""; } catch (e) {}
         if (!n || n.indexOf("//") !== -1 || n.indexOf("\\") !== -1 || n.indexOf("@") !== -1 || n.indexOf("..") !== -1) {
-          return "index.html";
+          return "mail-sample.html";
         }
         var path = n.split("?")[0].split("#")[0];
         var file = path.split("/").filter(Boolean).pop() || "index.html";
         if (path === "/" || file.indexOf(".") === -1) file = "index.html";
         var ok = [
-          "index.html", "home.html", "home-preview.html",
+          "mail-sample.html", "index.html", "home.html", "home-preview.html",
           "watch.html", "clips.html", "reels.html", "later.html",
           "studio.html", "upload.html", "help.html", "privacy.html", "terms.html",
           "notifications.html", "channel.html", "login.html", "register.html", "thank-you.html"
         ];
-        if (ok.indexOf(file) === -1) return "index.html";
+        if (ok.indexOf(file) === -1) return "mail-sample.html";
         var q = "";
         var qi = n.indexOf("?");
         if (qi >= 0) q = n.slice(qi).split("#")[0];
