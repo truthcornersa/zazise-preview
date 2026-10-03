@@ -120,30 +120,31 @@
     </nav>
 
     <main class="main channel-page">
-      <div class="channel-banner"><img src="assets/thumbs/banner.jpg" alt="" /></div>
+      <div class="channel-banner" id="studio-banner"><img id="studio-banner-img" src="assets/thumbs/banner.jpg" alt="" /><label class="banner-edit">Change banner<input id="studio-banner-file" type="file" accept="image/*" hidden /></label></div>
 
       <div class="channel-header">
-        <button type="button" class="btn-subscribe" data-act="subscribe">Subscribe</button>
+        <a class="btn-subscribe" id="studio-subscribe" href="#" data-act="subscribe">Subscribe</a>
         <div class="ch-meta">
-          <h1>Cape Stories</h1>
-          <div class="ch-handle">@capestories · Cape Town, South Africa</div>
-          <div class="ch-stats">428K subscribers · 186 videos · 24M views</div>
+          <h1 id="studio-name">Cape Stories</h1>
+          <div class="ch-handle" id="studio-handle">@capestories · Cape Town, South Africa</div>
+          <div class="ch-stats" id="studio-stats">428K subscribers · 186 videos · 24M views</div>
         </div>
-        <div class="ch-big-avatar"><img src="assets/avatars/channel.jpg" alt="" /></div>
+        <div class="ch-big-avatar" id="studio-avatar"><img src="assets/avatars/channel.jpg" alt="" /></div>
       </div>
 
       <div class="channel-tabs">
-        <a class="tab active" href="#">Home</a>
-        <a class="tab" href="#">Videos</a>
-        <a class="tab" href="#">Clips</a>
-        <a class="tab" href="#">Playlists</a>
-        <a class="tab" href="#">Community</a>
-        <a class="tab" href="#">About</a>
+        <a class="tab active" href="#" data-studio-tab="home">Home</a>
+        <a class="tab" href="#" data-studio-tab="videos">Videos</a>
+        <a class="tab" href="#" data-studio-tab="clips">Clips</a>
+        <a class="tab" href="#" data-studio-tab="playlists">Playlists</a>
+        <a class="tab" href="#" data-studio-tab="community">Community</a>
+        <a class="tab" href="#" data-studio-tab="about">About</a>
       </div>
 
+      <p class="sample-note" id="studio-sample-note" hidden>Your studio on this device. Watch, edit, or delete uploads here. They are not on zazise.africa.</p>
       <div class="channel-uploads">
         <div class="channel-section-title">Uploads</div>
-        <div class="video-grid">
+        <div class="video-grid" id="studio-grid">
           <a class="video-card" href="watch.html">
             <div class="thumb"><img src="assets/thumbs/sunset.jpg" alt="" /><span class="dur">8:02</span></div>
             <div class="video-meta">
@@ -252,5 +253,8 @@
   <script src="js/whoami.js?v=9"></script>
   <script src="js/i18n.js?v=11"></script>
   <script src="js/cooking-toast.js?v=20"></script>
+  <script src="js/sample-library.js?v=1"></script>
+  <script src="js/sample-studio.js?v=1"></script>
+  <script src="js/thank-you-confetti.js?v=2"></script>
 </body>
 </html>

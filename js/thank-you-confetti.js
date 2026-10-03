@@ -220,8 +220,21 @@
     requestAnimationFrame(frame);
   }
 
+  function consumePublish() {
+    var nonce = null;
+    try { nonce = sessionStorage.getItem("zazisePublishConfetti"); } catch (e) {}
+    if (!nonce) return false;
+    try { sessionStorage.removeItem("zazisePublishConfetti"); } catch (e2) {}
+    var seen = {};
+    try { seen = JSON.parse(localStorage.getItem("zazisePublishConfettiSeen") || "{}"); } catch (e3) {}
+    if (seen[nonce]) return false;
+    seen[nonce] = Date.now();
+    try { localStorage.setItem("zazisePublishConfettiSeen", JSON.stringify(seen)); } catch (e4) {}
+    return true;
+  }
+
   function init() {
-    if (!consumeFlag()) return;
+    if (!consumeFlag() && !consumePublish()) return;
     if (prefersReducedMotion()) {
       softFlash();
       return;
