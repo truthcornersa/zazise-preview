@@ -124,7 +124,7 @@
   }
 
   function kindLabel(item) {
-    if (item.uploadedOnMobile || item.kind === "clip") return "Clip";
+    if (item.kind === "clip") return "Clip";
     if (item.kind === "both") return "Video + Clip";
     return "Video";
   }

@@ -44,8 +44,8 @@
     }
   }
 
-  function surfacesFor(kind, uploadedOnMobile) {
-    if (uploadedOnMobile || kind === "clip") return ["clips"];
+  function surfacesFor(kind) {
+    if (kind === "clip") return ["clips"];
     if (kind === "both") return ["timeline", "clips"];
     return ["timeline"];
   }

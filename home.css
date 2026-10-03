@@ -2652,11 +2652,160 @@ body.home .studio-avatar-letter {
   body.home .form-cols { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  body.home .type-chooser { display: none; }
+  body.home .type-chooser {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
   body.home .type-mobile-note { display: block; }
   /* Bottom nav already has Clips — hide it from the side menu on phones. */
   body.home:has(#mobile-dock) .sidebar a.nav-item[href="clips.html"],
   body.home:has(#mobile-dock) .sidebar a.nav-item[data-i18n-title="pv_clips"] {
     display: none !important;
   }
+}
+
+/* Upload affordance chooser + preview player (Pages preview) */
+body.home .upload-header-actions { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+body.home .type-mobile-note.choice-note { display: block; margin: -4px 0 14px; }
+body.home .surface-stage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 28px;
+  margin: 0 0 8px;
+  padding: 14px 12px 12px;
+  border: 1px solid var(--z-border);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f6f3ec 0%, #fff 70%);
+}
+body.home .stage-device { transition: opacity .2s ease, transform .2s ease; text-align: center; }
+body.home .stage-device.is-off { opacity: .38; filter: grayscale(1); transform: scale(.94); }
+body.home .stage-device.is-on { opacity: 1; transform: none; }
+body.home .stage-bezel {
+  background: #1c2430;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 10px 22px rgba(18, 22, 31, .12);
+}
+body.home .stage-device.is-on .stage-bezel {
+  box-shadow: 0 0 0 3px rgba(226, 174, 65, .7), 0 10px 22px rgba(18, 22, 31, .12);
+}
+body.home .stage-screen {
+  position: relative;
+  overflow: hidden;
+  background: #12161f;
+  display: block;
+}
+body.home .stage-desk .stage-screen { width: 220px; height: 124px; border-radius: 4px; }
+body.home .stage-phone .stage-bezel { border-radius: 18px; padding: 12px 7px 14px; }
+body.home .stage-phone .stage-screen { width: 74px; height: 132px; border-radius: 8px; }
+body.home .stage-poster {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #1c2430;
+}
+body.home .stage-label {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+  padding: 14px 6px 4px;
+  font-size: 10px; font-weight: 750; color: #fff;
+  background: linear-gradient(transparent, rgba(0,0,0,.72));
+}
+body.home .stage-stand {
+  width: 52px; height: 8px; margin: 0 auto;
+  background: #c5ccd6; border-radius: 0 0 8px 8px;
+}
+body.home .stage-caption { margin: 0 0 14px; text-align: center; }
+body.home .preview-player {
+  position: relative;
+  background: #12161f;
+  color: #fff;
+  aspect-ratio: 16 / 9;
+  max-height: 240px;
+}
+body.home .preview-player .preview-poster,
+body.home #up-preview.preview-player video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; background: #12161f;
+}
+body.home .preview-empty {
+  position: relative; z-index: 1;
+  padding: 16px; text-align: center; color: #c9d0db; font-size: 13px;
+}
+body.home .preview-chrome {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  padding: 18px 10px 8px;
+  background: linear-gradient(transparent, rgba(0,0,0,.78));
+}
+body.home .preview-chrome button {
+  flex: 0 0 auto;
+  width: 32px; height: 32px; border: 0; border-radius: 50%;
+  background: #E2AE41; color: #12161f; font-weight: 800; cursor: pointer;
+}
+body.home .preview-time {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px; font-weight: 750; min-width: 92px;
+}
+body.home .preview-scrub {
+  flex: 1 1 auto; min-width: 48px; height: 4px; margin: 0;
+  -webkit-appearance: none; appearance: none;
+  background: rgba(255,255,255,.35); border-radius: 99px; cursor: pointer;
+}
+body.home .preview-scrub::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 12px; height: 12px; border-radius: 50%; background: #E2AE41; border: 0;
+}
+body.home .preview-scrub::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%; background: #E2AE41; border: 0;
+}
+body.home .preview-scrub:disabled,
+body.home .preview-scrub.is-pending { display: none; }
+body.home .preview-note { flex: 1 0 100%; font-size: 11px; line-height: 1.3; opacity: .9; }
+body.home .file-chip {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+  margin: 0 0 8px; font-size: 13px;
+}
+body.home .file-chip strong {
+  font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+body.home .file-chip .file-size { flex: 0 0 auto; color: var(--z-muted); font-size: 12px; }
+body.home .file-meta { margin-top: 0; }
+@media (max-width: 768px) {
+  body.home .upload-wrap { padding-bottom: 8px; }
+  body.home .upload-header { align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+  body.home .upload-header h1 { font-size: 18px; }
+  body.home .upload-steps { margin-bottom: 10px; gap: 6px; font-size: 12px; }
+  body.home .upload-steps .step-line { flex-basis: 16px; }
+  body.home .type-card { padding: 8px 6px; gap: 4px; }
+  body.home .type-name { font-size: 12px; }
+  body.home .type-help { display: none; }
+  body.home .type-frames { min-height: 36px; gap: 4px; }
+  body.home .device-desk { width: 48px; height: 30px; }
+  body.home .device-phone { width: 18px; height: 30px; }
+  body.home .surface-stage { gap: 14px; padding: 10px 8px; }
+  body.home .stage-desk .stage-screen { width: 148px; height: 84px; }
+  body.home .stage-phone .stage-screen { width: 56px; height: 100px; }
+  body.home .upload-drop { padding: 14px 12px; margin-bottom: 10px; }
+  body.home .upload-drop h2 { font-size: 15px; }
+  body.home .upload-drop p { display: none; }
+  body.home .upload-wrap.has-file .upload-drop { display: none; }
+  body.home .upload-form { padding: 12px; }
+  body.home .form-cols { display: flex; flex-direction: column; gap: 8px; }
+  body.home .form-side { order: -1; }
+  body.home .preview-player { max-height: 132px; margin-bottom: 6px; }
+  body.home .preview-chrome { padding: 6px 8px; }
+  body.home .visibility-opts { gap: 6px; }
+  body.home .visibility-opts label { padding: 8px 10px; }
+  body.home .upload-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 8;
+    margin: 8px -12px 0;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: #fff;
+    box-shadow: 0 -8px 18px rgba(18, 22, 31, .06);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  body.home .upload-footer .btn-accent { min-width: 42%; }
 }
